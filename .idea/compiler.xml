@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="clientService" />
+        <module name="appointmentService" />
+        <module name="AnalysisService" />
+        <module name="medService" />
+        <module name="authentication" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="14">
+      <module name="AnalysisService" target="11" />
+      <module name="appointmentService" target="11" />
+      <module name="authentication" target="11" />
+      <module name="Backend" target="11" />
+      <module name="clientService" target="11" />
+      <module name="medService" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="AnalysisService" options="-parameters" />
+      <module name="Backend" options="-parameters" />
+      <module name="appointmentService" options="-parameters" />
+      <module name="authentication" options="-parameters" />
+      <module name="clientService" options="-parameters" />
+      <module name="medService" options="-parameters" />
+    </option>
+  </component>
+</project>
