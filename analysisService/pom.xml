@@ -15,7 +15,7 @@
     <description>AnalysisService</description>
     <properties>
         <java.version>11</java.version>
-        <spring-cloud.version>2020.0.4</spring-cloud.version>
+        <spring-cloud.version>2021.0.0</spring-cloud.version>
     </properties>
     <dependencies>
         <dependency>
@@ -53,6 +53,12 @@
             <artifactId>springfox-swagger2</artifactId>
             <version>2.9.2</version>
             <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.10</version>
         </dependency>
 
         <dependency>

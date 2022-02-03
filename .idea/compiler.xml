@@ -2,13 +2,14 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
-      <profile name="Maven default annotation processors profile" enabled="true">
+      <profile name="Maven default annotation processors profile">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="clientService" />
         <module name="appointmentService" />
         <module name="AnalysisService" />
+        <module name="eureka" />
         <module name="medService" />
         <module name="authentication" />
       </profile>
@@ -19,6 +20,7 @@
       <module name="authentication" target="11" />
       <module name="Backend" target="11" />
       <module name="clientService" target="11" />
+      <module name="eureka" target="11" />
       <module name="medService" target="11" />
     </bytecodeTargetLevel>
   </component>
@@ -29,6 +31,7 @@
       <module name="appointmentService" options="-parameters" />
       <module name="authentication" options="-parameters" />
       <module name="clientService" options="-parameters" />
+      <module name="eureka" options="-parameters" />
       <module name="medService" options="-parameters" />
     </option>
   </component>
