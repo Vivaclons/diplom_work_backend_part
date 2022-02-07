@@ -1,14 +1,18 @@
-package kz.spring.clientservice.model;
-
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import java.io.Serializable;
-
-@Embeddable
-public class DoctorCustomer implements Serializable {
-    @Column(name = "doctorId")
-    Long doctorId;
-
-    @Column(name = "customerId")
-    Long customerId;
-}
+//package kz.spring.clientservice.model;
+//
+//import kz.spring.medservice.model.Doctor;
+//import javax.persistence.*;
+//
+//@Entity
+//public class DoctorCustomer {
+//    @Id
+//    Long id;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "doctorId")
+//    Doctor doctor;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "customerId")
+//    Customer customer;
+//}

@@ -19,26 +19,5 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long appointmentId;
 
-    @Column(name = "doctorId")
-    Long doctorId;
-
-    @Column(name = "customerId")
-    Long customerId;
-
-    @Column(name = "medCenterId")
-    Long medCenterId;
-
     private Date date;
-
-    @ManyToOne
-    @JoinColumn(name="doctorId", nullable=false)
-    private Doctor doctor;
-
-    @ManyToOne
-    @JoinColumn(name="customerId", nullable=false)
-    private Customer customer;
-
-    @ManyToOne
-    @JoinColumn(name="medCenterId", nullable=false)
-    private MedCenter medCenter;
 }
