@@ -21,7 +21,7 @@ public class SpecialtyService implements ISpecialtyService {
 
     @Override
     public Specialty getBySpecialtyName(String specialtyName) {
-        return specialtyRepository.getSpecialtyName(specialtyName);
+        return specialtyRepository.getSpecialtyBySpecialtyName(specialtyName);
     }
 
     @Override
@@ -30,8 +30,8 @@ public class SpecialtyService implements ISpecialtyService {
     }
 
     @Override
-    public List<Specialty> getAllSpecialtyBy() {
-        return specialtyRepository.getSpecialtyBy();
+    public List<Specialty> getAllSpecialty() {
+        return specialtyRepository.findAll();
     }
 
     @Override

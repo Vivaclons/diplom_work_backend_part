@@ -9,6 +9,6 @@ public interface IMedCenterService {
     MedCenter getByMedCenterName(String medCenterName);
     MedCenter getByMedCenterAddress(String address);
     void update(MedCenter medCenter);
-    List<MedCenter> getAllMedCenterBy();
+    List<MedCenter> getAllMedCenter();
     void DeleteById(Long id);
 }

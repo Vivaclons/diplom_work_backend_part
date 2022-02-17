@@ -3,6 +3,7 @@ package kz.spring.clientservice.controller;
 import kz.spring.clientservice.model.Customer;
 import kz.spring.clientservice.service.impl.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,12 +17,13 @@ public class CustomerController {
 
     @GetMapping("")
     public List<Customer> getAllCustomers(){
-        return iCustomerService.getAllCustomerBy();
+        return iCustomerService.getAllCustomer();
     }
 
     @GetMapping("/{id}")
-    public Customer getCustomerById(@PathVariable("id") Long id){
-        return iCustomerService.getById(id);
+    public ResponseEntity<?> getCustomerById(@PathVariable("id") Long id){
+        Customer customer = iCustomerService.getById(id);
+        return ResponseEntity.ok(customer);
     }
 
     @GetMapping("/customerName")

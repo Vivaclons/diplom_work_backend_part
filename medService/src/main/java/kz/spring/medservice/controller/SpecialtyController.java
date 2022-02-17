@@ -16,7 +16,7 @@ public class SpecialtyController {
 
     @GetMapping("")
     public List<Specialty> getAllSpecialty(){
-        return iSpecialtyService.getAllSpecialtyBy();
+        return iSpecialtyService.getAllSpecialty();
     }
 
     @GetMapping("/{id}")

@@ -20,20 +20,20 @@ public class AppointmentService implements IAppointmentService {
         return appointmentRepository.getById(id);
     }
 
-    @Override
-    public Appointment getByDoctorId(Long doctorId) {
-        return appointmentRepository.getByDoctorId(doctorId);
-    }
-
-    @Override
-    public Appointment getByCustomerId(Long customerId) {
-        return appointmentRepository.getByCustomerId(customerId);
-    }
-
-    @Override
-    public Appointment getByMedCenterId(Long medCenterId) {
-        return appointmentRepository.getByMedCenterId(medCenterId);
-    }
+//    @Override
+//    public Appointment getByDoctorId(Long doctorId) {
+//        return appointmentRepository.getByDoctorId(doctorId);
+//    }
+//
+//    @Override
+//    public Appointment getByCustomerId(Long customerId) {
+//        return appointmentRepository.getByCustomerId(customerId);
+//    }
+//
+//    @Override
+//    public Appointment getByMedCenterId(Long medCenterId) {
+//        return appointmentRepository.getByMedCenterId(medCenterId);
+//    }
 
     @Override
     public Appointment getByDate(Date date) {
@@ -46,8 +46,8 @@ public class AppointmentService implements IAppointmentService {
     }
 
     @Override
-    public List<Appointment> getAllAppointmentBy() {
-        return appointmentRepository.getAppointmentBy();
+    public List<Appointment> getAllAppointment() {
+        return appointmentRepository.findAll();
     }
 
     @Override

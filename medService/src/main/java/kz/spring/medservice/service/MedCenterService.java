@@ -21,12 +21,12 @@ public class MedCenterService implements IMedCenterService {
 
     @Override
     public MedCenter getByMedCenterName(String medCenterName) {
-        return medCenterRepository.getMedCenterName(medCenterName);
+        return medCenterRepository.getMedCenterByMedCenterName(medCenterName);
     }
 
     @Override
     public MedCenter getByMedCenterAddress(String address){
-        return medCenterRepository.getMedCenterAddress(address);
+        return medCenterRepository.getMedCenterByMedCenterAddress(address);
     }
 
     @Override
@@ -35,8 +35,8 @@ public class MedCenterService implements IMedCenterService {
     }
 
     @Override
-    public List<MedCenter> getAllMedCenterBy() {
-        return medCenterRepository.getMedCenterBy();
+    public List<MedCenter> getAllMedCenter() {
+        return medCenterRepository.findAll();
     }
 
     @Override

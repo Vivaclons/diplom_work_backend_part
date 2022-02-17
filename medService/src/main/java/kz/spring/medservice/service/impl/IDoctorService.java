@@ -9,6 +9,6 @@ public interface IDoctorService {
     Doctor getById(Long id);
     Doctor getByDoctorName(String doctorName);
     void update(Doctor doctor);
-    List<Doctor> getAllDoctorBy();
+    List<Doctor> getAllDoctor();
     void DeleteById(Long id);
 }

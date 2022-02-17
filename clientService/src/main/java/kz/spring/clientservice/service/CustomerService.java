@@ -16,12 +16,13 @@ public class CustomerService implements ICustomerService {
 
     @Override
     public Customer getById(Long id) {
-        return customerRepository.getById(id);
+        Customer customer = customerRepository.getCustomerByCustomerId(id);
+        return customer;
     }
 
     @Override
     public Customer getByCustomerName(String customerName) {
-        return customerRepository.getCustomerName(customerName);
+        return customerRepository.getByCustomerName(customerName);
     }
 
     @Override
@@ -35,8 +36,8 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
-    public List<Customer> getAllCustomerBy() {
-        return customerRepository.getCustomerBy();
+    public List<Customer> getAllCustomer() {
+        return customerRepository.findAll();
     }
 
     @Override

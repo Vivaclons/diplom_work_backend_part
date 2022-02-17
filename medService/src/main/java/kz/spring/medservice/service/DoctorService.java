@@ -21,7 +21,7 @@ public class DoctorService implements IDoctorService {
 
     @Override
     public Doctor getByDoctorName(String doctorName) {
-        return doctorRepository.getDoctorName(doctorName);
+        return doctorRepository.getDoctorByDoctorName(doctorName);
     }
 
     @Override
@@ -30,8 +30,8 @@ public class DoctorService implements IDoctorService {
     }
 
     @Override
-    public List<Doctor> getAllDoctorBy() {
-        return doctorRepository.getDoctorBy();
+    public List<Doctor> getAllDoctor() {
+        return doctorRepository.findAll();
     }
 
     @Override

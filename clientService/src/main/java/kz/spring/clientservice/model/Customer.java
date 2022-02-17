@@ -1,9 +1,6 @@
 package kz.spring.clientservice.model;
 
-import kz.spring.analysisservice.model.Analysis;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -14,6 +11,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name="customer")
 public class Customer {
     @Id
@@ -23,24 +21,26 @@ public class Customer {
     private String customerName;
     private String customerSurname;
     private String customerTelNumber;
-    private char customerEmail;
+    private String customerEmail;
     private String Password;
 
-    @ManyToMany
-    @JoinTable(
-            name = "doctor_customer",
-            joinColumns = {@JoinColumn(name = "doctor_id")},
-            inverseJoinColumns = {@JoinColumn(name = "customer_id")}
-    )
-    private Set<Customer> customerDoctor = new HashSet<>();
 
-    @ManyToMany
-    @JoinTable(
-            name = "appointment",
-            joinColumns = {@JoinColumn(name = "doctor_id")},
-            inverseJoinColumns = {@JoinColumn(name = "customer_id"), @JoinColumn(name = "appointment_id"), @JoinColumn(name = "medcenter_id")}
-    )
-    private Set<Customer> customerAppointment = new HashSet<>();
+    //
+//    @ManyToMany
+//    @JoinTable(
+//            name = "doctor_customer",
+//            joinColumns = {@JoinColumn(name = "doctor_id")},
+//            inverseJoinColumns = {@JoinColumn(name = "customer_id")}
+//    )
+//    private Set<Customer> customerDoctor = new HashSet<>();
+
+//    @ManyToMany
+//    @JoinTable(
+//            name = "appointment",
+//            joinColumns = {@JoinColumn(name = "doctor_id")},
+//            inverseJoinColumns = {@JoinColumn(name = "customer_id"), @JoinColumn(name = "appointment_id"), @JoinColumn(name = "medcenter_id")}
+//    )
+//    private Set<Customer> customerAppointment = new HashSet<>();
 
 //    @OneToMany(mappedBy = "customer")
 //    private Set<DoctorCustomer> doctorCustomers;
@@ -48,6 +48,6 @@ public class Customer {
 //    @OneToMany(mappedBy="customer")
 //    private Set<Appointment> appointments;
 //
-    @OneToMany(mappedBy="customer")
-    private Set<Analysis> analyses;
+//    @OneToMany(mappedBy="customer")
+//    private Set<Analysis> analyses;
 }

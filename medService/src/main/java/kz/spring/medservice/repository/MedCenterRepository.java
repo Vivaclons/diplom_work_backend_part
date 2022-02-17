@@ -10,7 +10,6 @@ import java.util.List;
 public interface MedCenterRepository extends JpaRepository<MedCenter, Long> {
     MedCenter getByMedCenterId(Long id);
     MedCenter getById(Long id);
-    MedCenter getMedCenterName(String medCenterName);
-    MedCenter getMedCenterAddress(String address);
-    List<MedCenter> getMedCenterBy();
+    MedCenter getMedCenterByMedCenterName(String medCenterName);
+    MedCenter getMedCenterByMedCenterAddress(String address);
 }

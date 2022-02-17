@@ -25,8 +25,8 @@ public class AnalysisService implements IAnalysisService {
     }
 
     @Override
-    public List<Analysis> getAllAnalysisBy() {
-        return analysisRepository.getByAnalysis();
+    public List<Analysis> getAllAnalysis() {
+        return this.analysisRepository.findAll();
     }
 
     @Override

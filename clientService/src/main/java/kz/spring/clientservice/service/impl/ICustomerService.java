@@ -8,6 +8,6 @@ public interface ICustomerService {
     Customer getByCustomerEmail(String email);
     Customer getByCustomerName(String customerName);
     void update(Customer customer);
-    List<Customer> getAllCustomerBy();
+    List<Customer> getAllCustomer();
     void DeleteById(Long id);
 }

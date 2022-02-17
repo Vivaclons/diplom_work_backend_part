@@ -16,29 +16,29 @@ public class AppointmentController {
     private IAppointmentService iAppointmentService;
 
     @GetMapping("")
-    public List<Appointment> getAllDoctors(){
-        return iAppointmentService.getAllAppointmentBy();
+    public List<Appointment> getAllAppointment(){
+        return iAppointmentService.getAllAppointment();
     }
 
-    @GetMapping("/{customerId}")
-    public Appointment getByCustomerId(@PathVariable("customerId") Long customerId){
-        return iAppointmentService.getByCustomerId(customerId);
-    }
+//    @GetMapping("/{customerId}")
+//    public Appointment getByCustomerId(@PathVariable("customerId") Long customerId){
+//        return iAppointmentService.getByCustomerId(customerId);
+//    }
 
     @GetMapping("/id}")
     public Appointment getById(@PathVariable("id") Long id){
         return iAppointmentService.getById(id);
     }
 
-    @GetMapping("/{doctorId}")
-    public Appointment getByDoctorId(@PathVariable("doctorId") Long doctorId){
-        return iAppointmentService.getByDoctorId(doctorId);
-    }
+//    @GetMapping("/{doctorId}")
+//    public Appointment getByDoctorId(@PathVariable("doctorId") Long doctorId){
+//        return iAppointmentService.getByDoctorId(doctorId);
+//    }
 
-    @GetMapping("/{medCenterId}")
-    public Appointment getByMedCenterId(@PathVariable("medCenterId") Long medCenterId){
-        return iAppointmentService.getByMedCenterId(medCenterId);
-    }
+//    @GetMapping("/{medCenterId}")
+//    public Appointment getByMedCenterId(@PathVariable("medCenterId") Long medCenterId){
+//        return iAppointmentService.getByMedCenterId(medCenterId);
+//    }
 
     @GetMapping("/{date}")
     public Appointment getByDate(@PathVariable("date") Date date){

@@ -17,6 +17,6 @@ public class Specialty {
     private Long specialtyId;
     private String specialtyName;
 
-    @OneToMany(mappedBy="specialty")
-    private Set<Doctor> doctors;
+//    @OneToMany(mappedBy="specialty")
+//    private Set<Doctor> doctors;
 }

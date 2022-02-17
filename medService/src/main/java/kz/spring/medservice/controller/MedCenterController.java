@@ -16,7 +16,7 @@ public class MedCenterController {
 
     @GetMapping("")
     public List<MedCenter> getAllMedCenter(){
-        return iMedCenterService.getAllMedCenterBy();
+        return iMedCenterService.getAllMedCenter();
     }
 
     @GetMapping("/{id}")

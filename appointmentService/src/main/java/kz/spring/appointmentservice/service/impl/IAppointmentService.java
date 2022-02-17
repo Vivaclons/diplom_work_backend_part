@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface IAppointmentService {
     Appointment getById(Long id);
-    Appointment getByDoctorId(Long doctorId);
-    Appointment getByCustomerId(Long customerId);
-    Appointment getByMedCenterId(Long medCenterId);
+//    Appointment getByDoctorId(Long doctorId);
+//    Appointment getByCustomerId(Long customerId);
+//    Appointment getByMedCenterId(Long medCenterId);
     Appointment getByDate(Date date);
     void update(Appointment appointment);
-    List<Appointment> getAllAppointmentBy();
+    List<Appointment> getAllAppointment();
     void DeleteById(Long id);
 }

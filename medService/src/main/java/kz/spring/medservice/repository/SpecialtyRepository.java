@@ -9,6 +9,5 @@ import java.util.List;
 public interface SpecialtyRepository extends JpaRepository<Specialty, Long> {
     Specialty getBySpecialtyId(Long id);
     Specialty getById(Long id);
-    Specialty getSpecialtyName(String specialtyName);
-    List<Specialty> getSpecialtyBy();
+    Specialty getSpecialtyBySpecialtyName(String specialtyName);
 }

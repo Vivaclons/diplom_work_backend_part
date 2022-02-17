@@ -21,20 +21,20 @@ public class Doctor {
     private String doctorName;
     private String doctorSurname;
     private String doctorTelNumber;
-    private char doctorEmail;
+    private String doctorEmail;
     private String doctorPassword;
 
-    @ManyToOne
-    @JoinColumn(name="specialtyId")
-    private Specialty specialty;
-
-    @ManyToMany
-    @JoinTable(
-            name = "med_center_doctor",
-            joinColumns = {@JoinColumn(name = "doctor_id")},
-            inverseJoinColumns = {@JoinColumn(name = "medcenter_id")}
-    )
-    private Set<Doctor> medcenterDoctor = new HashSet<>();
+//    @ManyToOne
+//    @JoinColumn(name="specialtyId")
+//    private Specialty specialty;
+//
+//    @ManyToMany
+//    @JoinTable(
+//            name = "med_center_doctor",
+//            joinColumns = {@JoinColumn(name = "doctor_id")},
+//            inverseJoinColumns = {@JoinColumn(name = "medcenter_id")}
+//    )
+//    private Set<Doctor> medcenterDoctor = new HashSet<>();
 
 //    @OneToMany(mappedBy="doctor")
 //    private Set<Appointment> appointments;
