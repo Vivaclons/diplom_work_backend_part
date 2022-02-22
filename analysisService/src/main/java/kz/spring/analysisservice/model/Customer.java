@@ -1,9 +1,11 @@
-package kz.spring.clientservice.model;
+package kz.spring.analysisservice.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
 
 @Entity
@@ -11,7 +13,6 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="customer")
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +23,4 @@ public class Customer {
     private String customerTelNumber;
     private String customerEmail;
     private String Password;
-
-    @ManyToMany
-    List<Doctor> doctors;
 }

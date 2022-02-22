@@ -8,6 +8,10 @@ import java.util.List;
 
 @Repository
 public interface MedCenterRepository extends JpaRepository<MedCenter, Long> {
+    List<MedCenter> findByMedCenterId(Long id);
+    List<MedCenter> findMedCenterByMedCenterName(String medCenterName);
+    List<MedCenter> getMedCenterByMedCenterNameIsLike(String medCenterName);
+    List<MedCenter> getMedCenterByMedCenterAddressIsLike(String medCenterAddress);
     MedCenter getByMedCenterId(Long id);
     MedCenter getById(Long id);
     MedCenter getMedCenterByMedCenterName(String medCenterName);

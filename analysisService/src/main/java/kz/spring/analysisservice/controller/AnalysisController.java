@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/analysis")
 public class AnalysisController {
@@ -15,13 +17,13 @@ public class AnalysisController {
     private IAnalysisService iAnalysisService;
 
     @GetMapping("/all")
-    public ResponseEntity<?> getAllAnalysis(){
-        return ResponseEntity.ok(iAnalysisService.getAllAnalysis());
+    public List<Analysis> getAllAnalysis(){
+        return iAnalysisService.getAllAnalysis();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getAnalysisById(@PathVariable("id") Long id){
-        return ResponseEntity.ok(iAnalysisService.getById(id));
+    public Analysis getAnalysisById(@PathVariable("id") Long id){
+        return iAnalysisService.getById(id);
     }
 
     @DeleteMapping("/delete/{analysis_id}")

@@ -15,7 +15,27 @@ public class CustomerController {
     @Autowired
     private ICustomerService iCustomerService;
 
-    @GetMapping("")
+    @GetMapping("/search")
+    public ResponseEntity<?> searchCustomerByName(@RequestParam("customerName") String customerName) {
+        return ResponseEntity.ok(iCustomerService.searchCustomerByCustomerName(customerName));
+    }
+
+    @PatchMapping("/add-doctor")
+    public ResponseEntity<?> addDoctor(@RequestParam("customer_id") Long customer_id, @RequestParam("doctor_id") Long doctor_id) {
+        return ResponseEntity.ok(iCustomerService.addDoctor(customer_id, doctor_id));
+    }
+
+    @PatchMapping("/change-doctor")
+    public ResponseEntity<?> updateCustomerDoctorById(@RequestParam("customer_id") Long customer_id, @RequestParam("doctor_id") Long doctor_id) {
+        return ResponseEntity.ok(iCustomerService.updateDoctor(customer_id, doctor_id));
+    }
+
+    @PatchMapping("/remove-doctor")
+    public ResponseEntity<?> removeDoctor(@RequestParam("customer_id") Long customer_id, @RequestParam("doctor_id") Long doctor_id) {
+        return ResponseEntity.ok(iCustomerService.removeDoctor(customer_id, doctor_id));
+    }
+
+    @GetMapping("/all")
     public List<Customer> getAllCustomers(){
         return iCustomerService.getAllCustomer();
     }

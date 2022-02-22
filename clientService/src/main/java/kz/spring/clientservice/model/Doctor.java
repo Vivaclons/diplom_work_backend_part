@@ -1,19 +1,19 @@
-package kz.spring.medservice.model;
+package kz.spring.clientservice.model;
 
-import javax.persistence.*;
-
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.util.List;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Setter
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
-public class Doctor {
+@Table(name = "doctor")
+public class Doctor implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +24,4 @@ public class Doctor {
     private String doctorTelNumber;
     private String doctorEmail;
     private String doctorPassword;
-
-    @ManyToMany
-    List<Specialty> specialties;
 }

@@ -17,7 +17,7 @@ public class AppointmentService implements IAppointmentService {
 
     @Override
     public Appointment getById(Long id) {
-        return appointmentRepository.getById(id);
+        return appointmentRepository.getAppointmentById(id);
     }
 
 //    @Override
@@ -37,7 +37,7 @@ public class AppointmentService implements IAppointmentService {
 
     @Override
     public Appointment getByDate(Date date) {
-        return appointmentRepository.getByDate(date);
+        return appointmentRepository.getAppointmentByDate(date);
     }
 
     @Override

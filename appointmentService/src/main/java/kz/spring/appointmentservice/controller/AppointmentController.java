@@ -15,7 +15,7 @@ public class AppointmentController {
     @Autowired
     private IAppointmentService iAppointmentService;
 
-    @GetMapping("")
+    @GetMapping("/all")
     public List<Appointment> getAllAppointment(){
         return iAppointmentService.getAllAppointment();
     }
@@ -40,12 +40,12 @@ public class AppointmentController {
 //        return iAppointmentService.getByMedCenterId(medCenterId);
 //    }
 
-    @GetMapping("/{date}")
+    @GetMapping("/date/{date}")
     public Appointment getByDate(@PathVariable("date") Date date){
         return iAppointmentService.getByDate(date);
     }
 
-    @DeleteMapping
+    @DeleteMapping("delete/{appointment_id}")
     public void deleteAppointmentByID(@PathVariable("id") Long id){
         iAppointmentService.DeleteById(id);
     }

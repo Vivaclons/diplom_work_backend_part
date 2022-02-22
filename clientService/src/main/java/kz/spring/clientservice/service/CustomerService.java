@@ -1,7 +1,9 @@
 package kz.spring.clientservice.service;
 
 import kz.spring.clientservice.model.Customer;
+import kz.spring.clientservice.model.Doctor;
 import kz.spring.clientservice.repository.CustomerRepository;
+import kz.spring.clientservice.repository.DoctorRepository;
 import kz.spring.clientservice.service.impl.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,66 @@ public class CustomerService implements ICustomerService {
 
     @Autowired
     private CustomerRepository customerRepository;
+
+    @Autowired
+    private DoctorRepository doctorRepository;
+
+    @Override
+    public List<Customer> searchCustomerByCustomerName(String customerName) {
+        return customerRepository.getCustomerByCustomerNameIsLike("%" + customerName + "%");
+    }
+
+    @Override
+    public Customer removeDoctor(Long customerId, Long doctorId) {
+        Customer customer = customerRepository.getByCustomerId(customerId);
+
+        boolean check = false;
+
+        for(int i = 0; i < customer.getDoctors().size(); i++){
+            if(customer.getDoctors().get(i).getDoctorId().equals(customerId)){
+                customer.getDoctors().remove(i);
+                check = true;
+                break;
+            }
+        }
+
+        if(check){
+            return customerRepository.saveAndFlush(customer);
+        }
+        return null;
+    }
+
+    @Override
+    public Customer addDoctor(Long customerId, Long doctorId) {
+
+        Customer customer = customerRepository.getByCustomerId(customerId);
+
+        Doctor doctor = doctorRepository.getById(doctorId);
+
+        boolean check = false;
+
+        if(doctor != null && customer != null){
+            customer.getDoctors().add(doctor);
+            if(!check){
+                return customerRepository.saveAndFlush(customer);
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Customer updateDoctor(Long customerId, Long doctorId) {
+
+        Customer customer = customerRepository.getByCustomerId(doctorId);
+
+        if (customer != null && customer.getCustomerId() != null && customer.getCustomerId() != 0L) {
+            for (int i = 0; i < customer.getDoctors().size(); i++) {
+                customer.getDoctors().get(i).setDoctorId(doctorId);
+                return customerRepository.saveAndFlush(customer);
+            }
+        }
+        return null;
+    }
 
     @Override
     public Customer getById(Long id) {

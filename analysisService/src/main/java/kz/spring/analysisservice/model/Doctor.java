@@ -1,12 +1,11 @@
-package kz.spring.medservice.model;
-
-import javax.persistence.*;
+package kz.spring.analysisservice.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.util.List;
+
+import javax.persistence.*;
 
 @Entity
 @Setter
@@ -24,7 +23,4 @@ public class Doctor {
     private String doctorTelNumber;
     private String doctorEmail;
     private String doctorPassword;
-
-    @ManyToMany
-    List<Specialty> specialties;
 }

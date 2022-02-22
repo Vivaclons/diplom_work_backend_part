@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface SpecialtyRepository extends JpaRepository<Specialty, Long> {
-    Specialty getBySpecialtyId(Long id);
+    Specialty getSpecialtyBySpecialtyId(Long id);
     Specialty getById(Long id);
     Specialty getSpecialtyBySpecialtyName(String specialtyName);
 }
