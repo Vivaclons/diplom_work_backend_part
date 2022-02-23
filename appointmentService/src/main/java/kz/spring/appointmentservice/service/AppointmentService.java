@@ -17,7 +17,7 @@ public class AppointmentService implements IAppointmentService {
 
     @Override
     public Appointment getById(Long id) {
-        return appointmentRepository.getAppointmentById(id);
+        return appointmentRepository.getAppointmentByAppointmentId(id);
     }
 
 //    @Override

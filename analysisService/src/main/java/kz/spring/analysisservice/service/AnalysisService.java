@@ -15,6 +15,11 @@ public class AnalysisService implements IAnalysisService {
     private AnalysisRepository analysisRepository;
 
     @Override
+    public List<Analysis> searchAnalysisByAnalysisDescription(String analysisDescription) {
+        return analysisRepository.getAnalysisByDescriptionIsLike("%" + analysisDescription + "%");
+    }
+
+    @Override
     public Analysis getById(Long id) {
         return analysisRepository.getById(id);
     }

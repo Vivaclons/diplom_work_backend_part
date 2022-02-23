@@ -12,6 +12,7 @@ public interface MedCenterRepository extends JpaRepository<MedCenter, Long> {
     List<MedCenter> findMedCenterByMedCenterName(String medCenterName);
     List<MedCenter> getMedCenterByMedCenterNameIsLike(String medCenterName);
     List<MedCenter> getMedCenterByMedCenterAddressIsLike(String medCenterAddress);
+//    List<MedCenter> findAllByDoctors(String medCenterDoctor);
     MedCenter getByMedCenterId(Long id);
     MedCenter getById(Long id);
     MedCenter getMedCenterByMedCenterName(String medCenterName);

@@ -23,4 +23,5 @@ public class Customer {
     private String customerTelNumber;
     private String customerEmail;
     private String Password;
+    private String Address;
 }

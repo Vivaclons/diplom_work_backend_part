@@ -3,6 +3,7 @@ package kz.spring.appointmentservice.model;
 //import kz.spring.clientservice.model.Customer;
 //import kz.spring.medservice.model.Doctor;
 //import kz.spring.medservice.model.MedCenter;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,6 +15,7 @@ import java.util.Date;
 @Setter
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
