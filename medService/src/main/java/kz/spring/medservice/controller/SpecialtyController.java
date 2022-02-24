@@ -14,7 +14,7 @@ public class SpecialtyController {
     @Autowired
     private ISpecialtyService iSpecialtyService;
 
-    @GetMapping("")
+    @GetMapping("/all")
     public List<Specialty> getAllSpecialty(){
         return iSpecialtyService.getAllSpecialty();
     }
@@ -24,9 +24,9 @@ public class SpecialtyController {
         return iSpecialtyService.getById(id);
     }
 
-    @DeleteMapping
-    public void deleteSpecialtyById(@PathVariable("id") Long id){
-        iSpecialtyService.DeleteById(id);
+    @DeleteMapping("/delete/{specialtyId}")
+    public void deleteSpecialtyById(@PathVariable("specialtyId") Long specialtyId){
+        iSpecialtyService.DeleteById(specialtyId);
     }
 
     @PostMapping("/create")
@@ -34,7 +34,7 @@ public class SpecialtyController {
         iSpecialtyService.update(specialty);
     }
 
-    @PostMapping("/update")
+    @PutMapping("/update")
     public void updateSpecialty(@RequestBody Specialty specialty){
         iSpecialtyService.update(specialty);
     }

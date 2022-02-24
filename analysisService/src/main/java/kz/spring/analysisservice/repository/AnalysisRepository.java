@@ -11,5 +11,5 @@ import java.util.List;
 public interface AnalysisRepository extends JpaRepository<Analysis, Long> {
     List<Analysis> findByAnalysisId(Long id);
     List<Analysis> getAnalysisByDescriptionIsLike(String analysisDescription);
-    Analysis getById(Long id);
+    Analysis getAnalysisByAnalysisId(Long id);
 }

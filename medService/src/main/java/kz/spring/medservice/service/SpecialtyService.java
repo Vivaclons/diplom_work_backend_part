@@ -16,7 +16,7 @@ public class SpecialtyService implements ISpecialtyService {
 
     @Override
     public Specialty getById(Long id) {
-        return specialtyRepository.getById(id);
+        return specialtyRepository.getSpecialtyBySpecialtyId(id);
     }
 
     @Override

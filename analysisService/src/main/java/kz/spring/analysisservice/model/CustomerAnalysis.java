@@ -14,7 +14,7 @@ public class CustomerAnalysis {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customerAnalysis_id")
-    private Long customerAnalysis_id;
+    private Long customerAnalysisId;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "analysis_id")

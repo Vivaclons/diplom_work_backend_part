@@ -27,48 +27,140 @@ public class CustomerAnalysisService implements ICustomerAnalysisService {
     private AnalysisRepository analysisRepository;
 
     @Override
-    public CustomerAnalysis removeCustomerAnalysis(Long customerAnalysisId, Long medCenterId, Long analysisId, Long doctorId, Long customerId) {
-        return null;
+    public void removeCustomerAnalysis(Long customerAnalysisId) {
+        customerAnalysisRepository.deleteById(customerAnalysisId);
     }
 
     @Override
     public CustomerAnalysis addCustomerAnalysis(Long customerAnalysisId, Long medCenterId, Long analysisId, Long doctorId, Long customerId) {
 
-        CustomerAnalysis customerAnalysis = customerAnalysisRepository.getById(customerAnalysisId);
-//
-//        MedCenter medCenter = medCenterRepository.getById(medCenterId);
-//
-//        Doctor doctor = doctorRepository.getById(doctorId);
-//
-//        Customer customer = customerRepository.getById(customerId);
-//
-//        Analysis analysis = analysisRepository.getById(analysisId);
-//
-//        boolean check = false;
-//
-//        if(doctor != null && medCenter != null && customer != null && analysis != null && customerAnalysis != null){
-//            customerAnalysis.getAnalysis().setAnalysisId(analysisId);
-//            customerAnalysis.getCustomer().setCustomerId(customerId);
-//            customerAnalysis.getDoctor().setDoctorId(doctorId);
-//            customerAnalysis.getMedCenter().setMedCenterId(medCenterId);
-//            if(!check){
-//                return customerAnalysisRepository.saveAndFlush(customerAnalysis);
-//            }
-//        }
+        CustomerAnalysis customerAnalysis = customerAnalysisRepository.getCustomerAnalysisByCustomerAnalysisId(customerAnalysisId);
+
+        MedCenter medCenter = medCenterRepository.getMedCenterByMedCenterId(medCenterId);
+
+        Doctor doctor = doctorRepository.getDoctorByDoctorId(doctorId);
+
+        Customer customer = customerRepository.getCustomerByCustomerId(customerId);
+
+        Analysis analysis = analysisRepository.getAnalysisByAnalysisId(analysisId);
+
+        boolean check = false;
+
+        if(doctor != null && medCenter != null && customer != null && analysis != null && customerAnalysis != null){
+            customerAnalysis.getAnalysis().setAnalysisId(analysisId);
+            customerAnalysis.getCustomer().setCustomerId(customerId);
+            customerAnalysis.getDoctor().setDoctorId(doctorId);
+            customerAnalysis.getMedCenter().setMedCenterId(medCenterId);
+            if(!check){
+                return customerAnalysisRepository.saveAndFlush(customerAnalysis);
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public CustomerAnalysis updateCustomer(Long customerAnalysisId, Long customerId){
+
+//        customerAnalysisRepository.deleteCustomerAnalysisByCustomerCustomerId(customerId);
+
+        CustomerAnalysis customerAnalysis = customerAnalysisRepository.getCustomerAnalysisByCustomerAnalysisId(customerAnalysisId);
+
+        Customer customer = customerRepository.getCustomerByCustomerId(customerId);
+
+        boolean check = false;
+
+        if(customerAnalysis.getCustomer().getCustomerId().equals(customerId)){
+                customerAnalysis.setCustomer(customer);
+                check = true;
+        }
+
+        if(check){
+            return customerAnalysisRepository.saveAndFlush(customerAnalysis);
+        }
+        return null;
+    }
+
+    @Override
+    public CustomerAnalysis updateDoctor(Long customerAnalysisId, Long doctorId) {
+        CustomerAnalysis customerAnalysis = customerAnalysisRepository.getCustomerAnalysisByCustomerAnalysisId(customerAnalysisId);
+
+        Doctor doctor = doctorRepository.getDoctorByDoctorId(doctorId);
+
+        boolean check = false;
+
+        if(customerAnalysis.getDoctor().getDoctorId().equals(doctorId)){
+            customerAnalysis.setDoctor(doctor);
+            check = true;
+        }
+
+        if(check){
+            return customerAnalysisRepository.saveAndFlush(customerAnalysis);
+        }
+        return null;
+    }
+
+    @Override
+    public CustomerAnalysis updateMedCenter(Long customerAnalysisId, Long medCenterId) {
+        CustomerAnalysis customerAnalysis = customerAnalysisRepository.getCustomerAnalysisByCustomerAnalysisId(customerAnalysisId);
+
+        MedCenter medCenter = medCenterRepository.getMedCenterByMedCenterId(medCenterId);
+
+        boolean check = false;
+
+        if(customerAnalysis.getMedCenter().getMedCenterId().equals(medCenterId)){
+            customerAnalysis.setMedCenter(medCenter);
+            check = true;
+        }
+
+        if(check){
+            return customerAnalysisRepository.saveAndFlush(customerAnalysis);
+        }
+        return null;
+    }
+
+    @Override
+    public CustomerAnalysis updateAnalysis(Long customerAnalysisId, Long analysisId) {
+        CustomerAnalysis customerAnalysis = customerAnalysisRepository.getCustomerAnalysisByCustomerAnalysisId(customerAnalysisId);
+
+        Analysis analysis = analysisRepository.getAnalysisByAnalysisId(analysisId);
+
+        boolean check = false;
+
+        if(customerAnalysis.getAnalysis().getAnalysisId().equals(analysisId)){
+            customerAnalysis.setAnalysis(analysis);
+            check = true;
+        }
+
+        if(check){
+            return customerAnalysisRepository.saveAndFlush(customerAnalysis);
+        }
         return null;
     }
 
     @Override
     public CustomerAnalysis updateCustomerAnalysis(Long customerAnalysisId, Long medCenterId, Long analysisId, Long doctorId, Long customerId) {
 
-//        CustomerAnalysis customerAnalysis = customerAnalysisRepository.getById(customerAnalysisId);
-//
-//        if(customerAnalysis != null && customerAnalysis.getCustomerAnalysis_id() != null && customerAnalysis.getCustomerAnalysis_id() != 0L) {
-//            for (int i = 0; i < customerAnalysis.getAnalysis().getObjectSize(); i++) {
-//                customerAnalysis.getAnalysis().setAnalysisId(analysisId);
-//                return customerAnalysisRepository.saveAndFlush(customerAnalysis);
-//            }
-//        }
+        CustomerAnalysis customerAnalysis = customerAnalysisRepository.getCustomerAnalysisByCustomerAnalysisId(customerAnalysisId);
+
+        MedCenter medCenter = medCenterRepository.getMedCenterByMedCenterId(medCenterId);
+
+        Doctor doctor = doctorRepository.getDoctorByDoctorId(doctorId);
+
+        Customer customer = customerRepository.getCustomerByCustomerId(customerId);
+
+        Analysis analysis = analysisRepository.getAnalysisByAnalysisId(analysisId);
+
+        boolean check = false;
+
+        if(doctor != null && medCenter != null && customer != null && analysis != null && customerAnalysis != null){
+            customerAnalysis.getAnalysis().setAnalysisId(analysisId);
+            customerAnalysis.getCustomer().setCustomerId(customerId);
+            customerAnalysis.getDoctor().setDoctorId(doctorId);
+            customerAnalysis.getMedCenter().setMedCenterId(medCenterId);
+            if(!check){
+                return customerAnalysisRepository.saveAndFlush(customerAnalysis);
+            }
+        }
         return null;
     }
 

@@ -20,28 +20,28 @@ public class MedCenterController {
         return iMedCenterService.getAllMedCenter();
     }
 
-    @GetMapping("/search/medCenter-name")
-    public ResponseEntity<?> searchMedCenterByName(@RequestParam("medCenterName") String medCenterName) {
+    @GetMapping("/search/medCenter-name/{medCenterName}")
+    public ResponseEntity<?> searchMedCenterByName(@PathVariable("medCenterName") String medCenterName) {
         return ResponseEntity.ok(iMedCenterService.searchMedCenterByMedCenterName(medCenterName));
     }
 
-    @GetMapping("/search/medCenter-address")
-    public ResponseEntity<?> searchMedCenterByAddress(@RequestParam("medCenterAddress") String medCenterAddress) {
+    @GetMapping("/search/medCenter-address/{medCenterAddress}")
+    public ResponseEntity<?> searchMedCenterByAddress(@PathVariable("medCenterAddress") String medCenterAddress) {
         return ResponseEntity.ok(iMedCenterService.searchMedCenterByMedCenterAddress(medCenterAddress));
     }
 
-    @PatchMapping("/add-doctor")
-    public ResponseEntity<?> addDoctor(@RequestParam("medCenter_id") Long medCenter_id, @RequestParam("doctor_id") Long doctor_id) {
+    @PatchMapping("/add-doctor/{medCenter_id}/{doctor_id}")
+    public ResponseEntity<?> addDoctor(@PathVariable("medCenter_id") Long medCenter_id, @PathVariable("doctor_id") Long doctor_id) {
         return ResponseEntity.ok(iMedCenterService.addDoctor(medCenter_id, doctor_id));
     }
 
-    @PatchMapping("/change-doctor")
-    public ResponseEntity<?> updateMedCenterDoctorById(@RequestParam("medCenter_id") Long medCenter_id, @RequestParam("doctor_id") Long doctor_id) {
+    @PatchMapping("/change-doctor/{medCenter_id}/{doctor_id}")
+    public ResponseEntity<?> updateMedCenterDoctorById(@PathVariable("medCenter_id") Long medCenter_id, @PathVariable("doctor_id") Long doctor_id) {
         return ResponseEntity.ok(iMedCenterService.updateDoctor(medCenter_id, doctor_id));
     }
 
-    @PatchMapping("/remove-doctor")
-    public ResponseEntity<?> removeDoctor(@RequestParam("medCenter_id") Long medCenter_id, @RequestParam("doctor_id") Long doctor_id) {
+    @PatchMapping("/remove-doctor/{medCenter_id}/{doctor_id}")
+    public ResponseEntity<?> removeDoctor(@PathVariable("medCenter_id") Long medCenter_id, @PathVariable("doctor_id") Long doctor_id) {
         return ResponseEntity.ok(iMedCenterService.removeDoctor(medCenter_id, doctor_id));
     }
 
@@ -50,19 +50,19 @@ public class MedCenterController {
         return iMedCenterService.getById(id);
     }
 
-    @GetMapping("/medCenterName")
+    @GetMapping("/medCenterName/{medCenterName}")
     public MedCenter getByMedCenterName(@PathVariable("medCenterName") String medCenterName){
         return iMedCenterService.getByMedCenterName(medCenterName);
     }
 
-    @GetMapping("/address")
+    @GetMapping("/address/{address}")
     public MedCenter getByMedCenterAddress(@PathVariable("address") String address){
         return iMedCenterService.getByMedCenterAddress(address);
     }
 
-    @DeleteMapping
-    public void deleteMedCenterByID(@PathVariable("id") Long id){
-        iMedCenterService.DeleteById(id);
+    @DeleteMapping("/delete/{medCenterId}")
+    public void deleteMedCenterByID(@PathVariable("medCenterId") Long medCenterId){
+        iMedCenterService.DeleteById(medCenterId);
     }
 
     @PostMapping("/create")

@@ -20,7 +20,7 @@ public class MedCenter {
     private String medCenterName;
     private String medCenterAddress;
     private String medCenterNumber;
-    private char medCenterEmail;
+    private String medCenterEmail;
 
     @ManyToMany
     List<Doctor> doctors;

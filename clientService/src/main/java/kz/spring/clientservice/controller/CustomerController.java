@@ -15,23 +15,23 @@ public class CustomerController {
     @Autowired
     private ICustomerService iCustomerService;
 
-    @GetMapping("/search")
-    public ResponseEntity<?> searchCustomerByName(@RequestParam("customerName") String customerName) {
+    @GetMapping("/search/{customerName}")
+    public ResponseEntity<?> searchCustomerByName(@PathVariable("customerName") String customerName) {
         return ResponseEntity.ok(iCustomerService.searchCustomerByCustomerName(customerName));
     }
 
-    @PatchMapping("/add-doctor")
-    public ResponseEntity<?> addDoctor(@RequestParam("customer_id") Long customer_id, @RequestParam("doctor_id") Long doctor_id) {
+    @PatchMapping("/add-doctor/{customer_id}/{doctor_id}")
+    public ResponseEntity<?> addDoctor(@PathVariable("customer_id") Long customer_id, @PathVariable("doctor_id") Long doctor_id) {
         return ResponseEntity.ok(iCustomerService.addDoctor(customer_id, doctor_id));
     }
 
-    @PatchMapping("/change-doctor")
-    public ResponseEntity<?> updateCustomerDoctorById(@RequestParam("customer_id") Long customer_id, @RequestParam("doctor_id") Long doctor_id) {
+    @PatchMapping("/change-doctor/{customer_id}/{doctor_id}")
+    public ResponseEntity<?> updateCustomerDoctorById(@PathVariable("customer_id") Long customer_id, @PathVariable("doctor_id") Long doctor_id) {
         return ResponseEntity.ok(iCustomerService.updateDoctor(customer_id, doctor_id));
     }
 
-    @PatchMapping("/remove-doctor")
-    public ResponseEntity<?> removeDoctor(@RequestParam("customer_id") Long customer_id, @RequestParam("doctor_id") Long doctor_id) {
+    @PatchMapping("/remove-doctor/{customer_id}/{doctor_id}")
+    public ResponseEntity<?> removeDoctor(@PathVariable("customer_id") Long customer_id, @PathVariable("doctor_id") Long doctor_id) {
         return ResponseEntity.ok(iCustomerService.removeDoctor(customer_id, doctor_id));
     }
 
@@ -46,17 +46,17 @@ public class CustomerController {
         return ResponseEntity.ok(customer);
     }
 
-    @GetMapping("/customerName")
+    @GetMapping("/customerName/{customerName}")
     public Customer getByCustomerName(@PathVariable("customerName") String customerName){
         return iCustomerService.getByCustomerName(customerName);
     }
 
-    @GetMapping("/email")
+    @GetMapping("/email/{email}")
     public Customer getByCustomerEmail(@PathVariable("email") String email){
         return iCustomerService.getByCustomerEmail(email);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/delete/{id}")
     public void deleteCustomerByID(@PathVariable("id") Long id){
         iCustomerService.DeleteById(id);
     }

@@ -32,7 +32,7 @@ public class DoctorService implements IDoctorService {
         boolean check = false;
 
         for(int i = 0; i < doctor.getSpecialties().size(); i++){
-            if(doctor.getSpecialties().get(i).getSpecialtyId().equals(doctorId)){
+            if(doctor.getSpecialties().get(i).getSpecialtyId().equals(specialtyId)){
                 doctor.getSpecialties().remove(i);
                 check = true;
                 break;
@@ -84,7 +84,7 @@ public class DoctorService implements IDoctorService {
 
     @Override
     public Doctor getDoctorBySpecialty(String specialty) {
-        return doctorRepository.getDoctorBySpecialties(specialty);
+        return doctorRepository.getDoctorsBySpecialties(specialty);
     }
 
     @Override

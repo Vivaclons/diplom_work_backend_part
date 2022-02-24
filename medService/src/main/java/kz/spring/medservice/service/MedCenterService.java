@@ -39,7 +39,7 @@ public class MedCenterService implements IMedCenterService {
         boolean check = false;
 
         for(int i = 0; i < medCenter.getDoctors().size(); i++){
-            if(medCenter.getDoctors().get(i).getDoctorId().equals(medCenterId)){
+            if(medCenter.getDoctors().get(i).getDoctorId().equals(doctorId)){
                 medCenter.getDoctors().remove(i);
                 check = true;
                 break;
@@ -84,7 +84,7 @@ public class MedCenterService implements IMedCenterService {
 
     @Override
     public MedCenter getById(Long id) {
-        return medCenterRepository.getById(id);
+        return medCenterRepository.getByMedCenterId(id);
     }
 
     @Override

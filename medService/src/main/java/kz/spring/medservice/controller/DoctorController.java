@@ -15,23 +15,23 @@ public class DoctorController {
     @Autowired
     private IDoctorService iDoctorService;
 
-    @GetMapping("/search")
-    public ResponseEntity<?> searchDoctorByName(@RequestParam("doctorName") String doctorName) {
+    @GetMapping("/search/{doctorName}")
+    public ResponseEntity<?> searchDoctorByName(@PathVariable("doctorName") String doctorName) {
         return ResponseEntity.ok(iDoctorService.searchDoctorByDoctorName(doctorName));
     }
 
-    @PatchMapping("/add-specialty")
-    public ResponseEntity<?> addSpecialty(@RequestParam("doctor_id") Long doctor_id, @RequestParam("specialty_id") Long specialty_id) {
+    @PatchMapping("/add-specialty/{doctor_id}/{specialty_id}")
+    public ResponseEntity<?> addSpecialty(@PathVariable("doctor_id") Long doctor_id, @PathVariable("specialty_id") Long specialty_id) {
         return ResponseEntity.ok(iDoctorService.addSpecialty(doctor_id, specialty_id));
     }
 
-    @PatchMapping("/change-specialty")
-    public ResponseEntity<?> updateDoctorSpecialtyById(@RequestParam("doctor_id") Long doctor_id, @RequestParam("specialty_id") Long specialty_id) {
+    @PatchMapping("/change-specialty/{doctor_id}/{specialty_id}")
+    public ResponseEntity<?> updateDoctorSpecialtyById(@PathVariable("doctor_id") Long doctor_id, @PathVariable("specialty_id") Long specialty_id) {
         return ResponseEntity.ok(iDoctorService.updateSpecialty(doctor_id, specialty_id));
     }
 
-    @PatchMapping("/remove-specialty")
-    public ResponseEntity<?> removeSpecialty(@RequestParam("doctor_id") Long doctor_id, @RequestParam("specialty_id") Long specialty_id) {
+    @PatchMapping("/remove-specialty/{doctor_id}/{specialty_id}")
+    public ResponseEntity<?> removeSpecialty(@PathVariable("doctor_id") Long doctor_id, @PathVariable("specialty_id") Long specialty_id) {
         return ResponseEntity.ok(iDoctorService.removeSpecialty(doctor_id, specialty_id));
     }
 
@@ -45,19 +45,19 @@ public class DoctorController {
         return iDoctorService.getDoctorById(id);
     }
 
-    @GetMapping("/doctorName")
+    @GetMapping("/doctorName/{doctorName}")
     public Doctor getDoctorName(@PathVariable("doctorName") String doctorName){
         return iDoctorService.getByDoctorName(doctorName);
     }
 
-    @GetMapping("/specialty")
+    @GetMapping("/specialty/{specialty}")
     public Doctor getDoctorSpecialty(@PathVariable("specialty") String specialty){
         return iDoctorService.getDoctorBySpecialty(specialty);
     }
 
-    @DeleteMapping
-    public void deleteDoctorByID(@PathVariable("id") Long id){
-        iDoctorService.DeleteById(id);
+    @DeleteMapping("/delete/{doctorId}")
+    public void deleteDoctorByID(@PathVariable("doctorId") Long doctorId){
+        iDoctorService.DeleteById(doctorId);
     }
 
     @PostMapping("/create")

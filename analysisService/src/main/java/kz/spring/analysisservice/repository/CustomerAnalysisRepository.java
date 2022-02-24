@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface CustomerAnalysisRepository extends JpaRepository<CustomerAnalysis, Long> {
+    CustomerAnalysis getCustomerAnalysisByCustomerAnalysisId(Long id);
 //    List<CustomerAnalysis> findByCustomerAnalysisId(Long id);
 //    List<CustomerAnalysis> findCustomerAnalysisByCustomerAnalysisName(String customerAnalysisName);
 //    List<CustomerAnalysis> getCustomerAnalysisByAnalysis_Description(String customerAnalysisName);

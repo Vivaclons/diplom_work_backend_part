@@ -21,7 +21,7 @@ public class AnalysisService implements IAnalysisService {
 
     @Override
     public Analysis getById(Long id) {
-        return analysisRepository.getById(id);
+        return analysisRepository.getAnalysisByAnalysisId(id);
     }
 
     @Override

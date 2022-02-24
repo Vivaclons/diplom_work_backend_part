@@ -31,7 +31,7 @@ public class CustomerService implements ICustomerService {
         boolean check = false;
 
         for(int i = 0; i < customer.getDoctors().size(); i++){
-            if(customer.getDoctors().get(i).getDoctorId().equals(customerId)){
+            if(customer.getDoctors().get(i).getDoctorId().equals(doctorId)){
                 customer.getDoctors().remove(i);
                 check = true;
                 break;
