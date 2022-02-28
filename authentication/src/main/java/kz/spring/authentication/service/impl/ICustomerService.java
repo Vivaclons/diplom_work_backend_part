@@ -10,19 +10,15 @@ public interface ICustomerService {
 
     Customer getByCustomerName(String customerName);
 
-    Boolean isAdmin(String customerName, String pass);
-
-    Boolean isDoctor(String customerName, String pass);
-
-    Boolean isMedCenter(String customerName, String pass);
-
-    Boolean isCustomer(String customerName, String pass);
-
     void update(Customer customer);
 
     List<Customer> getAllCustomersBy();
 
     void DeleteByID(Long customerId);
 
-    boolean checkByLoginAndPassword(String login, String password);
+    boolean checkByEmailAndPassword(String username, String password);
+
+    boolean addUser(Customer customer);
+
+    boolean activateCustomer(String code);
 }

@@ -6,13 +6,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Table(name="customer")
 public class Customer implements UserDetails{
     @Id
@@ -22,50 +22,29 @@ public class Customer implements UserDetails{
     private String customerName;
     private String customerSurname;
     private String customerTelNumber;
-    private String customerEmail;
-    private String Password;
-    private String Address;
+    private String email;
+    private String activationCode;
+    private String username;
+    private String password;
+    private String address;
+    private boolean status;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "user_roles",
-            joinColumns = {
-                    @JoinColumn(name = "user_id")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "role_id")
-            }
-    )
-    private List<Role> roles;
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    @JoinTable(
+//            name = "user_roles",
+//            joinColumns = {
+//                    @JoinColumn(name = "user_id")
+//            },
+//            inverseJoinColumns = {
+//                    @JoinColumn(name = "role_id")
+//            }
+//    )
+//    private List<Role> roles;
 
-    private boolean isAdmin;
-    private boolean isDoctor;
-    private boolean isMedCenter;
-
-    public Customer(Long customerId, String customerName, String customerSurname, String customerTelNumber, String customerEmail, String password, String address, List<Role> roles) {
-        this.customerId = customerId;
-        this.customerName = customerName;
-        this.customerSurname = customerSurname;
-        this.customerTelNumber = customerTelNumber;
-        this.customerEmail = customerEmail;
-        Password = password;
-        Address = address;
-        this.roles = roles;
-
-        isAdmin = false;
-        isDoctor = false;
-        isMedCenter = false;
-
-        for (Role i : roles ) {
-            if (i.getName().equals( "ADMIN" )) {
-                isAdmin = true;
-            } else if(i.getName().equals("DOCTOR")){
-                isDoctor = true;
-            } else if(i.getName().equals("MEDCENTER")){
-                isMedCenter = true;
-            }
-        }
-    }
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.LAZY)
+    @CollectionTable(name = "customer_role", joinColumns = @JoinColumn(name = "customer_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<Role> roles;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -74,7 +53,7 @@ public class Customer implements UserDetails{
 
     @Override
     public String getUsername() {
-        return null;
+        return this.username;
     }
 
     @Override
@@ -94,6 +73,6 @@ public class Customer implements UserDetails{
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return isStatus();
     }
 }

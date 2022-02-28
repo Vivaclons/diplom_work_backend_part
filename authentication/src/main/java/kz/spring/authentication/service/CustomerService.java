@@ -1,25 +1,33 @@
 package kz.spring.authentication.service;
 
 import kz.spring.authentication.model.Customer;
+import kz.spring.authentication.model.Role;
 import kz.spring.authentication.repository.CustomerRepository;
 import kz.spring.authentication.service.impl.ICustomerService;
+import kz.spring.authentication.service.impl.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 @Service
-public class CustomerService implements ICustomerService, UserDetailsService {
+public class CustomerService implements ICustomerService, UserDetailsService, IRoleService {
 
     @Autowired
     private CustomerRepository customerRepository;
 
     @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private MailDelivery mailDelivery;
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public Customer getById(Long customerId) {
@@ -31,37 +39,59 @@ public class CustomerService implements ICustomerService, UserDetailsService {
         return customerRepository.getByCustomerName(customerName);
     }
 
+//    @Override
+//    public Role saveRole(Role role){
+//        return roleRepository.save(role);
+//    }
+
     @Override
-    public Boolean isAdmin(String customerName, String pass) {
-        Customer customer = customerRepository.getByCustomerName(customerName);
-        if(customer == null){
-            return false;
+    public void addRoleToCustomer(Customer customer, String roleName){
+        Customer customer1 = customerRepository.findByUsername(customer.getUsername());
+//        Role role = roleRepository.findByName(roleName);
+        if(roleName.equals(Role.USER)){
+            customer1.getRoles().add(Role.USER);
+        }else{
+            customer1.getRoles().add(Role.ADMIN);
         }
-        return customer.getPassword().equals(pass) && customer.isAdmin();
     }
 
-    @Override
-    public Boolean isDoctor(String customerName, String pass) {
-        return null;
-    }
+//    @Override
+//    public List<Role> getRoles(){
+//        return roleRepository.findAll();
+//    }
 
-    @Override
-    public Boolean isMedCenter(String customerName, String pass) {
-        return null;
-    }
+//
+//    @Override
+//    public Boolean isAdmin(String customerName, String pass) {
+//        Customer customer = customerRepository.getByCustomerName(customerName);
+//        if(customer == null){
+//            return false;
+//        }
+//        return customer.getPassword().equals(pass) && customer.isAdmin();
+//    }
 
-    @Override
-    public Boolean isCustomer(String customerName, String pass) {
-        Customer customer = customerRepository.getByCustomerName(customerName);
-        if(customer == null){
-            return false;
-        }
-        return customer.getPassword().equals(pass);
-    }
+//    @Override
+//    public Boolean isDoctor(String customerName, String pass) {
+//        return null;
+//    }
+//
+//    @Override
+//    public Boolean isMedCenter(String customerName, String pass) {
+//        return null;
+//    }
+//
+//    @Override
+//    public Boolean isCustomer(String customerName, String pass) {
+//        Customer customer = customerRepository.getByCustomerName(customerName);
+//        if(customer == null){
+//            return false;
+//        }
+//        return customer.getPassword().equals(pass);
+//    }
 
     @Override
     public void update(Customer customer) {
-        customer.setPassword(bCryptPasswordEncoder.encode(customer.getPassword()));
+        customer.setPassword(passwordEncoder.encode(customer.getPassword()));
         customerRepository.saveAndFlush(customer);
     }
 
@@ -76,24 +106,68 @@ public class CustomerService implements ICustomerService, UserDetailsService {
     }
 
     @Override
-    public boolean checkByLoginAndPassword(String login, String password) {
-        return customerRepository.existsCustomerByUsernameAndPassword(login, password);
+    public boolean checkByEmailAndPassword(String username, String password) {
+        return customerRepository.existsCustomerByUsernameAndPassword(username, password);
     }
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        List<Customer> customers = customerRepository.findAll();
-        Customer customer = null;
 
-        for (Customer customer1 : customers){
-            if(customer1.getCustomerName().equals(username)){
-                customer = customer1;
-            }
-        }
+        Customer customer = customerRepository.findByUsername(username);
 
         if(customer == null){
-            throw new UsernameNotFoundException("Authentication error with user name(Not found user): " + username);
+            throw new UsernameNotFoundException("User by this email: " + username + " not found!");
         }
-        return customer;
+//
+//        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+//        customer.getRoles().forEach(role -> {
+//            authorities.add(new SimpleGrantedAuthority(role.getName()));
+//        });
+
+//        return new User(customer.getUsername(), customer.getPassword(), authorities);
+
+        return null;
+    }
+
+    @Override
+    public boolean addUser(Customer customer){
+        Customer customer1 = customerRepository.findByUsername(customer.getUsername());
+
+        if(customer1 != null){
+            System.out.println("ERROR");
+            return false;
+        }
+
+        customer.setStatus(true);
+        customer.setRoles(Collections.singleton(Role.USER));
+        customer.setPassword(passwordEncoder.encode(customer.getPassword()));
+        customer.setActivationCode(UUID.randomUUID().toString());
+
+        if(!StringUtils.isEmpty(customer.getEmail())){
+            String message = String.format(
+                    "Hello, %s! \n" + "Welcome to QazMed. Please visit next link: http://localhost:8084/registration/activate/%s",
+                    customer.getUsername(),
+                    customer.getActivationCode()
+            );
+            mailDelivery.send(customer.getEmail(), "Activation code", message);
+        }
+
+        customerRepository.saveAndFlush(customer);
+        return true;
+    }
+
+    public boolean activateCustomer(String code){
+
+        Customer customer = customerRepository.findByActivationCode(code);
+
+        if(customer == null){
+            return false;
+        }
+
+        customer.setActivationCode(null);
+        customerRepository.saveAndFlush(customer);
+
+        return true;
     }
 }
