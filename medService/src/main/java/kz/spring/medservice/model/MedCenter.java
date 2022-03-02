@@ -21,6 +21,11 @@ public class MedCenter {
     private String medCenterAddress;
     private String medCenterNumber;
     private String medCenterEmail;
+    private String medCenterTelNumber;
+    private String password;
+    private boolean status;
+    private String activationCode;
+    private String username;
 
     @ManyToMany
     List<Doctor> doctors;

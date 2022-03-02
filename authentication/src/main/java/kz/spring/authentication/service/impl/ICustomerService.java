@@ -6,17 +6,15 @@ import java.util.List;
 
 public interface ICustomerService {
 
-    Customer getById(Long customerId);
+    Customer getCustomerById(Long customerId);
 
     Customer getByCustomerName(String customerName);
 
-    void update(Customer customer);
+    void updateCus(Customer customer);
 
     List<Customer> getAllCustomersBy();
 
     void DeleteByID(Long customerId);
-
-    boolean checkByEmailAndPassword(String username, String password);
 
     boolean addUser(Customer customer);
 

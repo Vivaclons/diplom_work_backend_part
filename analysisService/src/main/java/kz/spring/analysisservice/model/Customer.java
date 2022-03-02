@@ -21,7 +21,11 @@ public class Customer {
     private String customerName;
     private String customerSurname;
     private String customerTelNumber;
-    private String customerEmail;
-    private String Password;
-    private String Address;
+    private String email;
+    private String activationCode;
+    private String username;
+    private String password;
+
+    private String address;
+    private boolean status;
 }

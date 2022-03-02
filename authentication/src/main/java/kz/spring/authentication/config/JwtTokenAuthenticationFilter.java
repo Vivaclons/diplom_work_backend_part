@@ -42,7 +42,7 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
 
             // 4. Validate the token
             Claims claims = Jwts.parser()
-                    .setSigningKey("kazMed-diploma".getBytes())
+                    .setSigningKey("QazMed-diploma".getBytes())
                     .parseClaimsJws(token)
                     .getBody();
 

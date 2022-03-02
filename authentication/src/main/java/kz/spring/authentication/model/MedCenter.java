@@ -1,59 +1,45 @@
 package kz.spring.authentication.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-
 @Entity
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
-@Table(name="customer")
-public class Customer implements UserDetails{
+@AllArgsConstructor
+public class MedCenter implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "customer_id")
-    private Long customerId;
-    private String customerName;
-    private String customerSurname;
-    private String customerTelNumber;
-    private String email;
+    @Column(name = "medcenter_id")
+    private Long medCenterId;
+    private String medCenterName;
+    private String medCenterAddress;
+    private String medCenterNumber;
+    private String medCenterEmail;
+    private String medCenterTelNumber;
+    private String password;
+    private boolean status;
     private String activationCode;
     private String username;
-    private String password;
-    private String address;
-    private boolean status;
-
-//    @ManyToMany(fetch = FetchType.LAZY)
-//    @JoinTable(
-//            name = "user_roles",
-//            joinColumns = {
-//                    @JoinColumn(name = "user_id")
-//            },
-//            inverseJoinColumns = {
-//                    @JoinColumn(name = "role_id")
-//            }
-//    )
-//    private List<Role> roles;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "customer_role", joinColumns = @JoinColumn(name = "customer_id"))
+    @CollectionTable(name = "medCenter_role", joinColumns = @JoinColumn(name = "medCenter_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;
-    }
-
-    @Override
-    public String getUsername() {
-        return this.username;
     }
 
     @Override

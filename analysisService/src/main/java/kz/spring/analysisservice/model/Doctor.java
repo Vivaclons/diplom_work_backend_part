@@ -22,5 +22,8 @@ public class Doctor {
     private String doctorSurname;
     private String doctorTelNumber;
     private String doctorEmail;
-    private String doctorPassword;
+    private String password;
+    private boolean status;
+    private String activationCode;
+    private String username;
 }

@@ -20,12 +20,14 @@ public class Customer {
     private String customerName;
     private String customerSurname;
     private String customerTelNumber;
-    private String customerEmail;
     private String email;
     private String activationCode;
     private String username;
     private String password;
+    @Transient
+    private String password2;
     private String address;
+    private boolean status;
 
     @ManyToMany
     List<Doctor> doctors;

@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class JwtTokenGeneratorFilter extends UsernamePasswordAuthenticationFilter {
@@ -37,6 +38,8 @@ public class JwtTokenGeneratorFilter extends UsernamePasswordAuthenticationFilte
 
         try {
 
+            Customer customer = new Customer();
+
             // 1. Get credentials from request
             Customer creds = new ObjectMapper().readValue(request.getInputStream(), Customer.class);
 
@@ -44,10 +47,15 @@ public class JwtTokenGeneratorFilter extends UsernamePasswordAuthenticationFilte
             UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                     creds.getUsername(), creds.getPassword(), Collections.emptyList());
 
-            // 3. Authentication manager authenticate the user, and use UserDetialsServiceImpl::loadUserByUsername() method to load the user.
-            return authenticationManager.authenticate(authToken);
+//            if(customer.getActivationCode() == null){
 
-        } catch (IOException e) {
+            return authenticationManager.authenticate(authToken);
+//            }else{
+//                System.out.println("Account unavailable");
+//                return authenticationManager.authenticate(null);
+//            }
+            // 3. Authentication manager authenticate the user, and use UserDetialsServiceImpl::loadUserByUsername() method to load the user.
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -67,7 +75,7 @@ public class JwtTokenGeneratorFilter extends UsernamePasswordAuthenticationFilte
                         .map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
                 .setIssuedAt(new Date(now))
                 .setExpiration(new Date(now + 60*60 * 1000))  // in milliseconds
-                .signWith(SignatureAlgorithm.HS512, "kazmed-diploma".getBytes())
+                .signWith(SignatureAlgorithm.HS512, "QazMed-diploma".getBytes())
                 .compact();
 
         // Add token to header

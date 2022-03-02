@@ -15,7 +15,12 @@ import javax.persistence.Id;
 //@NoArgsConstructor
 //@ToString
 public enum Role implements GrantedAuthority{
-    USER, ADMIN;
+    USER("USER"),
+    ADMIN("ADMIN"),
+    DOCTOR("DOCTOR"),
+    MED_CENTER("MED_CENTER");
+
+    public final String name;
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    private Long id;
@@ -25,9 +30,12 @@ public enum Role implements GrantedAuthority{
 //    public String getAuthority() {
 //        return name;
 //    }
+    Role(String name) {
+        this.name = name;
+    }
 
     @Override
     public String getAuthority() {
-        return name();
+        return this.name;
     }
 }
