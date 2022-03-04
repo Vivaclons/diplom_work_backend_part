@@ -58,9 +58,11 @@ public class AppointmentService implements IAppointmentService {
 
         Appointment appointment = appointmentRepository.getById(appointmentId);
 
+        boolean apCheck = checkAppointment(customer, appointment);
+
         boolean check = false;
 
-        if(doctor != null && medCenter != null && customer != null && appointment != null){
+        if(doctor != null && medCenter != null && customer != null && appointment != null && apCheck){
             appointment.getCustomer().setCustomerId(customerId);
             appointment.getDoctor().setDoctorId(doctorId);
             appointment.getMedCenter().setMedCenterId(medCenterId);
@@ -69,6 +71,19 @@ public class AppointmentService implements IAppointmentService {
             }
         }
         return null;
+    }
+
+    public boolean checkAppointment(Customer customer, Appointment appointment){
+
+        List<Appointment> appointment1 = appointmentRepository.findAll();
+
+        for(int i = 0; i < appointment1.size(); i++){
+            if(customer.getCustomerId().equals(appointment1.get(i).getCustomer().getCustomerId()) && appointment1.get(i).getDate().getTime() == appointment.getDate().getTime()){
+                return false;
+            }
+        }
+
+        return true;
     }
 
     @Override

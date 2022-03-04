@@ -33,5 +33,4 @@ public class Appointment {
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "medCenter_id")
     private MedCenter medCenter;
-
 }
