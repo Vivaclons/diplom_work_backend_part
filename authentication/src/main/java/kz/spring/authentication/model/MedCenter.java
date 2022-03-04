@@ -17,6 +17,7 @@ import java.util.Set;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name="med_center")
 public class MedCenter implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

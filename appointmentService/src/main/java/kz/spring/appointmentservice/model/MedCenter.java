@@ -1,4 +1,4 @@
-package kz.spring.analysisservice.model;
+package kz.spring.appointmentservice.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,4 +27,5 @@ public class MedCenter {
     private boolean status;
     private String activationCode;
     private String username;
+
 }

@@ -40,4 +40,6 @@ public class AnalysisController {
     public void updateAnalysis(@RequestBody Analysis analysis){
         iAnalysisService.update(analysis);
     }
+
+
 }

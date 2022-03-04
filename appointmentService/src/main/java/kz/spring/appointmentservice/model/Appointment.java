@@ -1,8 +1,5 @@
 package kz.spring.appointmentservice.model;
 
-//import kz.spring.clientservice.model.Customer;
-//import kz.spring.medservice.model.Doctor;
-//import kz.spring.medservice.model.MedCenter;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,19 +13,25 @@ import java.util.Date;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name="appointment")
 public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "appointment_id")
     private Long appointmentId;
 
     private Date date;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    private MedCenter medCenter;
-//
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    private Doctor doctor;
-//
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    private Customer customer;
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "doctor_id")
+    private Doctor doctor;
+
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "medCenter_id")
+    private MedCenter medCenter;
+
 }

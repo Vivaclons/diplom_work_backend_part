@@ -12,6 +12,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name="med_center")
 public class MedCenter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
