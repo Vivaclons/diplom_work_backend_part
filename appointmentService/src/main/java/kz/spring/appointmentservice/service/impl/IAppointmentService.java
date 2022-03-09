@@ -12,7 +12,8 @@ public interface IAppointmentService {
     Appointment updateMedCenter(Long appointmentId, Long medCenterId);
     Appointment updateCustomer(Long appointmentId, Long customerId);
     Appointment getByDate(Date date);
-    void update(Appointment appointment);
+    void create(Appointment appointment, Long medCenterId, Long appointmentId, Long doctorId, Long customerId);
+    void update(Appointment appointment, Long medCenterId, Long appointmentId, Long doctorId, Long customerId);
     List<Appointment> getAllAppointment();
     void DeleteById(Long id);
 }

@@ -33,8 +33,15 @@ public class AppointmentService implements IAppointmentService {
     }
 
     @Override
-    public void update(Appointment appointment) {
+    public void create(Appointment appointment, Long medCenterId, Long appointmentId, Long doctorId, Long customerId) {
         appointmentRepository.saveAndFlush(appointment);
+        addAppointment(medCenterId, appointmentId, doctorId, customerId);
+    }
+
+    @Override
+    public void update(Appointment appointment, Long medCenterId, Long appointmentId, Long doctorId, Long customerId){
+        appointmentRepository.saveAndFlush(appointment);
+        addAppointment(medCenterId, appointmentId, doctorId, customerId);
     }
 
     @Override
@@ -62,13 +69,20 @@ public class AppointmentService implements IAppointmentService {
 
         boolean check = false;
 
-        if(doctor != null && medCenter != null && customer != null && appointment != null && apCheck){
-            appointment.getCustomer().setCustomerId(customerId);
-            appointment.getDoctor().setDoctorId(doctorId);
-            appointment.getMedCenter().setMedCenterId(medCenterId);
-            if(!check){
-                return appointmentRepository.saveAndFlush(appointment);
+
+        if(apCheck){
+            if(doctor != null && medCenter != null && customer != null && appointment != null){
+                appointment.getCustomer().setCustomerId(customerId);
+                appointment.getDoctor().setDoctorId(doctorId);
+                appointment.getMedCenter().setMedCenterId(medCenterId);
+                if(!check){
+                    return appointmentRepository.saveAndFlush(appointment);
+                }
+            } else {
+                System.out.println("entity is empty!");
             }
+        } else {
+            System.out.println("Error with appointment date: you have appointment in this time");
         }
         return null;
     }

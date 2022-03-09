@@ -7,6 +7,7 @@ import kz.spring.clientservice.repository.DoctorRepository;
 import kz.spring.clientservice.service.impl.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class CustomerService implements ICustomerService {
     private CustomerRepository customerRepository;
 
     @Autowired
-    private DoctorRepository doctorRepository;
+    private RestTemplate restTemplate;
 
     @Override
     public List<Customer> searchCustomerByCustomerName(String customerName) {
@@ -49,7 +50,7 @@ public class CustomerService implements ICustomerService {
 
         Customer customer = customerRepository.getByCustomerId(customerId);
 
-        Doctor doctor = doctorRepository.getById(doctorId);
+        Doctor doctor = restTemplate.getForObject("http://localhost:8082/med-service/doctor/" + doctorId, Doctor.class);
 
         boolean check = false;
 

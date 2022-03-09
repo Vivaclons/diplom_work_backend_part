@@ -5,6 +5,7 @@ import kz.spring.analysisservice.repository.*;
 import kz.spring.analysisservice.service.impl.ICustomerAnalysisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -26,6 +27,9 @@ public class CustomerAnalysisService implements ICustomerAnalysisService {
     @Autowired
     private AnalysisRepository analysisRepository;
 
+    @Autowired
+    private RestTemplate restTemplate;
+
     @Override
     public void removeCustomerAnalysis(Long customerAnalysisId) {
         customerAnalysisRepository.deleteById(customerAnalysisId);
@@ -36,11 +40,11 @@ public class CustomerAnalysisService implements ICustomerAnalysisService {
 
         CustomerAnalysis customerAnalysis = customerAnalysisRepository.getCustomerAnalysisByCustomerAnalysisId(customerAnalysisId);
 
-        MedCenter medCenter = medCenterRepository.getMedCenterByMedCenterId(medCenterId);
+        MedCenter medCenter = restTemplate.getForObject("http://localhost:8082/med-service/medCenter/" + medCenterId, MedCenter.class);
 
-        Doctor doctor = doctorRepository.getDoctorByDoctorId(doctorId);
+        Doctor doctor = restTemplate.getForObject("http://localhost:8082/med-service/doctor/" + doctorId, Doctor.class);
 
-        Customer customer = customerRepository.getCustomerByCustomerId(customerId);
+        Customer customer = restTemplate.getForObject("http://localhost:8083/client-service/customer/" + customerId, Customer.class);
 
         Analysis analysis = analysisRepository.getAnalysisByAnalysisId(analysisId);
 
@@ -65,7 +69,7 @@ public class CustomerAnalysisService implements ICustomerAnalysisService {
 
         CustomerAnalysis customerAnalysis = customerAnalysisRepository.getCustomerAnalysisByCustomerAnalysisId(customerAnalysisId);
 
-        Customer customer = customerRepository.getCustomerByCustomerId(customerId);
+        Customer customer = restTemplate.getForObject("http://localhost:8083/client-service/customer/" + customerId, Customer.class);
 
         boolean check = false;
 
@@ -84,7 +88,7 @@ public class CustomerAnalysisService implements ICustomerAnalysisService {
     public CustomerAnalysis updateDoctor(Long customerAnalysisId, Long doctorId) {
         CustomerAnalysis customerAnalysis = customerAnalysisRepository.getCustomerAnalysisByCustomerAnalysisId(customerAnalysisId);
 
-        Doctor doctor = doctorRepository.getDoctorByDoctorId(doctorId);
+        Doctor doctor = restTemplate.getForObject("http://localhost:8082/med-service/doctor/" + doctorId, Doctor.class);
 
         boolean check = false;
 
@@ -103,7 +107,7 @@ public class CustomerAnalysisService implements ICustomerAnalysisService {
     public CustomerAnalysis updateMedCenter(Long customerAnalysisId, Long medCenterId) {
         CustomerAnalysis customerAnalysis = customerAnalysisRepository.getCustomerAnalysisByCustomerAnalysisId(customerAnalysisId);
 
-        MedCenter medCenter = medCenterRepository.getMedCenterByMedCenterId(medCenterId);
+        MedCenter medCenter = restTemplate.getForObject("http://localhost:8082/med-service/medCenter/" + medCenterId, MedCenter.class);
 
         boolean check = false;
 
@@ -142,11 +146,11 @@ public class CustomerAnalysisService implements ICustomerAnalysisService {
 
         CustomerAnalysis customerAnalysis = customerAnalysisRepository.getCustomerAnalysisByCustomerAnalysisId(customerAnalysisId);
 
-        MedCenter medCenter = medCenterRepository.getMedCenterByMedCenterId(medCenterId);
+        MedCenter medCenter = restTemplate.getForObject("http://localhost:8082/med-service/medCenter/" + medCenterId, MedCenter.class);
 
-        Doctor doctor = doctorRepository.getDoctorByDoctorId(doctorId);
+        Doctor doctor = restTemplate.getForObject("http://localhost:8082/med-service/doctor/" + doctorId, Doctor.class);
 
-        Customer customer = customerRepository.getCustomerByCustomerId(customerId);
+        Customer customer = restTemplate.getForObject("http://localhost:8083/client-service/customer/" + customerId, Customer.class);
 
         Analysis analysis = analysisRepository.getAnalysisByAnalysisId(analysisId);
 
