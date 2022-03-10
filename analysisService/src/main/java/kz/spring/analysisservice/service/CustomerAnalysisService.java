@@ -40,11 +40,11 @@ public class CustomerAnalysisService implements ICustomerAnalysisService {
 
         CustomerAnalysis customerAnalysis = customerAnalysisRepository.getCustomerAnalysisByCustomerAnalysisId(customerAnalysisId);
 
-        MedCenter medCenter = restTemplate.getForObject("http://localhost:8082/med-service/medCenter/" + medCenterId, MedCenter.class);
+        MedCenter medCenter = restTemplate.getForObject("http://localhost:8082/medCenter/" + medCenterId, MedCenter.class);
 
-        Doctor doctor = restTemplate.getForObject("http://localhost:8082/med-service/doctor/" + doctorId, Doctor.class);
+        Doctor doctor = restTemplate.getForObject("http://localhost:8082/doctor/" + doctorId, Doctor.class);
 
-        Customer customer = restTemplate.getForObject("http://localhost:8083/client-service/customer/" + customerId, Customer.class);
+        Customer customer = restTemplate.getForObject("http://localhost:8083/customer/" + customerId, Customer.class);
 
         Analysis analysis = analysisRepository.getAnalysisByAnalysisId(analysisId);
 
@@ -69,7 +69,7 @@ public class CustomerAnalysisService implements ICustomerAnalysisService {
 
         CustomerAnalysis customerAnalysis = customerAnalysisRepository.getCustomerAnalysisByCustomerAnalysisId(customerAnalysisId);
 
-        Customer customer = restTemplate.getForObject("http://localhost:8083/client-service/customer/" + customerId, Customer.class);
+        Customer customer = restTemplate.getForObject("http://localhost:8083/customer/" + customerId, Customer.class);
 
         boolean check = false;
 
@@ -88,7 +88,7 @@ public class CustomerAnalysisService implements ICustomerAnalysisService {
     public CustomerAnalysis updateDoctor(Long customerAnalysisId, Long doctorId) {
         CustomerAnalysis customerAnalysis = customerAnalysisRepository.getCustomerAnalysisByCustomerAnalysisId(customerAnalysisId);
 
-        Doctor doctor = restTemplate.getForObject("http://localhost:8082/med-service/doctor/" + doctorId, Doctor.class);
+        Doctor doctor = restTemplate.getForObject("http://localhost:8082/doctor/" + doctorId, Doctor.class);
 
         boolean check = false;
 
@@ -107,7 +107,7 @@ public class CustomerAnalysisService implements ICustomerAnalysisService {
     public CustomerAnalysis updateMedCenter(Long customerAnalysisId, Long medCenterId) {
         CustomerAnalysis customerAnalysis = customerAnalysisRepository.getCustomerAnalysisByCustomerAnalysisId(customerAnalysisId);
 
-        MedCenter medCenter = restTemplate.getForObject("http://localhost:8082/med-service/medCenter/" + medCenterId, MedCenter.class);
+        MedCenter medCenter = restTemplate.getForObject("http://localhost:8082/medCenter/" + medCenterId, MedCenter.class);
 
         boolean check = false;
 
@@ -146,11 +146,11 @@ public class CustomerAnalysisService implements ICustomerAnalysisService {
 
         CustomerAnalysis customerAnalysis = customerAnalysisRepository.getCustomerAnalysisByCustomerAnalysisId(customerAnalysisId);
 
-        MedCenter medCenter = restTemplate.getForObject("http://localhost:8082/med-service/medCenter/" + medCenterId, MedCenter.class);
+        MedCenter medCenter = restTemplate.getForObject("http://localhost:8082/medCenter/" + medCenterId, MedCenter.class);
 
-        Doctor doctor = restTemplate.getForObject("http://localhost:8082/med-service/doctor/" + doctorId, Doctor.class);
+        Doctor doctor = restTemplate.getForObject("http://localhost:8082/doctor/" + doctorId, Doctor.class);
 
-        Customer customer = restTemplate.getForObject("http://localhost:8083/client-service/customer/" + customerId, Customer.class);
+        Customer customer = restTemplate.getForObject("http://localhost:8083/customer/" + customerId, Customer.class);
 
         Analysis analysis = analysisRepository.getAnalysisByAnalysisId(analysisId);
 

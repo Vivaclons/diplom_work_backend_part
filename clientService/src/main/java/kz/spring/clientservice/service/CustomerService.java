@@ -50,7 +50,7 @@ public class CustomerService implements ICustomerService {
 
         Customer customer = customerRepository.getByCustomerId(customerId);
 
-        Doctor doctor = restTemplate.getForObject("http://localhost:8082/med-service/doctor/" + doctorId, Doctor.class);
+        Doctor doctor = restTemplate.getForObject("http://localhost:8082/doctor/" + doctorId, Doctor.class);
 
         boolean check = false;
 
@@ -90,7 +90,7 @@ public class CustomerService implements ICustomerService {
 
     @Override
     public Customer getByCustomerEmail(String email){
-        return customerRepository.getByCustomerEmail(email);
+        return customerRepository.getCustomerByEmail(email);
     }
 
     @Override

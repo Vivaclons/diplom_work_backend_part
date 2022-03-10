@@ -57,13 +57,13 @@ public class AppointmentService implements IAppointmentService {
     @Override
     public Appointment addAppointment(Long medCenterId, Long appointmentId, Long doctorId, Long customerId){
 
-        Customer customer = restTemplate.getForObject("http://localhost:8083/client-service/customer/" + customerId, Customer.class);
+        Customer customer = restTemplate.getForObject("http://localhost:8083/customer/" + customerId, Customer.class);
 
-        Doctor doctor = restTemplate.getForObject("http://localhost:8082/med-service/doctor/" + doctorId, Doctor.class);
+        Doctor doctor = restTemplate.getForObject("http://localhost:8082/doctor/" + doctorId, Doctor.class);
 
-        MedCenter medCenter = restTemplate.getForObject("http://localhost:8082/med-service/medCenter/" + medCenterId, MedCenter.class);
+        MedCenter medCenter = restTemplate.getForObject("http://localhost:8082/medCenter/" + medCenterId, MedCenter.class);
 
-        Appointment appointment = appointmentRepository.getById(appointmentId);
+        Appointment appointment = appointmentRepository.getAppointmentByAppointmentId(appointmentId);
 
         boolean apCheck = checkAppointment(customer, appointment);
 
@@ -105,7 +105,7 @@ public class AppointmentService implements IAppointmentService {
 
         Appointment appointment = appointmentRepository.getById(appointmentId);
 
-        Doctor doctor = restTemplate.getForObject("http://localhost:8082/med-service/doctor/" + doctorId, Doctor.class);
+        Doctor doctor = restTemplate.getForObject("http://localhost:8082/doctor/" + doctorId, Doctor.class);
 
         boolean check = false;
 
@@ -125,7 +125,7 @@ public class AppointmentService implements IAppointmentService {
 
         Appointment appointment = appointmentRepository.getById(appointmentId);
 
-        MedCenter medCenter = restTemplate.getForObject("http://localhost:8082/med-service/medCenter/" + medCenterId, MedCenter.class);
+        MedCenter medCenter = restTemplate.getForObject("http://localhost:8082/medCenter/" + medCenterId, MedCenter.class);
 
         boolean check = false;
 
@@ -145,7 +145,7 @@ public class AppointmentService implements IAppointmentService {
 
         Appointment appointment = appointmentRepository.getById(appointmentId);
 
-        Customer customer = restTemplate.getForObject("http://localhost:8083/client-service/customer/" + customerId, Customer.class);
+        Customer customer = restTemplate.getForObject("http://localhost:8083/customer/" + customerId, Customer.class);
 
         boolean check = false;
 

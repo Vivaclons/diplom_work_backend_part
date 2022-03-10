@@ -12,7 +12,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
     List<Customer> findDoctorByCustomerName(String customerName);
     List<Customer> getCustomerByCustomerNameIsLike(String customerName);
     Customer getByCustomerId(Long id);
-    Customer getByCustomerEmail(String email);
+    Customer getCustomerByEmail(String email);
     Customer getCustomerByCustomerId(Long id);
     Customer getByCustomerName(String customerName);
 }
