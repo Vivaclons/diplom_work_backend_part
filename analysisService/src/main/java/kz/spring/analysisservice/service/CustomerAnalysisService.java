@@ -27,8 +27,8 @@ public class CustomerAnalysisService implements ICustomerAnalysisService {
     @Autowired
     private AnalysisRepository analysisRepository;
 
-    @Autowired
-    private RestTemplate restTemplate;
+//    @Autowired
+//    private RestTemplate restTemplate;
 
     @Override
     public void removeCustomerAnalysis(Long customerAnalysisId) {
@@ -40,24 +40,30 @@ public class CustomerAnalysisService implements ICustomerAnalysisService {
 
         CustomerAnalysis customerAnalysis = customerAnalysisRepository.getCustomerAnalysisByCustomerAnalysisId(customerAnalysisId);
 
-        MedCenter medCenter = restTemplate.getForObject("http://localhost:8082/medCenter/" + medCenterId, MedCenter.class);
+        MedCenter medCenter = medCenterRepository.getMedCenterByMedCenterId(medCenterId);
 
-        Doctor doctor = restTemplate.getForObject("http://localhost:8082/doctor/" + doctorId, Doctor.class);
+        Doctor doctor = doctorRepository.getDoctorByDoctorId(doctorId);
 
-        Customer customer = restTemplate.getForObject("http://localhost:8083/customer/" + customerId, Customer.class);
+        Customer customer = customerRepository.getCustomerByCustomerId(customerId);
+
+//        MedCenter medCenter = restTemplate.getForObject("http://localhost:8082/medCenter/" + medCenterId, MedCenter.class);
+//
+//        Doctor doctor = restTemplate.getForObject("http://localhost:8082/doctor/" + doctorId, Doctor.class);
+//
+//        Customer customer = restTemplate.getForObject("http://localhost:8083/customer/" + customerId, Customer.class);
 
         Analysis analysis = analysisRepository.getAnalysisByAnalysisId(analysisId);
 
-        boolean check = false;
-
-        if(doctor != null && medCenter != null && customer != null && analysis != null && customerAnalysis != null){
-            customerAnalysis.getAnalysis().setAnalysisId(analysisId);
-            customerAnalysis.getCustomer().setCustomerId(customerId);
-            customerAnalysis.getDoctor().setDoctorId(doctorId);
-            customerAnalysis.getMedCenter().setMedCenterId(medCenterId);
-            if(!check){
-                return customerAnalysisRepository.saveAndFlush(customerAnalysis);
-            }
+        if(doctor != null && medCenter != null && customer != null && analysis != null){
+//            customerAnalysis.getAnalysis().setAnalysisId(analysisId);
+//            customerAnalysis.getCustomer().setCustomerId(customerId);
+//            customerAnalysis.getDoctor().setDoctorId(doctorId);
+//            customerAnalysis.getMedCenter().setMedCenterId(medCenterId);
+            customerAnalysis.setAnalysis(analysis);
+            customerAnalysis.setCustomer(customer);
+            customerAnalysis.setDoctor(doctor);
+            customerAnalysis.setMedCenter(medCenter);
+            return customerAnalysisRepository.saveAndFlush(customerAnalysis);
         }
         return null;
     }
@@ -69,7 +75,9 @@ public class CustomerAnalysisService implements ICustomerAnalysisService {
 
         CustomerAnalysis customerAnalysis = customerAnalysisRepository.getCustomerAnalysisByCustomerAnalysisId(customerAnalysisId);
 
-        Customer customer = restTemplate.getForObject("http://localhost:8083/customer/" + customerId, Customer.class);
+        Customer customer = customerRepository.getCustomerByCustomerId(customerId);
+
+//        Customer customer = restTemplate.getForObject("http://localhost:8083/customer/" + customerId, Customer.class);
 
         boolean check = false;
 
@@ -88,7 +96,9 @@ public class CustomerAnalysisService implements ICustomerAnalysisService {
     public CustomerAnalysis updateDoctor(Long customerAnalysisId, Long doctorId) {
         CustomerAnalysis customerAnalysis = customerAnalysisRepository.getCustomerAnalysisByCustomerAnalysisId(customerAnalysisId);
 
-        Doctor doctor = restTemplate.getForObject("http://localhost:8082/doctor/" + doctorId, Doctor.class);
+        Doctor doctor = doctorRepository.getDoctorByDoctorId(doctorId);
+
+//        Doctor doctor = restTemplate.getForObject("http://localhost:8082/doctor/" + doctorId, Doctor.class);
 
         boolean check = false;
 
@@ -107,7 +117,9 @@ public class CustomerAnalysisService implements ICustomerAnalysisService {
     public CustomerAnalysis updateMedCenter(Long customerAnalysisId, Long medCenterId) {
         CustomerAnalysis customerAnalysis = customerAnalysisRepository.getCustomerAnalysisByCustomerAnalysisId(customerAnalysisId);
 
-        MedCenter medCenter = restTemplate.getForObject("http://localhost:8082/medCenter/" + medCenterId, MedCenter.class);
+        MedCenter medCenter = medCenterRepository.getMedCenterByMedCenterId(medCenterId);
+
+//        MedCenter medCenter = restTemplate.getForObject("http://localhost:8082/medCenter/" + medCenterId, MedCenter.class);
 
         boolean check = false;
 
@@ -146,11 +158,17 @@ public class CustomerAnalysisService implements ICustomerAnalysisService {
 
         CustomerAnalysis customerAnalysis = customerAnalysisRepository.getCustomerAnalysisByCustomerAnalysisId(customerAnalysisId);
 
-        MedCenter medCenter = restTemplate.getForObject("http://localhost:8082/medCenter/" + medCenterId, MedCenter.class);
+        MedCenter medCenter = medCenterRepository.getMedCenterByMedCenterId(medCenterId);
 
-        Doctor doctor = restTemplate.getForObject("http://localhost:8082/doctor/" + doctorId, Doctor.class);
+        Doctor doctor = doctorRepository.getDoctorByDoctorId(doctorId);
 
-        Customer customer = restTemplate.getForObject("http://localhost:8083/customer/" + customerId, Customer.class);
+        Customer customer = customerRepository.getCustomerByCustomerId(customerId);
+
+//        MedCenter medCenter = restTemplate.getForObject("http://localhost:8082/medCenter/" + medCenterId, MedCenter.class);
+//
+//        Doctor doctor = restTemplate.getForObject("http://localhost:8082/doctor/" + doctorId, Doctor.class);
+//
+//        Customer customer = restTemplate.getForObject("http://localhost:8083/customer/" + customerId, Customer.class);
 
         Analysis analysis = analysisRepository.getAnalysisByAnalysisId(analysisId);
 

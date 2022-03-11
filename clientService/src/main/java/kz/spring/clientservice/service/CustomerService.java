@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import javax.print.Doc;
 import java.util.List;
 
 @Service
@@ -16,6 +17,9 @@ public class CustomerService implements ICustomerService {
 
     @Autowired
     private CustomerRepository customerRepository;
+
+    @Autowired
+    private DoctorRepository doctorRepository;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -50,7 +54,9 @@ public class CustomerService implements ICustomerService {
 
         Customer customer = customerRepository.getByCustomerId(customerId);
 
-        Doctor doctor = restTemplate.getForObject("http://localhost:8082/doctor/" + doctorId, Doctor.class);
+        Doctor doctor = doctorRepository.getDoctorByDoctorId(doctorId);
+
+//        Doctor doctor = restTemplate.getForObject("http://localhost:8082/doctor/" + doctorId, Doctor.class);
 
         boolean check = false;
 

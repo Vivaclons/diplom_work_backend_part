@@ -20,6 +20,11 @@ public class DoctorController {
         return ResponseEntity.ok(iDoctorService.searchDoctorByDoctorName(doctorName));
     }
 
+//    @GetMapping("/search-doctor-specialty/{specialtyName}")
+//    public ResponseEntity<?> searchDoctorBySpecialty(@PathVariable("specialtyName") String specialtyName) {
+//        return ResponseEntity.ok(iDoctorService.searchDoctorsBySpecialty(specialtyName));
+//    }
+
     @PatchMapping("/add-specialty/{doctor_id}/{specialty_id}")
     public ResponseEntity<?> addSpecialty(@PathVariable("doctor_id") Long doctor_id, @PathVariable("specialty_id") Long specialty_id) {
         return ResponseEntity.ok(iDoctorService.addSpecialty(doctor_id, specialty_id));
@@ -51,8 +56,8 @@ public class DoctorController {
     }
 
     @GetMapping("/specialty/{specialty}")
-    public Doctor getDoctorSpecialty(@PathVariable("specialty") String specialty){
-        return iDoctorService.getDoctorBySpecialty(specialty);
+    public List<Doctor> getDoctorSpecialty(@PathVariable("specialty") String specialty){
+        return iDoctorService.searchSpecialtyDoctor(specialty);
     }
 
     @DeleteMapping("/delete/{doctorId}")

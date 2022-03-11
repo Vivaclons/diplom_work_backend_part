@@ -8,6 +8,7 @@ import kz.spring.medservice.service.impl.IDoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,6 +24,11 @@ public class DoctorService implements IDoctorService {
     public List<Doctor> searchDoctorByDoctorName(String doctorName) {
         return doctorRepository.getDoctorByDoctorNameIsLike("%" + doctorName + "%");
     }
+
+//    @Override
+//    public List<Doctor> searchDoctorsBySpecialty(String specialtyName) {
+//        return doctorRepository.getDoctorsBySpecialties();
+//    }
 
     @Override
     public Doctor removeSpecialty(Long doctorId, Long specialtyId) {
@@ -68,9 +74,13 @@ public class DoctorService implements IDoctorService {
 
         Doctor doctor = doctorRepository.getDoctorByDoctorId(doctorId);
 
-        if(doctor != null && doctor.getDoctorId() != null && doctor.getDoctorId() != 0L) {
-            for (int i = 0; i < doctor.getSpecialties().size(); i++) {
-                doctor.getSpecialties().get(i).setSpecialtyId(specialtyId);
+        Specialty specialty = specialtyRepository.getSpecialtyBySpecialtyId(specialtyId);
+
+        boolean check = false;
+
+        if(doctor != null && specialty != null){
+            doctor.getSpecialties().add(specialty);
+            if(!check){
                 return doctorRepository.saveAndFlush(doctor);
             }
         }
@@ -82,9 +92,25 @@ public class DoctorService implements IDoctorService {
         return doctorRepository.getDoctorByDoctorName(doctorName);
     }
 
+//    public List<Doctor> getDoctorBySpecialty(String specialty) {
+//        return doctorRepository.getDoctorsBySpecialties("%" + specialty + "%");
+//    }
+
     @Override
-    public Doctor getDoctorBySpecialty(String specialty) {
-        return doctorRepository.getDoctorsBySpecialties(specialty);
+    public List<Doctor> searchSpecialtyDoctor(String specialtyName){
+        List<Doctor> doctor = doctorRepository.findAll();
+
+        List<Doctor> doctors = new ArrayList<>();
+
+        for (int i = 0; i < doctor.size(); i++){
+            for(int k = 0; k < doctor.get(i).getSpecialties().size(); k++){
+                if(doctor.get(i).getSpecialties().get(k).getSpecialtyName().equals(specialtyName)){
+                    doctors.add(doctor.get(i));
+                }
+            }
+        }
+
+        return doctors;
     }
 
     @Override

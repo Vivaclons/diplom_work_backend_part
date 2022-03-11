@@ -5,6 +5,9 @@ import kz.spring.appointmentservice.model.Customer;
 import kz.spring.appointmentservice.model.Doctor;
 import kz.spring.appointmentservice.model.MedCenter;
 import kz.spring.appointmentservice.repository.AppointmentRepository;
+import kz.spring.appointmentservice.repository.CustomerRepository;
+import kz.spring.appointmentservice.repository.DoctorRepository;
+import kz.spring.appointmentservice.repository.MedCenterRepository;
 import kz.spring.appointmentservice.service.impl.IAppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +24,15 @@ public class AppointmentService implements IAppointmentService {
 
     @Autowired
     private RestTemplate restTemplate;
+
+    @Autowired
+    private CustomerRepository customerRepository;
+
+    @Autowired
+    private DoctorRepository doctorRepository;
+
+    @Autowired
+    private MedCenterRepository medCenterRepository;
 
     @Override
     public Appointment getById(Long id) {
@@ -57,11 +69,17 @@ public class AppointmentService implements IAppointmentService {
     @Override
     public Appointment addAppointment(Long medCenterId, Long appointmentId, Long doctorId, Long customerId){
 
-        Customer customer = restTemplate.getForObject("http://localhost:8083/customer/" + customerId, Customer.class);
+        MedCenter medCenter = medCenterRepository.getMedCenterByMedCenterId(medCenterId);
 
-        Doctor doctor = restTemplate.getForObject("http://localhost:8082/doctor/" + doctorId, Doctor.class);
+        Doctor doctor = doctorRepository.getDoctorByDoctorId(doctorId);
 
-        MedCenter medCenter = restTemplate.getForObject("http://localhost:8082/medCenter/" + medCenterId, MedCenter.class);
+        Customer customer = customerRepository.getCustomerByCustomerId(customerId);
+
+//        Customer customer = restTemplate.getForObject("http://localhost:8083/customer/" + customerId, Customer.class);
+//
+//        Doctor doctor = restTemplate.getForObject("http://localhost:8082/doctor/" + doctorId, Doctor.class);
+//
+//        MedCenter medCenter = restTemplate.getForObject("http://localhost:8082/medCenter/" + medCenterId, MedCenter.class);
 
         Appointment appointment = appointmentRepository.getAppointmentByAppointmentId(appointmentId);
 
@@ -105,7 +123,9 @@ public class AppointmentService implements IAppointmentService {
 
         Appointment appointment = appointmentRepository.getById(appointmentId);
 
-        Doctor doctor = restTemplate.getForObject("http://localhost:8082/doctor/" + doctorId, Doctor.class);
+        Doctor doctor = doctorRepository.getDoctorByDoctorId(doctorId);
+
+//        Doctor doctor = restTemplate.getForObject("http://localhost:8082/doctor/" + doctorId, Doctor.class);
 
         boolean check = false;
 
@@ -125,7 +145,9 @@ public class AppointmentService implements IAppointmentService {
 
         Appointment appointment = appointmentRepository.getById(appointmentId);
 
-        MedCenter medCenter = restTemplate.getForObject("http://localhost:8082/medCenter/" + medCenterId, MedCenter.class);
+        MedCenter medCenter = medCenterRepository.getMedCenterByMedCenterId(medCenterId);
+
+//        MedCenter medCenter = restTemplate.getForObject("http://localhost:8082/medCenter/" + medCenterId, MedCenter.class);
 
         boolean check = false;
 
@@ -145,7 +167,9 @@ public class AppointmentService implements IAppointmentService {
 
         Appointment appointment = appointmentRepository.getById(appointmentId);
 
-        Customer customer = restTemplate.getForObject("http://localhost:8083/customer/" + customerId, Customer.class);
+        Customer customer = customerRepository.getCustomerByCustomerId(customerId);
+
+//        Customer customer = restTemplate.getForObject("http://localhost:8083/customer/" + customerId, Customer.class);
 
         boolean check = false;
 
