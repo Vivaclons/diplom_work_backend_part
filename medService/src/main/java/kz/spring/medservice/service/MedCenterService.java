@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.print.Doc;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -110,5 +111,28 @@ public class MedCenterService implements IMedCenterService {
     @Override
     public void DeleteById(Long id) {
         medCenterRepository.deleteById(id);
+    }
+
+    @Override
+    public List<MedCenter> getAllMedCentersWorkTime(String date){
+
+        List<MedCenter> medCenters = medCenterRepository.findAll();
+
+        List<MedCenter> medCentersTime = new ArrayList<>();
+
+        int timeNow = Integer.parseInt(date.replace(':', '0'));
+        int timeFrom = 0;
+        int timeTo = 0;
+
+        for(int i = 0; i < medCenters.size(); i++){
+            timeFrom = Integer.parseInt(medCenters.get(i).getWorkTimeFrom().replace(':', '0'));
+            timeTo = Integer.parseInt(medCenters.get(i).getWorkTimeTo().replace(':', '0'));
+
+            if(timeNow > timeFrom && timeNow < timeTo){
+                medCentersTime.add(medCenters.get(i));
+            }
+
+        }
+        return medCentersTime;
     }
 }

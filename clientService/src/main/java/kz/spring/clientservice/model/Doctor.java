@@ -23,9 +23,9 @@ public class Doctor implements Serializable {
     private String doctorSurname;
     private String doctorTelNumber;
     private String doctorEmail;
+    private String workTimeFrom;
+    private String workTimeTo;
     private String password;
-    @Transient
-    private String password2;
     private boolean status;
     private String activationCode;
     private String username;

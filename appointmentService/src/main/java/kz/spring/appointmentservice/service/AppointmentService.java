@@ -11,7 +11,6 @@ import kz.spring.appointmentservice.repository.MedCenterRepository;
 import kz.spring.appointmentservice.service.impl.IAppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.Date;
 import java.util.List;
@@ -21,9 +20,6 @@ public class AppointmentService implements IAppointmentService {
 
     @Autowired
     private AppointmentRepository appointmentRepository;
-
-    @Autowired
-    private RestTemplate restTemplate;
 
     @Autowired
     private CustomerRepository customerRepository;
@@ -83,18 +79,22 @@ public class AppointmentService implements IAppointmentService {
 
         Appointment appointment = appointmentRepository.getAppointmentByAppointmentId(appointmentId);
 
-        boolean apCheck = checkAppointment(customer, appointment);
+        boolean apCheck = true;
 
         boolean check = false;
 
 
         if(apCheck){
             if(doctor != null && medCenter != null && customer != null && appointment != null){
-                appointment.getCustomer().setCustomerId(customerId);
-                appointment.getDoctor().setDoctorId(doctorId);
-                appointment.getMedCenter().setMedCenterId(medCenterId);
+                appointment.setCustomer(customer);
+                appointment.setDoctor(doctor);
+                appointment.setMedCenter(medCenter);
                 if(!check){
-                    return appointmentRepository.saveAndFlush(appointment);
+                    appointmentRepository.saveAndFlush(appointment);
+                    apCheck = checkAppointment(customer, appointment);
+                    if(!apCheck){
+                        DeleteById(appointmentId);
+                    }
                 }
             } else {
                 System.out.println("entity is empty!");
@@ -110,6 +110,11 @@ public class AppointmentService implements IAppointmentService {
         List<Appointment> appointment1 = appointmentRepository.findAll();
 
         for(int i = 0; i < appointment1.size(); i++){
+            System.out.println(customer.getCustomerId());
+            System.out.println(appointment.toString());
+            System.out.println(appointment1.get(i).getAppointmentId());
+            System.out.println(customer.getCustomerId());
+            System.out.println(appointment1.get(i).getCustomer().getCustomerId());
             if(customer.getCustomerId().equals(appointment1.get(i).getCustomer().getCustomerId()) && appointment1.get(i).getDate().getTime() == appointment.getDate().getTime()){
                 return false;
             }

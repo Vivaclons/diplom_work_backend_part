@@ -11,6 +11,7 @@ public interface IMedCenterService {
     MedCenter removeDoctor(Long medCenterId, Long doctorId);
     MedCenter addDoctor(Long medCenterId, Long doctorId);
     MedCenter updateDoctor(Long medCenterId, Long doctorId);
+    List<MedCenter> getAllMedCentersWorkTime(String date);
     MedCenter getById(Long id);
     MedCenter getByMedCenterName(String medCenterName);
     MedCenter getByMedCenterAddress(String address);

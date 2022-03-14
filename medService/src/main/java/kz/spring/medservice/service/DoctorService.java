@@ -137,4 +137,27 @@ public class DoctorService implements IDoctorService {
     public Doctor getDoctorById(Long id) {
         return doctorRepository.getDoctorByDoctorId(id);
     }
+
+    @Override
+    public List<Doctor> getAllDoctorByWorkTime(String date){
+
+        List<Doctor> doctor = doctorRepository.findAll();
+
+        List<Doctor> doctorTime = new ArrayList<>();
+
+        int timeNow = Integer.parseInt(date.replace(':', '0'));
+        int timeFrom = 0;
+        int timeTo = 0;
+
+        for(int i = 0; i < doctor.size(); i++){
+            timeFrom = Integer.parseInt(doctor.get(i).getWorkTimeFrom().replace(':', '0'));
+            timeTo = Integer.parseInt(doctor.get(i).getWorkTimeTo().replace(':', '0'));
+
+            if(timeNow > timeFrom && timeNow < timeTo){
+                doctorTime.add(doctor.get(i));
+            }
+
+        }
+        return doctorTime;
+    }
 }

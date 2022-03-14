@@ -12,6 +12,7 @@ public interface IDoctorService {
     Doctor getByDoctorName(String doctorName);
     List<Doctor> searchSpecialtyDoctor(String specialty);
     Doctor createDoctor(Doctor doctor);
+    List<Doctor> getAllDoctorByWorkTime(String date);
     void update(Doctor doctor);
     List<Doctor> getAllDoctor();
     void DeleteById(Long id);

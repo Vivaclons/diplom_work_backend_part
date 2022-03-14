@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.Doc;
 import java.util.List;
 
 @RestController
@@ -43,6 +44,11 @@ public class DoctorController {
     @GetMapping("/all")
     public List<Doctor> getAllDoctors(){
         return iDoctorService.getAllDoctor();
+    }
+
+    @GetMapping("/all/workTime/{date}")
+    public List<Doctor> getAllDoctorWorkTime(@PathVariable("date") String date){
+        return iDoctorService.getAllDoctorByWorkTime(date);
     }
 
     @GetMapping("/{id}")

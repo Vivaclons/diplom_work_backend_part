@@ -1,5 +1,6 @@
 package kz.spring.medservice.controller;
 
+import kz.spring.medservice.model.Doctor;
 import kz.spring.medservice.model.MedCenter;
 import kz.spring.medservice.service.impl.IMedCenterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,5 +74,10 @@ public class MedCenterController {
     @PutMapping("/update")
     public void updateMedCenter(@RequestBody MedCenter medCenter){
         iMedCenterService.update(medCenter);
+    }
+
+    @GetMapping("/all/workTime/{date}")
+    public List<MedCenter> getAllMedCentersWorkTime(@PathVariable("date") String date){
+        return iMedCenterService.getAllMedCentersWorkTime(date);
     }
 }

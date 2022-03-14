@@ -25,6 +25,8 @@ public class Doctor implements UserDetails {
     private String doctorSurname;
     private String doctorTelNumber;
     private String doctorEmail;
+    private String workTimeFrom;
+    private String workTimeTo;
     private String password;
     private boolean status;
     private String activationCode;

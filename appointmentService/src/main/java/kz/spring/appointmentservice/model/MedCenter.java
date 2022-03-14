@@ -23,6 +23,8 @@ public class MedCenter {
     private String medCenterNumber;
     private String medCenterEmail;
     private String medCenterTelNumber;
+    private String workTimeFrom;
+    private String workTimeTo;
     private String password;
     private boolean status;
     private String activationCode;
