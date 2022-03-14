@@ -42,28 +42,6 @@ public class AppointmentService implements IAppointmentService {
 
     @Override
     public void create(Appointment appointment, Long medCenterId, Long appointmentId, Long doctorId, Long customerId) {
-        appointmentRepository.saveAndFlush(appointment);
-        addAppointment(medCenterId, appointmentId, doctorId, customerId);
-    }
-
-    @Override
-    public void update(Appointment appointment, Long medCenterId, Long appointmentId, Long doctorId, Long customerId){
-        appointmentRepository.saveAndFlush(appointment);
-        addAppointment(medCenterId, appointmentId, doctorId, customerId);
-    }
-
-    @Override
-    public List<Appointment> getAllAppointment() {
-        return appointmentRepository.findAll();
-    }
-
-    @Override
-    public void DeleteById(Long id) {
-        appointmentRepository.deleteById(id);
-    }
-
-    @Override
-    public Appointment addAppointment(Long medCenterId, Long appointmentId, Long doctorId, Long customerId){
 
         MedCenter medCenter = medCenterRepository.getMedCenterByMedCenterId(medCenterId);
 
@@ -77,24 +55,53 @@ public class AppointmentService implements IAppointmentService {
 //
 //        MedCenter medCenter = restTemplate.getForObject("http://localhost:8082/medCenter/" + medCenterId, MedCenter.class);
 
-        Appointment appointment = appointmentRepository.getAppointmentByAppointmentId(appointmentId);
+        boolean apCheck = true;
+
+        if(doctor != null && medCenter != null && customer != null){
+            appointment.setCustomer(customer);
+            appointment.setDoctor(doctor);
+            appointment.setMedCenter(medCenter);
+            apCheck = checkAppointment(appointment);
+            if(apCheck){
+                appointmentRepository.saveAndFlush(appointment);
+            } else {
+                DeleteById(appointmentId);
+                System.out.println("Error with appointment date: you have appointment in this time");
+
+            }
+        } else {
+            System.out.println("entity is empty!");
+        }
+    }
+
+    @Override
+    public void update(Appointment appointment, Long medCenterId, Long appointmentId, Long doctorId, Long customerId){
+
+        MedCenter medCenter = medCenterRepository.getMedCenterByMedCenterId(medCenterId);
+
+        Doctor doctor = doctorRepository.getDoctorByDoctorId(doctorId);
+
+        Customer customer = customerRepository.getCustomerByCustomerId(customerId);
+
+//        Customer customer = restTemplate.getForObject("http://localhost:8083/customer/" + customerId, Customer.class);
+//
+//        Doctor doctor = restTemplate.getForObject("http://localhost:8082/doctor/" + doctorId, Doctor.class);
+//
+//        MedCenter medCenter = restTemplate.getForObject("http://localhost:8082/medCenter/" + medCenterId, MedCenter.class);
 
         boolean apCheck = true;
 
-        boolean check = false;
+        boolean check = true;
 
 
         if(apCheck){
-            if(doctor != null && medCenter != null && customer != null && appointment != null){
+            if(doctor != null && medCenter != null && customer != null){
                 appointment.setCustomer(customer);
                 appointment.setDoctor(doctor);
                 appointment.setMedCenter(medCenter);
-                if(!check){
-                    appointmentRepository.saveAndFlush(appointment);
-                    apCheck = checkAppointment(customer, appointment);
-                    if(!apCheck){
-                        DeleteById(appointmentId);
-                    }
+                appointmentRepository.saveAndFlush(appointment);
+                if(!apCheck){
+                    DeleteById(appointmentId);
                 }
             } else {
                 System.out.println("entity is empty!");
@@ -102,20 +109,27 @@ public class AppointmentService implements IAppointmentService {
         } else {
             System.out.println("Error with appointment date: you have appointment in this time");
         }
-        return null;
     }
 
-    public boolean checkAppointment(Customer customer, Appointment appointment){
+    @Override
+    public List<Appointment> getAllAppointment() {
+        return appointmentRepository.findAll();
+    }
+
+    @Override
+    public void DeleteById(Long id) {
+        appointmentRepository.deleteById(id);
+    }
+
+    public boolean checkAppointment(Appointment appointment){
 
         List<Appointment> appointment1 = appointmentRepository.findAll();
 
         for(int i = 0; i < appointment1.size(); i++){
-            System.out.println(customer.getCustomerId());
             System.out.println(appointment.toString());
             System.out.println(appointment1.get(i).getAppointmentId());
-            System.out.println(customer.getCustomerId());
-            System.out.println(appointment1.get(i).getCustomer().getCustomerId());
-            if(customer.getCustomerId().equals(appointment1.get(i).getCustomer().getCustomerId()) && appointment1.get(i).getDate().getTime() == appointment.getDate().getTime()){
+
+            if(appointment.getCustomer().getCustomerId() == appointment1.get(i).getCustomer().getCustomerId() && appointment1.get(i).getDate().getTime() == appointment.getDate().getTime()){
                 return false;
             }
         }

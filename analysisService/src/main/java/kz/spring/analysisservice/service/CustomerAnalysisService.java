@@ -38,7 +38,7 @@ public class CustomerAnalysisService implements ICustomerAnalysisService {
     @Override
     public CustomerAnalysis addCustomerAnalysis(Long customerAnalysisId, Long medCenterId, Long analysisId, Long doctorId, Long customerId) {
 
-        CustomerAnalysis customerAnalysis = customerAnalysisRepository.getCustomerAnalysisByCustomerAnalysisId(customerAnalysisId);
+        CustomerAnalysis customerAnalysis = new CustomerAnalysis();
 
         MedCenter medCenter = medCenterRepository.getMedCenterByMedCenterId(medCenterId);
 

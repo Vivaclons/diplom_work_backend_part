@@ -46,10 +46,10 @@ public class AppointmentController {
         iAppointmentService.update(appointment, medCenterId, appointmentId, doctorId, customerId);
     }
 
-    @PatchMapping("/add-appointment/{medCenterId}/{appointmentId}/{doctorId}/{customerId}")
-    public ResponseEntity<?> addCustomerAnalysis(@PathVariable("medCenterId") Long medCenterId, @PathVariable("appointmentId") Long appointmentId, @PathVariable("doctorId") Long doctorId, @PathVariable("customerId") Long customerId) {
-        return ResponseEntity.ok(iAppointmentService.addAppointment(medCenterId, appointmentId, doctorId, customerId));
-    }
+//    @PatchMapping("/add-appointment/{medCenterId}/{appointmentId}/{doctorId}/{customerId}")
+//    public ResponseEntity<?> addCustomerAnalysis(@PathVariable("medCenterId") Long medCenterId, @PathVariable("appointmentId") Long appointmentId, @PathVariable("doctorId") Long doctorId, @PathVariable("customerId") Long customerId) {
+//        return ResponseEntity.ok(iAppointmentService.addAppointment(medCenterId, appointmentId, doctorId, customerId));
+//    }
 
     @PatchMapping("/update-customer/{appointmentId}/{customerId}")
     public ResponseEntity<?> updateCustomer(@PathVariable("appointmentId") Long appointmentId, @PathVariable("customerId") Long customerId) {
