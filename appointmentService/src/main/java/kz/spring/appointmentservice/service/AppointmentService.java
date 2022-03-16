@@ -130,16 +130,19 @@ public class AppointmentService implements IAppointmentService {
         int time = Integer.parseInt(appointment.getTime().replace(":", "0"));
 
         for(int i = 0; i < appointment1.size(); i++){
-            if(appointment.getCustomer().getCustomerId() == appointment1.get(i).getCustomer().getCustomerId() && appointment1.get(i).getDate().getTime() == appointment.getDate().getTime()){
+            if((appointment.getCustomer().getCustomerId() == appointment1.get(i).getCustomer().getCustomerId() &&
+                    appointment1.get(i).getDate().getTime() == appointment.getDate().getTime()) &&
+                    (appointment.getDoctor().getDoctorId() == appointment1.get(i).getDoctor().getDoctorId() &&
+                            appointment1.get(i).getDate().getTime() == appointment.getDate().getTime())){
                 if(time > timeTo && time > timeFrom){
                     System.out.println("Doctor time is " + appointment.getDoctor().getWorkTimeFrom() + " and " + appointment.getDoctor().getWorkTimeTo());
                     return false;
                 }
-            }else{
+            }
+            else{
                 System.out.println("You have same appointment with time");
             }
         }
-
         return true;
     }
 
