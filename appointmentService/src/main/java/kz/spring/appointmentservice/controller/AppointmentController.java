@@ -36,9 +36,9 @@ public class AppointmentController {
         iAppointmentService.DeleteById(id);
     }
 
-    @PostMapping("/create-appointment/{medCenterId}/{appId}/{doctorId}/{custId}")
-    public void createAppointment(@RequestBody Appointment appointment, @PathVariable("medCenterId") Long medCenterId, @PathVariable("appId") Long appointmentId, @PathVariable("doctorId") Long doctorId, @PathVariable("custId") Long customerId){
-        iAppointmentService.create(appointment, medCenterId, appointmentId, doctorId, customerId);
+    @PostMapping("/create-appointment/{medCenterId}/{doctorId}/{custId}")
+    public void createAppointment(@RequestBody Appointment appointment, @PathVariable("medCenterId") Long medCenterId, @PathVariable("doctorId") Long doctorId, @PathVariable("custId") Long customerId){
+        iAppointmentService.create(appointment, medCenterId, doctorId, customerId);
     }
 
     @PutMapping("/update-appointment/{medCenterId}/{appointmentId}/{doctorId}/{customerId}")

@@ -51,6 +51,11 @@ public class DoctorController {
         return iDoctorService.getAllDoctorByWorkTime(date);
     }
 
+    @GetMapping("/all/nearDoctor/{lat}/{lon}")
+    public List<Doctor> getNearDoctor(@PathVariable("lat") String lat, @PathVariable("lon") String lon){
+        return iDoctorService.nearDoctor(lat, lon);
+    }
+
     @GetMapping("/{id}")
     public Doctor getDoctorById(@PathVariable("id") Long id){
         return iDoctorService.getDoctorById(id);

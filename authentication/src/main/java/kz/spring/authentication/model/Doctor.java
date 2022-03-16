@@ -31,6 +31,10 @@ public class Doctor implements UserDetails {
     private boolean status;
     private String activationCode;
     private String username;
+    private String address;
+    private String latitude;
+    private String longitude;
+    private Double distance;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "doctor_role", joinColumns = @JoinColumn(name = "doctor_id"))

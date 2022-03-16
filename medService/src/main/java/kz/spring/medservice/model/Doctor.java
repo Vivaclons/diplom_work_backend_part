@@ -29,6 +29,10 @@ public class Doctor {
     private boolean status;
     private String activationCode;
     private String username;
+    private String address;
+    private String latitude;
+    private String longitude;
+    private Double distance;
 
     @ManyToMany
     List<Specialty> specialties;

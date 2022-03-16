@@ -9,7 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+
+import static java.util.Collections.swap;
 
 @Service
 public class DoctorService implements IDoctorService {
@@ -159,5 +163,49 @@ public class DoctorService implements IDoctorService {
 
         }
         return doctorTime;
+    }
+
+    @Override
+    public List<Doctor> nearDoctor(String lat, String lon){
+        double latd = Double.parseDouble(lat);
+        double lond = Double.parseDouble(lon);
+        double raduis = 6371.01;
+
+        List<Doctor> doctor = doctorRepository.findAll();
+
+        boolean sort = true;
+
+        for(int i = 0; i < doctor.size(); i++){
+            double latd2 = Double.parseDouble(doctor.get(i).getLatitude());
+            double lond2 = Double.parseDouble(doctor.get(i).getLongitude());
+
+            double latDistance = Math.toRadians(latd - latd2);
+            double lonDistance = Math.toRadians(lond - lond2);
+
+            double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+                    + Math.cos(Math.toRadians(latd)) * Math.cos(Math.toRadians(latd2))
+                    * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
+
+            double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+            //exchange to meter
+            double distance = raduis * c * 1000;
+
+            distance = Math.pow(distance, 2);
+
+            doctor.get(i).setDistance(Math.sqrt(distance));
+        }
+
+        while(sort){
+            sort = false;
+            for(int i = 1; i < doctor.size(); i++){
+                if(doctor.get(i).getDistance() < doctor.get(i-1).getDistance()){
+                    swap(doctor, i, i-1);
+                    sort = true;
+                }
+            }
+        }
+
+        return doctor;
     }
 }

@@ -26,15 +26,9 @@ public class RegistrationController {
 
     //add customer
     @PostMapping("/add-customer")
-    public String addCustomer(@RequestBody Customer customer, @RequestParam("password2") String passwordConf, Map<String, Object> map){
-
-        if(customer.getPassword() != null && !customer.getPassword().equals(passwordConf)){
-            map.put("password error", "Password-1 not some with password-2");
-            return "Customer password error password-1 != password-2";
-        }
+    public String addCustomer(@RequestBody Customer customer){
 
         if(!iCustomerService.addUser(customer)){
-            map.put("username error", "User not found!");
             return "ERROR with registration customer";
         }
 
@@ -47,7 +41,7 @@ public class RegistrationController {
         boolean isActivated = iCustomerService.activateCustomer(code);
 
         if(!isActivated){
-            System.out.println("Customer activated");
+            return "OK!";
         } else{
             System.out.println("ERROR code is not found");
         }

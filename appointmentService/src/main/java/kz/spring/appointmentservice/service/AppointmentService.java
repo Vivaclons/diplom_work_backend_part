@@ -41,7 +41,7 @@ public class AppointmentService implements IAppointmentService {
     }
 
     @Override
-    public void create(Appointment appointment, Long medCenterId, Long appointmentId, Long doctorId, Long customerId) {
+    public void create(Appointment appointment, Long medCenterId, Long doctorId, Long customerId) {
 
         MedCenter medCenter = medCenterRepository.getMedCenterByMedCenterId(medCenterId);
 
@@ -65,9 +65,8 @@ public class AppointmentService implements IAppointmentService {
             if(apCheck){
                 appointmentRepository.saveAndFlush(appointment);
             } else {
-                DeleteById(appointmentId);
+                deleteApp(appointment);
                 System.out.println("Error with appointment date: you have appointment in this time");
-
             }
         } else {
             System.out.println("entity is empty!");
@@ -91,23 +90,19 @@ public class AppointmentService implements IAppointmentService {
 
         boolean apCheck = true;
 
-        boolean check = true;
-
-
-        if(apCheck){
-            if(doctor != null && medCenter != null && customer != null){
-                appointment.setCustomer(customer);
-                appointment.setDoctor(doctor);
-                appointment.setMedCenter(medCenter);
+        if(doctor != null && medCenter != null && customer != null){
+            appointment.setCustomer(customer);
+            appointment.setDoctor(doctor);
+            appointment.setMedCenter(medCenter);
+            apCheck = checkAppointment(appointment);
+            if(apCheck){
                 appointmentRepository.saveAndFlush(appointment);
-                if(!apCheck){
-                    DeleteById(appointmentId);
-                }
             } else {
-                System.out.println("entity is empty!");
+                deleteApp(appointment);
+                System.out.println("Error with appointment date: you have appointment in this time");
             }
         } else {
-            System.out.println("Error with appointment date: you have appointment in this time");
+            System.out.println("entity is empty!");
         }
     }
 
@@ -121,16 +116,27 @@ public class AppointmentService implements IAppointmentService {
         appointmentRepository.deleteById(id);
     }
 
+    public void deleteApp(Appointment appointment){
+        appointmentRepository.delete(appointment);
+    }
+
     public boolean checkAppointment(Appointment appointment){
 
         List<Appointment> appointment1 = appointmentRepository.findAll();
 
-        for(int i = 0; i < appointment1.size(); i++){
-            System.out.println(appointment.toString());
-            System.out.println(appointment1.get(i).getAppointmentId());
+        int timeFrom = Integer.parseInt(appointment.getDoctor().getWorkTimeFrom().replace(":", "0"));
+        int timeTo = Integer.parseInt(appointment.getDoctor().getWorkTimeTo().replace(":", "0"));
 
+        int time = Integer.parseInt(appointment.getTime().replace(":", "0"));
+
+        for(int i = 0; i < appointment1.size(); i++){
             if(appointment.getCustomer().getCustomerId() == appointment1.get(i).getCustomer().getCustomerId() && appointment1.get(i).getDate().getTime() == appointment.getDate().getTime()){
-                return false;
+                if(time > timeTo && time > timeFrom){
+                    System.out.println("Doctor time is " + appointment.getDoctor().getWorkTimeFrom() + " and " + appointment.getDoctor().getWorkTimeTo());
+                    return false;
+                }
+            }else{
+                System.out.println("You have same appointment with time");
             }
         }
 

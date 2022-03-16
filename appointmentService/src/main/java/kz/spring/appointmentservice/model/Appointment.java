@@ -22,6 +22,7 @@ public class Appointment {
     private Long appointmentId;
 
     private Date date;
+    private String time;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "customer_id")

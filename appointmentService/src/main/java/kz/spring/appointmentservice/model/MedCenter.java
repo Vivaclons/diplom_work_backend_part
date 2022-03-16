@@ -29,5 +29,8 @@ public class MedCenter {
     private boolean status;
     private String activationCode;
     private String username;
+    private String latitude;
+    private String longitude;
+    private Double distance;
 
 }
