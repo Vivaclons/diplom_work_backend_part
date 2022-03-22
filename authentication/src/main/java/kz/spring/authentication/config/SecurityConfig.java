@@ -8,8 +8,11 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import javax.servlet.http.HttpServletResponse;
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -21,20 +24,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .exceptionHandling().authenticationEntryPoint((req, resp, e) -> resp.sendError(HttpServletResponse.SC_UNAUTHORIZED))
+                .and()
                 .authorizeRequests()
-                    .antMatchers("/admin/**").hasAuthority("ADMIN")
-                    .antMatchers("/registration/**").permitAll()
-                    .antMatchers("/auth/**").permitAll()
-                    .antMatchers("/v2/api-docs",
-                        "/swagger-resources/**",
-                        "/configuration/ui",
-                        "/configuration/security",
-                        "/swagger-ui.html",
-                        "/webjars/**").permitAll()
-                    .anyRequest().authenticated()
+                .anyRequest().permitAll()
+//                .csrf().disable()
+//                .authorizeRequests()
+//                    .antMatchers("/admin/**").hasAuthority("ADMIN")
+//                    .antMatchers("/registration/**").permitAll()
+//                    .antMatchers("/auth/**").permitAll()
+//                    .antMatchers("/v2/api-docs",
+//                        "/swagger-resources/**",
+//                        "/configuration/ui",
+//                        "/configuration/security",
+//                        "/swagger-ui.html",
+//                        "/webjars/**").permitAll()
+//                    .anyRequest().authenticated()
                 .and()
                     .addFilter(new JwtTokenGeneratorFilter(authenticationManager()))
-                    .addFilterAfter(new JwtTokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+//                    .addFilterAfter(new JwtTokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean
