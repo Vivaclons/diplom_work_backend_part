@@ -16,7 +16,7 @@ public class DoctorController {
     @Autowired
     private IDoctorService iDoctorService;
 
-    @GetMapping("/search/{doctorName}")
+    @GetMapping("/public/search/{doctorName}")
     public ResponseEntity<?> searchDoctorByName(@PathVariable("doctorName") String doctorName) {
         return ResponseEntity.ok(iDoctorService.searchDoctorByDoctorName(doctorName));
     }
@@ -41,47 +41,47 @@ public class DoctorController {
         return ResponseEntity.ok(iDoctorService.removeSpecialty(doctor_id, specialty_id));
     }
 
-    @GetMapping("/all")
+    @GetMapping("/public/all")
     public List<Doctor> getAllDoctors(){
         return iDoctorService.getAllDoctor();
     }
 
-    @GetMapping("/all/workTime/{date}")
+    @GetMapping("/public/all/workTime/{date}")
     public List<Doctor> getAllDoctorWorkTime(@PathVariable("date") String date){
         return iDoctorService.getAllDoctorByWorkTime(date);
     }
 
-    @GetMapping("/all/nearDoctor/{lat}/{lon}")
+    @GetMapping("/public/all/nearDoctor/{lat}/{lon}")
     public List<Doctor> getNearDoctor(@PathVariable("lat") String lat, @PathVariable("lon") String lon){
         return iDoctorService.nearDoctor(lat, lon);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/private/{id}")
     public Doctor getDoctorById(@PathVariable("id") Long id){
         return iDoctorService.getDoctorById(id);
     }
 
-    @GetMapping("/doctorName/{doctorName}")
+    @GetMapping("/public/doctorName/{doctorName}")
     public Doctor getDoctorName(@PathVariable("doctorName") String doctorName){
         return iDoctorService.getByDoctorName(doctorName);
     }
 
-    @GetMapping("/specialty/{specialty}")
+    @GetMapping("/public/specialty/{specialty}")
     public List<Doctor> getDoctorSpecialty(@PathVariable("specialty") String specialty){
         return iDoctorService.searchSpecialtyDoctor(specialty);
     }
 
-    @DeleteMapping("/delete/{doctorId}")
+    @DeleteMapping("/private/delete/{doctorId}")
     public void deleteDoctorByID(@PathVariable("doctorId") Long doctorId){
         iDoctorService.DeleteById(doctorId);
     }
 
-    @PostMapping("/create")
+    @PostMapping("/private/create")
     public void createDoctor(@RequestBody Doctor doctor){
         iDoctorService.update(doctor);
     }
 
-    @PutMapping("/update")
+    @PutMapping("/private/update")
     public void updateDoctor(@RequestBody Doctor doctor){
         iDoctorService.update(doctor);
     }
