@@ -75,7 +75,7 @@ public class JwtTokenGeneratorFilter extends UsernamePasswordAuthenticationFilte
                         .map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
                 .setIssuedAt(new Date(now))
                 .setExpiration(new Date(now + 60*60 * 1000))  // in milliseconds
-                .signWith(SignatureAlgorithm.HS512, "QazMed-diploma".getBytes())
+                .signWith(SignatureAlgorithm.HS512, "QazMed".getBytes())
                 .compact();
 
         // Add token to header
