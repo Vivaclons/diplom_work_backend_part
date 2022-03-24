@@ -19,4 +19,8 @@ public interface ICustomerService {
     boolean addUser(Customer customer);
 
     boolean activateCustomer(String code);
+
+    String forgetPassword(String email);
+
+    void updatePassword(String email, String password);
 }

@@ -16,10 +16,12 @@ public interface IDoctorService {
 
     List<Doctor> getAllDoctorsBy();
 
-    void DeleteByIDDoc(Long doctorId);
-
     boolean addDoctor(Doctor doctor);
 
     boolean activateDoctor(String code);
+
+    String forgetPasswordDoctor(String email);
+
+    void updatePasswordDoctor(String email, String password);
 
 }

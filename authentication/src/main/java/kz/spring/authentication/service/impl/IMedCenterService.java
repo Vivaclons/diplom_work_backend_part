@@ -18,5 +18,9 @@ public interface IMedCenterService {
     boolean addMedCenter(MedCenter medCenter);
 
     boolean activateMedCenter(String code);
+
+    void updatePasswordMedCenter(String email, String password);
+
+    String forgetPasswordMedCenter(String email);
 }
 

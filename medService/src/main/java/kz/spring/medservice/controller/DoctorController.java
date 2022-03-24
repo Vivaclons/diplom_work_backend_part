@@ -26,7 +26,7 @@ public class DoctorController {
 //        return ResponseEntity.ok(iDoctorService.searchDoctorsBySpecialty(specialtyName));
 //    }
 
-    @PatchMapping("/add-specialty/{doctor_id}/{specialty_id}")
+    @PatchMapping("/private/add-specialty/{doctor_id}/{specialty_id}")
     public ResponseEntity<?> addSpecialty(@PathVariable("doctor_id") Long doctor_id, @PathVariable("specialty_id") Long specialty_id) {
         return ResponseEntity.ok(iDoctorService.addSpecialty(doctor_id, specialty_id));
     }

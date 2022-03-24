@@ -24,43 +24,16 @@ import org.springframework.web.client.RestTemplate;
 import java.util.*;
 
 @Service
-public class CustomerService implements ICustomerService, UserDetailsService, IDoctorService, IMedCenterService {
+public class CustomerService implements ICustomerService, UserDetailsService {
 
     @Autowired
     private CustomerRepository customerRepository;
-
-    @Autowired
-    private DoctorRepository doctorRepository;
-
-    @Autowired
-    private MedCenterRepository medCenterRepository;
 
     @Autowired
     private MailDelivery mailDelivery;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
-
-    @Override
-    public Doctor getDoctorById(Long doctorId) {
-        return doctorRepository.getById(doctorId);
-    }
-
-    @Override
-    public Doctor getByDoctorName(String doctorName) {
-        return doctorRepository.getByDoctorName(doctorName);
-    }
-
-    @Override
-    public void updateDoc(Doctor doctor) {
-        doctor.setPassword(passwordEncoder.encode(doctor.getPassword()));
-        doctorRepository.saveAndFlush(doctor);
-    }
-
-    @Override
-    public List<Doctor> getAllDoctorsBy() {
-        return doctorRepository.getDoctorsBy();
-    }
 
     @Override
     public Customer getByCustomerName(String customerName) {
@@ -84,123 +57,11 @@ public class CustomerService implements ICustomerService, UserDetailsService, ID
     }
 
     @Override
-    public MedCenter getMedCenterById(Long medCenterId) {
-        return medCenterRepository.getById(medCenterId);
-    }
-
-    @Override
-    public MedCenter getByMedCenterName(String medCenterName) {
-        return  medCenterRepository.getByMedCenterName(medCenterName);
-    }
-
-    @Override
-    public void updateMed(MedCenter medCenter) {
-        medCenter.setPassword(passwordEncoder.encode(medCenter.getPassword()));
-        medCenterRepository.saveAndFlush(medCenter);
-    }
-
-    @Override
-    public List<MedCenter> getAllMedCentersBy() {
-        return medCenterRepository.getMedCentersBy();
-    }
-
-    @Override
     public void DeleteByID(Long customerId) {
         customerRepository.deleteById(customerId);
     }
 
-    @Override
-    public void DeleteByIDDoc(Long doctorId) {
-        doctorRepository.deleteById(doctorId);
-    }
-
-    @Override
-    public void DeleteByIDMed(Long medCenterId) {
-        medCenterRepository.deleteById(medCenterId);
-    }
-
-    @Override
-    public boolean addMedCenter(MedCenter medCenter) {
-        MedCenter medCenter1 = medCenterRepository.findByUsername(medCenter.getUsername());
-
-        if(medCenter1 != null){
-            System.out.println("ERROR");
-            return false;
-        }
-
-        medCenter.setStatus(true);
-        medCenter.setPassword(passwordEncoder.encode(medCenter.getPassword()));
-        medCenter.setActivationCode(UUID.randomUUID().toString());
-
-        if(!StringUtils.isEmpty(medCenter.getMedCenterEmail())){
-            String message = String.format(
-                    "Hello, %s! \n" + "Welcome to QazMed. Please visit next link: http://localhost:8762/auth-service/registration/doctor/activate/%s",
-                    medCenter.getUsername(),
-                    medCenter.getActivationCode()
-            );
-            mailDelivery.send(medCenter.getMedCenterEmail(), "Activation code", message);
-        }
-
-        medCenterRepository.saveAndFlush(medCenter);
-        return true;
-    }
-
-    @Override
-    public boolean activateMedCenter(String code) {
-
-        MedCenter medCenter = medCenterRepository.findByActivationCode(code);
-
-        if(medCenter == null){
-            return false;
-        }
-
-        medCenter.setActivationCode(null);
-        medCenterRepository.saveAndFlush(medCenter);
-
-        return true;
-    }
-
-    @Override
-    public boolean addDoctor(Doctor doctor) {
-        Doctor doctor1 = doctorRepository.findByUsername(doctor.getUsername());
-
-        if(doctor1 != null){
-            System.out.println("ERROR");
-            return false;
-        }
-
-        doctor.setStatus(true);
-        doctor.setPassword(passwordEncoder.encode(doctor.getPassword()));
-        doctor.setActivationCode(UUID.randomUUID().toString());
-
-        if(!StringUtils.isEmpty(doctor.getDoctorEmail())){
-            String message = String.format(
-                    "Hello, %s! \n" + "Welcome to QazMed. Please visit next link: http://localhost:8762/auth-service/registration/doctor/activate/%s",
-                    doctor.getUsername(),
-                    doctor.getActivationCode()
-            );
-            mailDelivery.send(doctor.getDoctorEmail(), "Activation code", message);
-        }
-
-        doctorRepository.saveAndFlush(doctor);
-        return true;
-    }
-
-    @Override
-    public boolean activateDoctor(String code) {
-
-        Doctor doctor = doctorRepository.findByActivationCode(code);
-
-        if(doctor == null){
-            return false;
-        }
-
-        doctor.setActivationCode(null);
-        doctorRepository.saveAndFlush(doctor);
-
-        return true;
-    }
-
+    //Customer
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -260,5 +121,48 @@ public class CustomerService implements ICustomerService, UserDetailsService, ID
         customerRepository.saveAndFlush(customer);
 
         return true;
+    }
+
+    @Override
+    public String forgetPassword(String email){
+
+        String message = "";
+
+        Customer customer = customerRepository.findByEmail(email);
+
+        if(customer != null){
+            System.out.println("ERROR");
+            return "ERROR with change password";
+        }
+
+        customer.setActivationCode("forget password");
+
+        if(!StringUtils.isEmpty(customer.getEmail())){
+            message = String.format(
+                    "Hello, %s! \n" + "Welcome to QazMed. Please visit next link: http://localhost:8762/auth-service/registration/activate/%s",
+                    customer.getUsername(),
+                    customer.getActivationCode()
+            );
+            mailDelivery.send(customer.getEmail(), "Activation code", message);
+        }
+
+        customerRepository.saveAndFlush(customer);
+
+        return message;
+
+    }
+
+    @Override
+    public void updatePassword(String email, String password){
+
+        Customer customer = customerRepository.findByEmail(email);
+
+        if(customer != null){
+            System.out.println("ERROR");
+        }
+
+        customer.setPassword(passwordEncoder.encode(password));
+
+        customerRepository.saveAndFlush(customer);
     }
 }

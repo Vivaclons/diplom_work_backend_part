@@ -35,6 +35,16 @@ public class RegistrationController {
         return "OK!";
     }
 
+    @GetMapping("/forgotPass/customer/{email}")
+    public String forgetPassword(@PathVariable String email){
+        return iCustomerService.forgetPassword(email);
+    }
+
+    @PutMapping("/change/pass/customer/{email}/{password}")
+    public void updatePass(@PathVariable String email, @PathVariable String password){
+        iCustomerService.updatePassword(email, password);
+    }
+
     @GetMapping("/activate/{code}")
     public String activate(Customer customer, @PathVariable String code){
 
@@ -49,18 +59,13 @@ public class RegistrationController {
         return "code is done!";
     }
 
+    @PutMapping("/")
 
     //add doctor
     @PostMapping("/add-doctor")
-    public String addDoctor(@RequestBody Doctor doctor, @RequestParam("password2") String passwordConf, Map<String, Object> map){
-
-        if(doctor.getPassword() != null && !doctor.getPassword().equals(passwordConf)){
-            map.put("password error", "Password-1 not some with password-2");
-            return " Doctor password error password-1 != password-2";
-        }
+    public String addDoctor(@RequestBody Doctor doctor){
 
         if(!iDoctorService.addDoctor(doctor)){
-            map.put("username error", "Doctor not found!");
             return "ERROR with registration doctor";
         }
 
@@ -82,17 +87,21 @@ public class RegistrationController {
         return "code is done!";
     }
 
+    @GetMapping("/forgotPass/doctor/{email}")
+    public String forgetPasswordDoctor(@PathVariable String email){
+        return iDoctorService.forgetPasswordDoctor(email);
+    }
+
+    @PutMapping("/change/pass/doctor/{email}/{password}")
+    public void updatePassDoctor(@PathVariable String email, @PathVariable String password){
+        iDoctorService.updatePasswordDoctor(email, password);
+    }
+
     //add medCenter
     @PostMapping("/add-medCenter")
-    public String addMedCenter(@RequestBody MedCenter medCenter, @RequestParam("password2") String passwordConf, Map<String, Object> map){
-
-        if(medCenter.getPassword() != null && !medCenter.getPassword().equals(passwordConf)){
-            map.put("password error", "Password-1 not some with password-2");
-            return " Medical center password error password-1 != password-2";
-        }
+    public String addMedCenter(@RequestBody MedCenter medCenter){
 
         if(!iMedCenterService.addMedCenter(medCenter)){
-            map.put("username error", "Medical center not found!");
             return "ERROR with registration medical center";
         }
 
@@ -112,5 +121,15 @@ public class RegistrationController {
         }
 
         return "code is done!";
+    }
+
+    @GetMapping("/forgotPass/medCenter/{email}")
+    public String forgetPasswordMedCenter(@PathVariable String email){
+        return iMedCenterService.forgetPasswordMedCenter(email);
+    }
+
+    @PutMapping("/change/pass/medCenter/{email}/{password}")
+    public void updatePassMedCenter(@PathVariable String email, @PathVariable String password){
+        iMedCenterService.updatePasswordMedCenter(email, password);
     }
 }
