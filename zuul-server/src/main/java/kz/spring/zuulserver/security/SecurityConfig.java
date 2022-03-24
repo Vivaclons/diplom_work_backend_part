@@ -48,6 +48,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //Appointment
                 .antMatchers("/appointment-service/**").hasAnyAuthority("USER", "ADMIN", "DOCTOR", "MEDCENTER")
 
+                .antMatchers("/appointment-service/private/**").hasAnyAuthority("ADMIN")
+
+                .antMatchers("/appointment-service/doctor/**").hasAnyAuthority("ADMIN", "DOCTOR", "MEDCENTER")
+
                 .anyRequest().authenticated()
                 .and()
                 .addFilterAfter(new AuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);

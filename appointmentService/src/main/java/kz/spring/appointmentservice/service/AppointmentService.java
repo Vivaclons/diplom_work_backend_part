@@ -1,9 +1,6 @@
 package kz.spring.appointmentservice.service;
 
-import kz.spring.appointmentservice.model.Appointment;
-import kz.spring.appointmentservice.model.Customer;
-import kz.spring.appointmentservice.model.Doctor;
-import kz.spring.appointmentservice.model.MedCenter;
+import kz.spring.appointmentservice.model.*;
 import kz.spring.appointmentservice.repository.AppointmentRepository;
 import kz.spring.appointmentservice.repository.CustomerRepository;
 import kz.spring.appointmentservice.repository.DoctorRepository;
@@ -61,6 +58,7 @@ public class AppointmentService implements IAppointmentService {
             appointment.setCustomer(customer);
             appointment.setDoctor(doctor);
             appointment.setMedCenter(medCenter);
+            appointment.setStatus(String.valueOf(AppointmentStatus.WAITING_TO_ARRIVAL));
             apCheck = checkAppointment(appointment);
             if(apCheck){
                 appointmentRepository.saveAndFlush(appointment);
@@ -214,4 +212,27 @@ public class AppointmentService implements IAppointmentService {
         }
         return null;
     }
+
+    @Override
+    public Appointment updateStatus(Long appointmentId, String status){
+
+        Appointment appointment = appointmentRepository.getById(appointmentId);
+
+        if(appointment == null){
+            System.out.println("Appointment is empty!");
+            return null;
+        }
+
+        if(status.equals(AppointmentStatus.WAITING_TO_ARRIVAL)){
+            appointment.setStatus(String.valueOf(AppointmentStatus.WAITING_TO_ARRIVAL));
+        } else if(status.equals(AppointmentStatus.APPOINTMENT_ACCEPTED)){
+            appointment.setStatus(String.valueOf(AppointmentStatus.APPOINTMENT_ACCEPTED));
+        } else{
+            appointment.setStatus(String.valueOf(AppointmentStatus.PATIENT_DID_NOT_ARRIVE));
+        }
+
+        return appointmentRepository.saveAndFlush(appointment);
+
+    }
+
 }

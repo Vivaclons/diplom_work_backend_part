@@ -31,7 +31,7 @@ public class AppointmentController {
         return iAppointmentService.getByDate(date);
     }
 
-    @DeleteMapping("delete/{appointment_id}")
+    @DeleteMapping("/private/delete/{appointment_id}")
     public void deleteAppointmentByID(@PathVariable("id") Long id){
         iAppointmentService.DeleteById(id);
     }
@@ -41,7 +41,7 @@ public class AppointmentController {
         iAppointmentService.create(appointment, medCenterId, doctorId, customerId);
     }
 
-    @PutMapping("/update-appointment/{medCenterId}/{appointmentId}/{doctorId}/{customerId}")
+    @PutMapping("/private/update-appointment/{medCenterId}/{appointmentId}/{doctorId}/{customerId}")
     public void updateAppointment(@RequestBody Appointment appointment, @PathVariable("medCenterId") Long medCenterId, @PathVariable("appointmentId") Long appointmentId, @PathVariable("doctorId") Long doctorId, @PathVariable("customerId") Long customerId){
         iAppointmentService.update(appointment, medCenterId, appointmentId, doctorId, customerId);
     }
@@ -51,18 +51,23 @@ public class AppointmentController {
 //        return ResponseEntity.ok(iAppointmentService.addAppointment(medCenterId, appointmentId, doctorId, customerId));
 //    }
 
-    @PatchMapping("/update-customer/{appointmentId}/{customerId}")
+    @PatchMapping("/private/update-customer/{appointmentId}/{customerId}")
     public ResponseEntity<?> updateCustomer(@PathVariable("appointmentId") Long appointmentId, @PathVariable("customerId") Long customerId) {
         return ResponseEntity.ok(iAppointmentService.updateCustomer(appointmentId, customerId));
     }
 
-    @PatchMapping("/update-doctor/{appointmentId}/{doctorId}")
+    @PatchMapping("/private/update-doctor/{appointmentId}/{doctorId}")
     public ResponseEntity<?> updateDoctor(@PathVariable("appointmentId") Long appointmentId, @PathVariable("doctorId") Long doctorId) {
         return ResponseEntity.ok(iAppointmentService.updateDoctor(appointmentId, doctorId));
     }
 
-    @PatchMapping("/update-medCenter/{appointmentId}/{medCenterId}")
+    @PatchMapping("/private/update-medCenter/{appointmentId}/{medCenterId}")
     public ResponseEntity<?> updateMedCenter(@PathVariable("appointmentId") Long appointmentId, @PathVariable("medCenterId") Long medCenterId) {
         return ResponseEntity.ok(iAppointmentService.updateMedCenter(appointmentId, medCenterId));
+    }
+
+    @PatchMapping("/doctor/update-appointment-status/{appointmentId}/{status}")
+    public ResponseEntity<?> updateAppointmentStatus(@PathVariable("appointmentId") Long appointmentId, @PathVariable("status") String status){
+        return ResponseEntity.ok(iAppointmentService.updateStatus(appointmentId, status));
     }
 }

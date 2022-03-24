@@ -24,7 +24,6 @@ public class AdminController {
     @Autowired
     private IMedCenterService iMedCenterService;
 
-
     //Admin customer controller
     @GetMapping("/customer/{customerId}")
     public Customer getCustomersById(@PathVariable("customerId") Long customerId){
