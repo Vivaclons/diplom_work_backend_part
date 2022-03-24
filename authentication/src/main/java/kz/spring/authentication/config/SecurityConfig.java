@@ -43,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                        "/webjars/**").permitAll()
 //                    .anyRequest().authenticated()
                 .and()
-                    .addFilter(new JwtTokenGeneratorFilter(authenticationManager()))
+                    .addFilter(new JwtTokenGeneratorFilter(authenticationManager()));
 //                    .addFilterAfter(new JwtTokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 

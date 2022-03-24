@@ -134,7 +134,7 @@ public class CustomerService implements ICustomerService, UserDetailsService, ID
 
         if(!StringUtils.isEmpty(medCenter.getMedCenterEmail())){
             String message = String.format(
-                    "Hello, %s! \n" + "Welcome to QazMed. Please visit next link: http://localhost:8084/registration/doctor/activate/%s",
+                    "Hello, %s! \n" + "Welcome to QazMed. Please visit next link: http://localhost:8762/auth-service/registration/doctor/activate/%s",
                     medCenter.getUsername(),
                     medCenter.getActivationCode()
             );
@@ -175,7 +175,7 @@ public class CustomerService implements ICustomerService, UserDetailsService, ID
 
         if(!StringUtils.isEmpty(doctor.getDoctorEmail())){
             String message = String.format(
-                    "Hello, %s! \n" + "Welcome to QazMed. Please visit next link: http://localhost:8084/registration/doctor/activate/%s",
+                    "Hello, %s! \n" + "Welcome to QazMed. Please visit next link: http://localhost:8762/auth-service/registration/doctor/activate/%s",
                     doctor.getUsername(),
                     doctor.getActivationCode()
             );
@@ -236,7 +236,7 @@ public class CustomerService implements ICustomerService, UserDetailsService, ID
 
         if(!StringUtils.isEmpty(customer.getEmail())){
             String message = String.format(
-                    "Hello, %s! \n" + "Welcome to QazMed. Please visit next link: http://localhost:8084/registration/activate/%s",
+                    "Hello, %s! \n" + "Welcome to QazMed. Please visit next link: http://localhost:8762/auth-service/registration/activate/%s",
                     customer.getUsername(),
                     customer.getActivationCode()
             );
