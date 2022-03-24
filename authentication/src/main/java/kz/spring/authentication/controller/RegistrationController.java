@@ -35,18 +35,8 @@ public class RegistrationController {
         return "OK!";
     }
 
-    @GetMapping("/forgotPass/customer/{email}")
-    public String forgetPassword(@PathVariable String email){
-        return iCustomerService.forgetPassword(email);
-    }
-
-    @PutMapping("/change/pass/customer/{email}/{password}")
-    public void updatePass(@PathVariable String email, @PathVariable String password){
-        iCustomerService.updatePassword(email, password);
-    }
-
     @GetMapping("/activate/{code}")
-    public String activate(Customer customer, @PathVariable String code){
+    public String activateCustomer(@PathVariable String code){
 
         boolean isActivated = iCustomerService.activateCustomer(code);
 
@@ -59,7 +49,15 @@ public class RegistrationController {
         return "code is done!";
     }
 
-    @PutMapping("/")
+    @GetMapping("/forgotPass/customer/{email}")
+    public String forgetPassword(@PathVariable String email){
+        return iCustomerService.forgetPassword(email);
+    }
+
+    @PutMapping("/change/pass/customer/{email}/{password}")
+    public void updatePass(@PathVariable String email, @PathVariable String password){
+        iCustomerService.updatePassword(email, password);
+    }
 
     //add doctor
     @PostMapping("/add-doctor")
@@ -73,7 +71,7 @@ public class RegistrationController {
     }
 
     @GetMapping("/doctor/activate/{code}")
-    public String activate(Doctor doctor, @PathVariable String code){
+    public String activateDoctor(@PathVariable String code){
 
         boolean isActivated = iDoctorService.activateDoctor(code);
 
@@ -109,7 +107,7 @@ public class RegistrationController {
     }
 
     @GetMapping("/medCenter/activate/{code}")
-    public String activate(MedCenter medCenter, @PathVariable String code){
+    public String activateMedCenter(@PathVariable String code){
 
         boolean isActivated = iMedCenterService.activateMedCenter(code);
 

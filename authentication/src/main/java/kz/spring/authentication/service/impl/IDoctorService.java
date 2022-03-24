@@ -16,6 +16,8 @@ public interface IDoctorService {
 
     List<Doctor> getAllDoctorsBy();
 
+    void deleteDoctor(Long doctorId);
+
     boolean addDoctor(Doctor doctor);
 
     boolean activateDoctor(String code);

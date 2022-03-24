@@ -42,6 +42,11 @@ public class DoctorService implements UserDetailsService, IDoctorService{
     }
 
     @Override
+    public void deleteDoctor(Long doctorId){
+        doctorRepository.deleteById(doctorId);
+    }
+
+    @Override
     public void updateDoc(Doctor doctor) {
         doctor.setPassword(passwordEncoder.encode(doctor.getPassword()));
         doctorRepository.saveAndFlush(doctor);

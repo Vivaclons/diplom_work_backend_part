@@ -7,7 +7,6 @@ import kz.spring.authentication.service.impl.ICustomerService;
 import kz.spring.authentication.service.impl.IDoctorService;
 import kz.spring.authentication.service.impl.IMedCenterService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -65,7 +64,7 @@ public class AdminController {
 
     @DeleteMapping("/delete/doctor/{doctorId}")
     public void deleteDoctorById(@PathVariable("doctorId") Long doctorId){
-        iDoctorService.DeleteByIDDoc(doctorId);
+        iDoctorService.deleteDoctor(doctorId);
     }
 
     @GetMapping("/doctor/all")
