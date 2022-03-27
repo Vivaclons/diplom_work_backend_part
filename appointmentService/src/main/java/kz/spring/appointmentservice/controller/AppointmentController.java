@@ -16,17 +16,17 @@ public class AppointmentController {
     @Autowired
     private IAppointmentService iAppointmentService;
 
-    @GetMapping("/all")
+    @GetMapping("/public/all")
     public List<Appointment> getAllAppointment(){
         return iAppointmentService.getAllAppointment();
     }
 
-    @GetMapping("/id}")
+    @GetMapping("/public/id}")
     public Appointment getById(@PathVariable("id") Long id){
         return iAppointmentService.getById(id);
     }
 
-    @GetMapping("/date/{date}")
+    @GetMapping("/public/date/{date}")
     public Appointment getByDate(@PathVariable("date") Date date){
         return iAppointmentService.getByDate(date);
     }
@@ -36,7 +36,7 @@ public class AppointmentController {
         iAppointmentService.DeleteById(id);
     }
 
-    @PostMapping("/create-appointment/{medCenterId}/{doctorId}/{custId}")
+    @PostMapping("/public/create-appointment/{medCenterId}/{doctorId}/{custId}")
     public void createAppointment(@RequestBody Appointment appointment, @PathVariable("medCenterId") Long medCenterId, @PathVariable("doctorId") Long doctorId, @PathVariable("custId") Long customerId){
         iAppointmentService.create(appointment, medCenterId, doctorId, customerId);
     }
@@ -45,11 +45,6 @@ public class AppointmentController {
     public void updateAppointment(@RequestBody Appointment appointment, @PathVariable("medCenterId") Long medCenterId, @PathVariable("appointmentId") Long appointmentId, @PathVariable("doctorId") Long doctorId, @PathVariable("customerId") Long customerId){
         iAppointmentService.update(appointment, medCenterId, appointmentId, doctorId, customerId);
     }
-
-//    @PatchMapping("/add-appointment/{medCenterId}/{appointmentId}/{doctorId}/{customerId}")
-//    public ResponseEntity<?> addCustomerAnalysis(@PathVariable("medCenterId") Long medCenterId, @PathVariable("appointmentId") Long appointmentId, @PathVariable("doctorId") Long doctorId, @PathVariable("customerId") Long customerId) {
-//        return ResponseEntity.ok(iAppointmentService.addAppointment(medCenterId, appointmentId, doctorId, customerId));
-//    }
 
     @PatchMapping("/private/update-customer/{appointmentId}/{customerId}")
     public ResponseEntity<?> updateCustomer(@PathVariable("appointmentId") Long appointmentId, @PathVariable("customerId") Long customerId) {
@@ -66,8 +61,28 @@ public class AppointmentController {
         return ResponseEntity.ok(iAppointmentService.updateMedCenter(appointmentId, medCenterId));
     }
 
-    @PatchMapping("/doctor/update-appointment-status/{appointmentId}/{status}")
+    @PatchMapping("/public/update-appointment-status/{appointmentId}/{status}")
     public ResponseEntity<?> updateAppointmentStatus(@PathVariable("appointmentId") Long appointmentId, @PathVariable("status") String status){
         return ResponseEntity.ok(iAppointmentService.updateStatus(appointmentId, status));
+    }
+
+    @GetMapping("/public/customer/{customerId}")
+    public List<Appointment> getAllCustomerAppointment(@PathVariable("customerId") Long customerId){
+        return iAppointmentService.getAllCustomerAppointment(customerId);
+    }
+
+    @GetMapping("/public/doctor/{doctorId}")
+    public List<Appointment> getAllDoctorAppointment(@PathVariable("doctorId") Long doctorId){
+        return iAppointmentService.getAllDoctorAppointment(doctorId);
+    }
+
+    @GetMapping("/public/medCenter/{medCenterId}")
+    public List<Appointment> getAllMedCenterAppointment(@PathVariable("medCenterId") Long medCenterId){
+        return iAppointmentService.getAllMedCenterAppointment(medCenterId);
+    }
+
+    @GetMapping("/public/search/status/{status}")
+    public ResponseEntity<?> searchAppointmentStatus(@PathVariable("status") String status) {
+        return ResponseEntity.ok(iAppointmentService.searchAppointmentStatus(status));
     }
 }

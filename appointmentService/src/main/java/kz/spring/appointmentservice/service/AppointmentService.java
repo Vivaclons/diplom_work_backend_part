@@ -8,7 +8,9 @@ import kz.spring.appointmentservice.repository.MedCenterRepository;
 import kz.spring.appointmentservice.service.impl.IAppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,6 +28,9 @@ public class AppointmentService implements IAppointmentService {
 
     @Autowired
     private MedCenterRepository medCenterRepository;
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     @Override
     public Appointment getById(Long id) {
@@ -79,6 +84,10 @@ public class AppointmentService implements IAppointmentService {
 
         Customer customer = customerRepository.getCustomerByCustomerId(customerId);
 
+//        Customer customer1 = restTemplate.getForObject("http://client-service/customer/" + customerId, Customer.class);
+
+//        Doctor doctor1 = restTemplate.getForObject("http://med-service/doctor" + doctorId, Doctor.class);
+
 //        Customer customer = restTemplate.getForObject("http://localhost:8083/customer/" + customerId, Customer.class);
 //
 //        Doctor doctor = restTemplate.getForObject("http://localhost:8082/doctor/" + doctorId, Doctor.class);
@@ -122,15 +131,14 @@ public class AppointmentService implements IAppointmentService {
         int time = Integer.parseInt(appointment.getTime().replace(":", "0"));
 
         for(int i = 0; i < appointment1.size(); i++){
-
-            if(appointment.getCustomer().getCustomerId() == appointment1.get(i).getCustomer().getCustomerId() &&
-                    appointment1.get(i).getDate().getTime() == appointment.getDate().getTime()){
+            if(appointment.getCustomer().getCustomerId().equals(appointment1.get(i).getCustomer().getCustomerId()) &&
+                    (appointment1.get(i).getTime().equals(appointment.getTime()) && appointment1.get(i).getDate().getTime() == appointment.getDate().getTime())){
                 System.out.println("Customer have appointment!");
                 return false;
             }
 
-            if(appointment.getDoctor().getDoctorId() == appointment1.get(i).getDoctor().getDoctorId() &&
-                    appointment1.get(i).getDate().getTime() == appointment.getDate().getTime()){
+            if(appointment.getDoctor().getDoctorId().equals(appointment1.get(i).getDoctor().getDoctorId()) &&
+                    (appointment1.get(i).getTime().equals(appointment.getTime()) && appointment1.get(i).getDate().getTime() == appointment.getDate().getTime())){
                 System.out.println("Doctor have appointment!");
                 return false;
             }
@@ -235,4 +243,68 @@ public class AppointmentService implements IAppointmentService {
 
     }
 
+    @Override
+    public List<Appointment> getAllCustomerAppointment(Long customerId){
+
+        List<Appointment> appointment = appointmentRepository.findAll();
+
+        List<Appointment> appointments = new ArrayList<>();
+
+        for(int i = 0; i < appointment.size(); i++){
+            if(appointment.get(i).getCustomer().getCustomerId() == customerId){
+                appointments.add(appointment.get(i));
+            }
+        }
+
+        return appointments;
+    }
+
+    @Override
+    public List<Appointment> getAllDoctorAppointment(Long doctorId){
+
+        List<Appointment> appointment = appointmentRepository.findAll();
+
+        List<Appointment> appointments = new ArrayList<>();
+
+        for(int i = 0; i < appointment.size(); i++){
+            if(appointment.get(i).getDoctor().getDoctorId() == doctorId){
+                appointments.add(appointment.get(i));
+            }
+        }
+
+        return appointments;
+    }
+
+    @Override
+    public List<Appointment> getAllMedCenterAppointment(Long medCenterId){
+
+        List<Appointment> appointment = appointmentRepository.findAll();
+
+        List<Appointment> appointments = new ArrayList<>();
+
+        for(int i = 0; i < appointment.size(); i++){
+            if(appointment.get(i).getMedCenter().getMedCenterId() == medCenterId){
+                appointments.add(appointment.get(i));
+            }
+        }
+
+        return appointments;
+
+    }
+
+    @Override
+    public List<Appointment> searchAppointmentStatus(String status){
+
+        List<Appointment> appointment = appointmentRepository.findAll();
+
+        List<Appointment> appointmentStatus = new ArrayList<>();
+
+        for(int i = 0; i < appointment.size(); i++){
+            if(appointment.get(i).getStatus().equals(status)){
+                appointmentStatus.add(appointment.get(i));
+            }
+        }
+
+        return appointmentStatus;
+    }
 }

@@ -50,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .antMatchers("/appointment-service/private/**").hasAnyAuthority("ADMIN")
 
-                .antMatchers("/appointment-service/doctor/**").hasAnyAuthority("ADMIN", "DOCTOR", "MEDCENTER")
+                .antMatchers("/appointment-service/public/**").hasAnyAuthority("ADMIN", "DOCTOR", "MEDCENTER", "USER")
 
                 .anyRequest().authenticated()
                 .and()

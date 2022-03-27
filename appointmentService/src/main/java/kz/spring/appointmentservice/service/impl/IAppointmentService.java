@@ -16,4 +16,8 @@ public interface IAppointmentService {
     List<Appointment> getAllAppointment();
     void DeleteById(Long id);
     Appointment updateStatus(Long appointmentId, String status);
+    List<Appointment> getAllCustomerAppointment(Long customerId);
+    List<Appointment> getAllDoctorAppointment(Long doctorId);
+    List<Appointment> getAllMedCenterAppointment(Long medCenterId);
+    List<Appointment> searchAppointmentStatus(String status);
 }
