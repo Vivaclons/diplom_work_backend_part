@@ -45,7 +45,7 @@ public class AdminController {
         return iCustomerService.getAllCustomersBy();
     }
 
-    @PutMapping("/customer/update")
+    @PutMapping(value = "/customer/update", consumes = {"application/xml","application/json"})
     public void updateCustomer(@RequestBody Customer customer){
         iCustomerService.updateCus(customer);
     }
@@ -71,7 +71,7 @@ public class AdminController {
         return iDoctorService.getAllDoctorsBy();
     }
 
-    @PutMapping("/doctor/update")
+    @PutMapping(value = "/doctor/update", consumes = {"application/xml","application/json"})
     public void updateDoctor(@RequestBody Doctor doctor){
         iDoctorService.updateDoc(doctor);
     }
@@ -97,7 +97,7 @@ public class AdminController {
         return iMedCenterService.getAllMedCentersBy();
     }
 
-    @PutMapping("/medCenter/update")
+    @PutMapping(value = "/medCenter/update", consumes = {"application/xml","application/json"})
     public void updateMedCenter(@RequestBody MedCenter medCenter){
         iMedCenterService.updateMed(medCenter);
     }

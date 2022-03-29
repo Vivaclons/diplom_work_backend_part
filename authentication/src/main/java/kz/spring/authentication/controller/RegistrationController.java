@@ -25,7 +25,7 @@ public class RegistrationController {
     private IMedCenterService iMedCenterService;
 
     //add customer
-    @PostMapping("/add-customer")
+    @PostMapping(value = "/add-customer", consumes = {"application/xml","application/json"})
     public String addCustomer(@RequestBody Customer customer){
 
         if(!iCustomerService.addUser(customer)){
@@ -54,13 +54,13 @@ public class RegistrationController {
         return iCustomerService.forgetPassword(email);
     }
 
-    @PutMapping("/change/pass/customer/{email}/{password}")
+    @PutMapping(value = "/change/pass/customer/{email}/{password}", consumes = {"application/xml","application/json"})
     public void updatePass(@PathVariable String email, @PathVariable String password){
         iCustomerService.updatePassword(email, password);
     }
 
     //add doctor
-    @PostMapping("/add-doctor")
+    @PostMapping(value = "/add-doctor", consumes = {"application/xml","application/json"})
     public String addDoctor(@RequestBody Doctor doctor){
 
         if(!iDoctorService.addDoctor(doctor)){
@@ -90,13 +90,13 @@ public class RegistrationController {
         return iDoctorService.forgetPasswordDoctor(email);
     }
 
-    @PutMapping("/change/pass/doctor/{email}/{password}")
+    @PutMapping(value = "/change/pass/doctor/{email}/{password}", consumes = {"application/xml","application/json"})
     public void updatePassDoctor(@PathVariable String email, @PathVariable String password){
         iDoctorService.updatePasswordDoctor(email, password);
     }
 
     //add medCenter
-    @PostMapping("/add-medCenter")
+    @PostMapping(value = "/add-medCenter", consumes = {"application/xml","application/json"})
     public String addMedCenter(@RequestBody MedCenter medCenter){
 
         if(!iMedCenterService.addMedCenter(medCenter)){
@@ -126,7 +126,7 @@ public class RegistrationController {
         return iMedCenterService.forgetPasswordMedCenter(email);
     }
 
-    @PutMapping("/change/pass/medCenter/{email}/{password}")
+    @PutMapping(value = "/change/pass/medCenter/{email}/{password}", consumes = {"application/xml","application/json"})
     public void updatePassMedCenter(@PathVariable String email, @PathVariable String password){
         iMedCenterService.updatePasswordMedCenter(email, password);
     }

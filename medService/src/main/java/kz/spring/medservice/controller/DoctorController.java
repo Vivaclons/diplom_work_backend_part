@@ -76,12 +76,12 @@ public class DoctorController {
         iDoctorService.DeleteById(doctorId);
     }
 
-    @PostMapping("/private/create")
+    @PostMapping(value = "/private/create", consumes = {"application/xml","application/json"})
     public void createDoctor(@RequestBody Doctor doctor){
         iDoctorService.update(doctor);
     }
 
-    @PutMapping("/private/update")
+    @PutMapping(value = "/private/update", consumes = {"application/xml","application/json"})
     public void updateDoctor(@RequestBody Doctor doctor){
         iDoctorService.update(doctor);
     }

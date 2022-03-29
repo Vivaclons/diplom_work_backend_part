@@ -29,12 +29,12 @@ public class SpecialtyController {
         iSpecialtyService.DeleteById(specialtyId);
     }
 
-    @PostMapping("/create")
+    @PostMapping(value = "/create", consumes = {"application/xml","application/json"})
     public void createSpecialty(@RequestBody Specialty specialty){
         iSpecialtyService.update(specialty);
     }
 
-    @PutMapping("/update")
+    @PutMapping(value = "/update", consumes = {"application/xml","application/json"})
     public void updateSpecialty(@RequestBody Specialty specialty){
         iSpecialtyService.update(specialty);
     }

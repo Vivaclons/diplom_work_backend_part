@@ -66,12 +66,12 @@ public class MedCenterController {
         iMedCenterService.DeleteById(medCenterId);
     }
 
-    @PostMapping("/private/create")
+    @PostMapping(value = "/private/create", consumes = {"application/xml","application/json"})
     public void createDoctor(@RequestBody MedCenter medCenter){
         iMedCenterService.update(medCenter);
     }
 
-    @PutMapping("/private/update")
+    @PutMapping(value = "/private/update", consumes = {"application/xml","application/json"})
     public void updateMedCenter(@RequestBody MedCenter medCenter){
         iMedCenterService.update(medCenter);
     }

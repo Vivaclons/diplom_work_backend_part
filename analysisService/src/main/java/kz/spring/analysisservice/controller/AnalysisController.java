@@ -31,12 +31,12 @@ public class AnalysisController {
         iAnalysisService.DeleteById(analysis_id);
     }
 
-    @PostMapping("/create")
+    @PostMapping(value = "/create", consumes = {"application/xml","application/json"})
     public void createAnalysis(@RequestBody Analysis analysis){
         iAnalysisService.update(analysis);
     }
 
-    @PutMapping("/update")
+    @PutMapping(value = "/update", consumes = {"application/xml","application/json"})
     public void updateAnalysis(@RequestBody Analysis analysis){
         iAnalysisService.update(analysis);
     }

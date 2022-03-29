@@ -61,12 +61,12 @@ public class CustomerController {
         iCustomerService.DeleteById(id);
     }
 
-    @PostMapping("/private/create")
+    @PostMapping(value = "/private/create", consumes = {"application/xml","application/json"})
     public void createCustomer(@RequestBody Customer customer){
         iCustomerService.update(customer);
     }
 
-    @PutMapping("/private/update")
+    @PutMapping(value = "/private/update", consumes = {"application/xml","application/json"})
     public void updateCustomer(@RequestBody Customer customer){
         iCustomerService.update(customer);
     }
