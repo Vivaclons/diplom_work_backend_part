@@ -130,21 +130,36 @@ public class AppointmentService implements IAppointmentService {
 
         int time = Integer.parseInt(appointment.getTime().replace(":", "0"));
 
+        int times = time + 10000;
+
         for(int i = 0; i < appointment1.size(); i++){
             if(appointment.getCustomer().getCustomerId().equals(appointment1.get(i).getCustomer().getCustomerId()) &&
                     (appointment1.get(i).getTime().equals(appointment.getTime()) && appointment1.get(i).getDate().getTime() == appointment.getDate().getTime())){
+                if(times < Integer.parseInt(appointment1.get(i).getTime().replace(":", "0"))){
+                    System.out.println("Customer have appointment (+1 hour)");
+                    return false;
+                }
                 System.out.println("Customer have appointment!");
                 return false;
             }
 
             if(appointment.getDoctor().getDoctorId().equals(appointment1.get(i).getDoctor().getDoctorId()) &&
                     (appointment1.get(i).getTime().equals(appointment.getTime()) && appointment1.get(i).getDate().getTime() == appointment.getDate().getTime())){
+                if(times < Integer.parseInt(appointment1.get(i).getTime().replace(":", "0"))){
+                    System.out.println("Doctor has appointment (+1 hour)");
+                    return false;
+                }
                 System.out.println("Doctor have appointment!");
                 return false;
             }
 
-            if(time < timeTo && time > timeFrom){
+            if(time < timeTo && time > timeFrom && times > timeFrom){
                 System.out.println("Doctor time is " + appointment.getDoctor().getWorkTimeFrom() + " and " + appointment.getDoctor().getWorkTimeTo());
+                return false;
+            }
+
+            if(times > timeFrom){
+                System.out.println("Doctor time is " + appointment.getDoctor().getWorkTimeFrom() + " and " + appointment.getDoctor().getWorkTimeTo() + " (+1 hour)");
                 return false;
             }
 
