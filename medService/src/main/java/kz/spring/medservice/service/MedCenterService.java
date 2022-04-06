@@ -141,6 +141,11 @@ public class MedCenterService implements IMedCenterService {
     @Override
     public void rating(Long medCenterId, double rating){
         MedCenter medCenter = medCenterRepository.getByMedCenterId(medCenterId);
+
+        if(medCenter.getPeopleCount() < 75 && rating < 4){
+            rating += 1;
+        }
+
         medCenter.setRating((medCenter.getRating() * medCenter.getPeopleCount() + rating)/(medCenter.getPeopleCount() + 1));
         medCenter.setPeopleCount(medCenter.getPeopleCount() + 1);
 

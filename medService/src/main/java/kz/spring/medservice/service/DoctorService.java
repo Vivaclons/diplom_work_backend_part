@@ -215,6 +215,11 @@ public class DoctorService implements IDoctorService {
     @Override
     public void rating(Long doctorId, double docRat){
         Doctor doctor = doctorRepository.getDoctorByDoctorId(doctorId);
+
+        if(doctor.getPeopleCount() < 75 && docRat < 4){
+            docRat += 1;
+        }
+
         doctor.setRating((doctor.getRating() * doctor.getPeopleCount() + docRat)/(doctor.getPeopleCount() + 1));
         doctor.setPeopleCount(doctor.getPeopleCount() + 1);
 

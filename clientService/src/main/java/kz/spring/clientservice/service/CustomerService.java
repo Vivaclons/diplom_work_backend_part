@@ -119,6 +119,11 @@ public class CustomerService implements ICustomerService {
     @Override
     public void rating(Long customerId, double rating){
         Customer customer = customerRepository.getByCustomerId(customerId);
+
+        if(customer.getPeopleCount() < 75 && rating < 4){
+            rating += 1;
+        }
+
         customer.setRating((customer.getRating() * customer.getPeopleCount() + rating)/(customer.getPeopleCount() + 1));
         customer.setPeopleCount(customer.getPeopleCount() + 1);
 
