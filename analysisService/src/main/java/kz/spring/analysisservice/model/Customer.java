@@ -25,7 +25,9 @@ public class Customer {
     private String activationCode;
     private String username;
     private String password;
-
     private String address;
     private boolean status;
+    private Double rating;
+    private Integer peopleCount;
+
 }

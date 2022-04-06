@@ -69,6 +69,8 @@ public class MedCenterService implements UserDetailsService, IMedCenterService {
         medCenter.setStatus(true);
         medCenter.setPassword(passwordEncoder.encode(medCenter.getPassword()));
         medCenter.setActivationCode(UUID.randomUUID().toString());
+        medCenter.setPeopleCount(50);
+        medCenter.setRating(5.0);
 
         if(!StringUtils.isEmpty(medCenter.getMedCenterEmail())){
             String message = String.format(

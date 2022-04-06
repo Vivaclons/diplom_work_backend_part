@@ -101,6 +101,8 @@ public class CustomerService implements ICustomerService {
 
     @Override
     public void update(Customer customer) {
+        customer.setPeopleCount(50);
+        customer.setRating(5.0);
         customerRepository.saveAndFlush(customer);
     }
 
@@ -112,5 +114,14 @@ public class CustomerService implements ICustomerService {
     @Override
     public void DeleteById(Long id) {
         customerRepository.deleteById(id);
+    }
+
+    @Override
+    public void rating(Long customerId, double rating){
+        Customer customer = customerRepository.getByCustomerId(customerId);
+        customer.setRating((customer.getRating() * customer.getPeopleCount() + rating)/(customer.getPeopleCount() + 1));
+        customer.setPeopleCount(customer.getPeopleCount() + 1);
+
+        customerRepository.saveAndFlush(customer);
     }
 }

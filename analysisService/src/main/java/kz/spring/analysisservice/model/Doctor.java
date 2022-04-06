@@ -32,4 +32,7 @@ public class Doctor {
     private String latitude;
     private String longitude;
     private Double distance;
+    private Double rating;
+    private Integer peopleCount;
+
 }

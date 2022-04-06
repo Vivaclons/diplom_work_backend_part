@@ -18,4 +18,6 @@ public interface IMedCenterService {
     void update(MedCenter medCenter);
     List<MedCenter> getAllMedCenter();
     void DeleteById(Long id);
+
+    void rating(Long medCenterId, double rating);
 }

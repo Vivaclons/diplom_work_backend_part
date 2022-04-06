@@ -18,6 +18,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
         String json = String.format("{\"message\": \"%s\"}", e.getMessage());
         httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         httpServletResponse.setContentType("application/json");
+        httpServletResponse.setContentType("application/xml");
         httpServletResponse.setCharacterEncoding("UTF-8");
         httpServletResponse.getWriter().write(json);
     }

@@ -78,11 +78,16 @@ public class DoctorController {
 
     @PostMapping(value = "/private/create", consumes = {"application/xml","application/json"})
     public void createDoctor(@RequestBody Doctor doctor){
-        iDoctorService.update(doctor);
+        iDoctorService.createDoctor(doctor);
     }
 
     @PutMapping(value = "/private/update", consumes = {"application/xml","application/json"})
     public void updateDoctor(@RequestBody Doctor doctor){
         iDoctorService.update(doctor);
+    }
+
+    @PutMapping(value = "/private/rating/{doctorId}/{rating}", consumes = {"application/xml","application/json"})
+    public void rating(@PathVariable("doctorId") Long doctorId, @PathVariable("rating") double rating){
+        iDoctorService.rating(doctorId, rating);
     }
 }

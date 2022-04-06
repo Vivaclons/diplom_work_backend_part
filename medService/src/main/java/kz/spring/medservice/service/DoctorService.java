@@ -8,6 +8,7 @@ import kz.spring.medservice.service.impl.IDoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.websocket.OnClose;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -119,6 +120,8 @@ public class DoctorService implements IDoctorService {
 
     @Override
     public Doctor createDoctor(Doctor doctor) {
+        doctor.setPeopleCount(50);
+        doctor.setRating(5.0);
         return doctorRepository.saveAndFlush(doctor);
     }
 
@@ -207,5 +210,14 @@ public class DoctorService implements IDoctorService {
         }
 
         return doctor;
+    }
+
+    @Override
+    public void rating(Long doctorId, double docRat){
+        Doctor doctor = doctorRepository.getDoctorByDoctorId(doctorId);
+        doctor.setRating((doctor.getRating() * doctor.getPeopleCount() + docRat)/(doctor.getPeopleCount() + 1));
+        doctor.setPeopleCount(doctor.getPeopleCount() + 1);
+
+        doctorRepository.saveAndFlush(doctor);
     }
 }

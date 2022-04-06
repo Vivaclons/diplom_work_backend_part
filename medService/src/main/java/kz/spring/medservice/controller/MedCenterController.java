@@ -80,4 +80,9 @@ public class MedCenterController {
     public List<MedCenter> getAllMedCentersWorkTime(@PathVariable("date") String date){
         return iMedCenterService.getAllMedCentersWorkTime(date);
     }
+
+    @PutMapping(value = "/private/rating/{medCenterId}/{rating}", consumes = {"application/xml","application/json"})
+    public void rating(@PathVariable("medCenterId") Long medCenterId, @PathVariable("rating") double rating){
+        iMedCenterService.rating(medCenterId, rating);
+    }
 }

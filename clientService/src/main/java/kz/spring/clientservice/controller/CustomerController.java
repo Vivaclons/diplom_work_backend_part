@@ -70,4 +70,9 @@ public class CustomerController {
     public void updateCustomer(@RequestBody Customer customer){
         iCustomerService.update(customer);
     }
+
+    @PutMapping(value = "/private/rating/{customerId}/{rating}", consumes = {"application/xml","application/json"})
+    public void rating(@PathVariable("customerId") Long customerId, @PathVariable("rating") double rating){
+        iCustomerService.rating(customerId, rating);
+    }
 }

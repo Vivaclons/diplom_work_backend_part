@@ -154,15 +154,13 @@ public class AppointmentService implements IAppointmentService {
             }
 
             if(time < timeTo && time > timeFrom && times > timeFrom){
+                if(times < timeFrom){
+                    System.out.println("Doctor time is " + appointment.getDoctor().getWorkTimeFrom() + " and " + appointment.getDoctor().getWorkTimeTo() + " (+1 hour)");
+                    return false;
+                }
                 System.out.println("Doctor time is " + appointment.getDoctor().getWorkTimeFrom() + " and " + appointment.getDoctor().getWorkTimeTo());
                 return false;
             }
-
-            if(times > timeFrom){
-                System.out.println("Doctor time is " + appointment.getDoctor().getWorkTimeFrom() + " and " + appointment.getDoctor().getWorkTimeTo() + " (+1 hour)");
-                return false;
-            }
-
         }
 
         System.out.println("Appointment validation is success");

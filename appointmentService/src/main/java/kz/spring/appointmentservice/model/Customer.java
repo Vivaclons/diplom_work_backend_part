@@ -25,6 +25,8 @@ public class Customer {
     private String password2;
     private String address;
     private boolean status;
+    private Double rating;
+    private Integer peopleCount;
 
 }
 

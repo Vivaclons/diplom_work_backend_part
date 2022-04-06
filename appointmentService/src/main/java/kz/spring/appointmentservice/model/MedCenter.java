@@ -32,5 +32,7 @@ public class MedCenter {
     private String latitude;
     private String longitude;
     private Double distance;
+    private Double rating;
+    private Integer peopleCount;
 
 }

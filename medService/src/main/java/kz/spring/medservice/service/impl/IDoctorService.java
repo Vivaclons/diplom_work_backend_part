@@ -29,4 +29,6 @@ public interface IDoctorService {
     Doctor getDoctorById(Long id);
 
     List<Doctor> nearDoctor(String lat, String lon);
+
+    void rating(Long doctorId, double docRat);
 }

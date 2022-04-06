@@ -94,7 +94,8 @@ public class CustomerService implements ICustomerService, UserDetailsService {
 
         customer.setPassword(passwordEncoder.encode(customer.getPassword()));
         customer.setActivationCode(UUID.randomUUID().toString());
-
+        customer.setPeopleCount(50);
+        customer.setRating(5.0);
         if(!StringUtils.isEmpty(customer.getEmail())){
             String message = String.format(
                     "Hello, %s! \n" + "Welcome to QazMed. Please visit next link: http://localhost:8762/auth-service/registration/activate/%s",

@@ -28,6 +28,9 @@ public class Customer implements UserDetails{
     private String password;
     private String address;
     private boolean status;
+    private Double rating;
+    private Integer peopleCount;
+
 
 //    @ManyToMany(fetch = FetchType.LAZY)
 //    @JoinTable(

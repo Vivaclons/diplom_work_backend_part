@@ -14,4 +14,5 @@ public interface ICustomerService {
     void update(Customer customer);
     List<Customer> getAllCustomer();
     void DeleteById(Long id);
+    void rating(Long customerId, double rating);
 }

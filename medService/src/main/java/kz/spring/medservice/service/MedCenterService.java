@@ -100,6 +100,8 @@ public class MedCenterService implements IMedCenterService {
 
     @Override
     public void update(MedCenter medCenter) {
+        medCenter.setPeopleCount(50);
+        medCenter.setRating(5.0);
         medCenterRepository.saveAndFlush(medCenter);
     }
 
@@ -134,5 +136,14 @@ public class MedCenterService implements IMedCenterService {
 
         }
         return medCentersTime;
+    }
+
+    @Override
+    public void rating(Long medCenterId, double rating){
+        MedCenter medCenter = medCenterRepository.getByMedCenterId(medCenterId);
+        medCenter.setRating((medCenter.getRating() * medCenter.getPeopleCount() + rating)/(medCenter.getPeopleCount() + 1));
+        medCenter.setPeopleCount(medCenter.getPeopleCount() + 1);
+
+        medCenterRepository.saveAndFlush(medCenter);
     }
 }

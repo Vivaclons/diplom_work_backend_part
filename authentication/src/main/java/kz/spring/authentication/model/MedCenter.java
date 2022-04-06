@@ -37,6 +37,8 @@ public class MedCenter implements UserDetails {
     private String latitude;
     private String longitude;
     private Double distance;
+    private Double rating;
+    private Integer peopleCount;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "medCenter_role", joinColumns = @JoinColumn(name = "medCenter_id"))

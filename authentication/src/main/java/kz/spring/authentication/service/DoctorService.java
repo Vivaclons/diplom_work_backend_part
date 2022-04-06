@@ -69,7 +69,8 @@ public class DoctorService implements UserDetailsService, IDoctorService{
         doctor.setStatus(true);
         doctor.setPassword(passwordEncoder.encode(doctor.getPassword()));
         doctor.setActivationCode(UUID.randomUUID().toString());
-
+        doctor.setPeopleCount(50);
+        doctor.setRating(5.0);
         if(!StringUtils.isEmpty(doctor.getDoctorEmail())){
             String message = String.format(
                     "Hello, %s! \n" + "Welcome to QazMed. Please visit next link: http://localhost:8762/auth-service/registration/doctor/activate/%s",
