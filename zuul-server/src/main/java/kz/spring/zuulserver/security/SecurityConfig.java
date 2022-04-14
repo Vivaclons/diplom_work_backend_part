@@ -30,12 +30,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/auth-service/admin/**").hasAnyAuthority("ADMIN")
 
                 //Customer
-                .antMatchers("/client-service/customer/public/**").hasAnyAuthority("USER", "DOCTOR", "ADMIN")
+                .antMatchers("/client-service/customer/public/**").permitAll()
+//                .antMatchers("/client-service/customer/public/**").hasAnyAuthority("USER", "DOCTOR", "ADMIN")
                 .antMatchers("/client-service/customer/private/**").hasAnyAuthority("USER", "ADMIN")
 
                 //MedCenter
-                .antMatchers("/med-service/doctor/public/**").hasAnyAuthority("DOCTOR", "MEDCENTER", "ADMIN")
-                .antMatchers("/med-service/medCenter/public/**").hasAnyAuthority("DOCTOR", "MEDCENTER", "ADMIN")
+                .antMatchers("/med-service/doctor/public/**").permitAll()
+//                .antMatchers("/med-service/doctor/public/**").hasAnyAuthority("DOCTOR", "MEDCENTER", "ADMIN")
+                .antMatchers("/med-service/medCenter/public/**").permitAll()
+//                .antMatchers("/med-service/medCenter/public/**").hasAnyAuthority("DOCTOR", "MEDCENTER", "ADMIN")
                 .antMatchers("/med-service/medCenter/private/**").hasAnyAuthority("MEDCENTER", "ADMIN")
                 .antMatchers("/med-service/doctor/private/**").hasAnyAuthority("DOCTOR", "ADMIN")
 
@@ -50,7 +53,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .antMatchers("/appointment-service/private/**").hasAnyAuthority("ADMIN")
 
-                .antMatchers("/appointment-service/public/**").hasAnyAuthority("ADMIN", "DOCTOR", "MEDCENTER", "USER")
+                .antMatchers("/appointment-service/public/**").permitAll()
+//                .antMatchers("/appointment-service/public/**").hasAnyAuthority("ADMIN", "DOCTOR", "MEDCENTER", "USER")
 
                 .anyRequest().authenticated()
                 .and()

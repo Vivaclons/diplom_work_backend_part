@@ -24,8 +24,6 @@ public class Customer {
     private String activationCode;
     private String username;
     private String password;
-    @Transient
-    private String password2;
     private String address;
     private boolean status;
     private Double rating;

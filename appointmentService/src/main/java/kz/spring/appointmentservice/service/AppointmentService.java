@@ -6,8 +6,10 @@ import kz.spring.appointmentservice.repository.CustomerRepository;
 import kz.spring.appointmentservice.repository.DoctorRepository;
 import kz.spring.appointmentservice.repository.MedCenterRepository;
 import kz.spring.appointmentservice.service.impl.IAppointmentService;
+import lombok.Builder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -30,7 +32,10 @@ public class AppointmentService implements IAppointmentService {
     private MedCenterRepository medCenterRepository;
 
     @Autowired
-    private RestTemplate restTemplate;
+    private MailDelivery mailDelivery;
+
+//    @Autowired
+//    private RestTemplate restTemplate;
 
     @Override
     public Appointment getById(Long id) {
@@ -66,6 +71,7 @@ public class AppointmentService implements IAppointmentService {
             appointment.setStatus(String.valueOf(AppointmentStatus.WAITING_TO_ARRIVAL));
             apCheck = checkAppointment(appointment);
             if(apCheck){
+                appointmentNotification(appointment);
                 appointmentRepository.saveAndFlush(appointment);
             } else {
                 System.out.println("Error with appointment date: you have appointment in this time");
@@ -75,6 +81,22 @@ public class AppointmentService implements IAppointmentService {
         }
     }
 
+    @Override
+    public void appointmentNotification(Appointment appointment) {
+        if (!StringUtils.isEmpty(appointment.getCustomer().getEmail())) {
+            String message = String.format(
+                    "Hello, %s! \n" +
+                            "You have an appointment with a doctor - %s, at %s, time - %s. \n" +
+                            "Address - %s.",
+                    appointment.getCustomer().getUsername(),
+                    appointment.getDoctor().getDoctorName(),
+                    appointment.getDate(),
+                    appointment.getTime(),
+                    appointment.getDoctor().getAddress()
+            );
+            mailDelivery.send(appointment.getCustomer().getEmail(), "Appointment", message);
+        }
+    }
     @Override
     public void update(Appointment appointment, Long medCenterId, Long appointmentId, Long doctorId, Long customerId){
 
