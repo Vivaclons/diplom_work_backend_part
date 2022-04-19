@@ -15,4 +15,5 @@ public interface ICustomerService {
     List<Customer> getAllCustomer();
     void DeleteById(Long id);
     void rating(Long customerId, double rating);
+    boolean checkDoctor(Customer customer, Long doctorId);
 }

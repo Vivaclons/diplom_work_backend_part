@@ -61,13 +61,24 @@ public class MedCenterService implements IMedCenterService {
 
         boolean check = false;
 
-        if(doctor != null && medCenter != null){
+        if(doctor != null && medCenter != null && checkDoctor(medCenter, doctorId)){
             medCenter.getDoctors().add(doctor);
             if(!check){
                 return medCenterRepository.saveAndFlush(medCenter);
             }
         }
         return null;
+    }
+
+    @Override
+    public boolean checkDoctor(MedCenter medCenter, Long doctorId){
+        for(int i = 0; i < medCenter.getDoctors().size(); i++){
+            if(medCenter.getDoctors().get(i).getDoctorId() == doctorId){
+                System.out.println("This medical center has this doctor with id " + doctorId);
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override

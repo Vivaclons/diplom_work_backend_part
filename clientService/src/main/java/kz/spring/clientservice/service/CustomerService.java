@@ -60,7 +60,7 @@ public class CustomerService implements ICustomerService {
 
         boolean check = false;
 
-        if(doctor != null && customer != null){
+        if(doctor != null && customer != null && checkDoctor(customer, doctorId)){
             customer.getDoctors().add(doctor);
             if(!check){
                 return customerRepository.saveAndFlush(customer);
@@ -70,11 +70,22 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
+    public boolean checkDoctor(Customer customer, Long doctorId){
+        for(int i = 0; i < customer.getDoctors().size(); i++){
+            if(customer.getDoctors().get(i).getDoctorId() == doctorId){
+                System.out.println("You have doctor with this id " + doctorId);
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
     public Customer updateDoctor(Long customerId, Long doctorId) {
 
         Customer customer = customerRepository.getByCustomerId(doctorId);
 
-        if (customer != null && customer.getCustomerId() != null && customer.getCustomerId() != 0L) {
+        if (customer != null && customer.getCustomerId() != null && customer.getCustomerId() != 0L && checkDoctor(customer, doctorId)) {
             for (int i = 0; i < customer.getDoctors().size(); i++) {
                 customer.getDoctors().get(i).setDoctorId(doctorId);
                 return customerRepository.saveAndFlush(customer);

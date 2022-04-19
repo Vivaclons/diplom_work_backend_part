@@ -86,17 +86,20 @@ public class AppointmentService implements IAppointmentService {
         if (!StringUtils.isEmpty(appointment.getCustomer().getEmail())) {
             String message = String.format(
                     "Hello, %s! \n" +
-                            "You have an appointment with a doctor - %s, at %s, time - %s. \n" +
+                            "You have an appointment with a doctor. Doctor name - %s, time: %s, at - %s %s %s. \n" +
                             "Address - %s.",
                     appointment.getCustomer().getUsername(),
                     appointment.getDoctor().getDoctorName(),
-                    appointment.getDate(),
                     appointment.getTime(),
+                    appointment.getDate().getYear(),
+                    appointment.getDate().getMonth(),
+                    appointment.getDate().getDay(),
                     appointment.getDoctor().getAddress()
             );
             mailDelivery.send(appointment.getCustomer().getEmail(), "Appointment", message);
         }
     }
+
     @Override
     public void update(Appointment appointment, Long medCenterId, Long appointmentId, Long doctorId, Long customerId){
 

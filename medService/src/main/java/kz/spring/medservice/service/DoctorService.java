@@ -65,13 +65,24 @@ public class DoctorService implements IDoctorService {
 
         boolean check = false;
 
-        if(doctor != null && specialty != null){
+        if(doctor != null && specialty != null && checkSpecialty(doctor, specialtyId)){
             doctor.getSpecialties().add(specialty);
             if(!check){
                 return doctorRepository.saveAndFlush(doctor);
             }
         }
         return null;
+    }
+
+    @Override
+    public boolean checkSpecialty(Doctor doctor, Long specialtyId){
+        for(int i = 0; i < doctor.getSpecialties().size(); i++){
+            if(doctor.getSpecialties().get(i).getSpecialtyId() == specialtyId){
+                System.out.println("doctor has this specialty " + doctor.getSpecialties().get(i).getSpecialtyName());
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override

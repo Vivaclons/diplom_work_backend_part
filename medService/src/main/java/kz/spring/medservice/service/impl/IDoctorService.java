@@ -31,4 +31,6 @@ public interface IDoctorService {
     List<Doctor> nearDoctor(String lat, String lon);
 
     void rating(Long doctorId, double docRat);
+
+    boolean checkSpecialty(Doctor doctor, Long specialtyId);
 }
