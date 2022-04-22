@@ -4,13 +4,13 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/AnalysisService/pom.xml" />
+        <option value="$PROJECT_DIR$/zuul-server/pom.xml" />
         <option value="$PROJECT_DIR$/analysisService/pom.xml" />
         <option value="$PROJECT_DIR$/appointmentService/pom.xml" />
         <option value="$PROJECT_DIR$/authentication/pom.xml" />
         <option value="$PROJECT_DIR$/clientService/pom.xml" />
         <option value="$PROJECT_DIR$/eureka/pom.xml" />
         <option value="$PROJECT_DIR$/medService/pom.xml" />
-        <option value="$PROJECT_DIR$/zuul-server/pom.xml" />
       </list>
     </option>
   </component>
