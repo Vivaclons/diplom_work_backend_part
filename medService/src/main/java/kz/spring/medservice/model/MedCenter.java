@@ -34,6 +34,8 @@ public class MedCenter {
     private Double distance;
     private Double rating;
     private Integer peopleCount;
+    private String about;
+    private Integer fees;
 
     @ManyToMany
     List<Doctor> doctors;

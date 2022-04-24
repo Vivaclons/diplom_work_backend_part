@@ -33,4 +33,7 @@ public interface IDoctorService {
     void rating(Long doctorId, double docRat);
 
     boolean checkSpecialty(Doctor doctor, Long specialtyId);
+
+    List<Doctor> getAllFilter(int distancefrom, int distanceTo, int ratingFrom, int ratingTo, int priceFrom,
+                              int priceTo, int expFrom, int expTo, String time);
 }

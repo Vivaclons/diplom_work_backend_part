@@ -1,6 +1,5 @@
 package kz.spring.medservice.controller;
 
-import kz.spring.medservice.model.Doctor;
 import kz.spring.medservice.model.MedCenter;
 import kz.spring.medservice.service.impl.IMedCenterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +60,11 @@ public class MedCenterController {
         return iMedCenterService.getByMedCenterAddress(address);
     }
 
+    @GetMapping("/public/all/nearMedCenter/{lat}/{lon}")
+    public List<MedCenter> getNearMedCenter(@PathVariable("lat") String lat, @PathVariable("lon") String lon){
+        return iMedCenterService.getNearMedCenter(lat, lon);
+    }
+
     @DeleteMapping("/private/delete/{medCenterId}")
     public void deleteMedCenterByID(@PathVariable("medCenterId") Long medCenterId){
         iMedCenterService.DeleteById(medCenterId);
@@ -84,5 +88,16 @@ public class MedCenterController {
     @PutMapping(value = "/private/rating/{medCenterId}/{rating}", consumes = {"application/xml","application/json"})
     public void rating(@PathVariable("medCenterId") Long medCenterId, @PathVariable("rating") double rating){
         iMedCenterService.rating(medCenterId, rating);
+    }
+
+    @GetMapping("/public/filter/{distanceFrom}/{distanceTo}/{ratingFrom}/{ratingTo}/{priceFrom}/{priceTo}/{time}")
+    public List<MedCenter> getAllFilter(@PathVariable("distanceFrom") int distancefrom,
+                                     @PathVariable("distanceTo") int distanceTo,
+                                     @PathVariable("ratingFrom") int ratingFrom,
+                                     @PathVariable("ratingTo") int ratingTo,
+                                     @PathVariable("priceFrom") int priceFrom,
+                                     @PathVariable("priceTo") int priceTo,
+                                     @PathVariable("time") String time){
+        return iMedCenterService.getAllFilter(distancefrom, distanceTo, ratingFrom, ratingTo, priceFrom, priceTo, time);
     }
 }

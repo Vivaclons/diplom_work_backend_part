@@ -86,6 +86,36 @@ public class DoctorService implements IDoctorService {
     }
 
     @Override
+    public List<Doctor> getAllFilter(int distancefrom, int distanceTo, int ratingFrom, int ratingTo,
+                                     int priceFrom, int priceTo, int expFrom,
+                                     int expTo, String time) {
+        List<Doctor> doctors = doctorRepository.findAll();
+
+        List<Doctor> doctorList = new ArrayList<>();
+
+        int timeF = Integer.parseInt(time.replace(':', '0'));
+        int tFrom = 0;
+        int tTo = 0;
+
+        for(int i = 0; i < doctors.size(); i++){
+            if(distancefrom <= doctors.get(i).getDistance() && distanceTo >= doctors.get(i).getDistance()){
+                if(priceFrom <= doctors.get(i).getFees() && priceTo >= doctors.get(i).getFees()){
+                    if(ratingFrom <= doctors.get(i).getRating() && ratingTo >= doctors.get(i).getRating()){
+                        if(expFrom <= doctors.get(i).getExperience() && expTo >= doctors.get(i).getExperience()){
+                            tFrom = Integer.parseInt(doctors.get(i).getWorkTimeFrom().replace(':', '0'));
+                            tTo = Integer.parseInt(doctors.get(i).getWorkTimeTo().replace(':', '0'));
+                            if(timeF > tFrom && timeF < tTo){
+                                doctorList.add(doctors.get(i));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return doctorList;
+    }
+
+    @Override
     public Doctor updateSpecialty(Long doctorId, Long specialtyId) {
 
         Doctor doctor = doctorRepository.getDoctorByDoctorId(doctorId);
@@ -208,6 +238,7 @@ public class DoctorService implements IDoctorService {
             distance = Math.pow(distance, 2);
 
             doctor.get(i).setDistance(Math.sqrt(distance));
+            doctorRepository.saveAndFlush(doctor.get(i));
         }
 
         while(sort){
@@ -236,4 +267,6 @@ public class DoctorService implements IDoctorService {
 
         doctorRepository.saveAndFlush(doctor);
     }
+
+
 }

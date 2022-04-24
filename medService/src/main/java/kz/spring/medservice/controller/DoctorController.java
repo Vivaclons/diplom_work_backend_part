@@ -21,6 +21,19 @@ public class DoctorController {
         return ResponseEntity.ok(iDoctorService.searchDoctorByDoctorName(doctorName));
     }
 
+    @GetMapping("/public/filter/{distanceFrom}/{distanceTo}/{ratingFrom}/{ratingTo}/{priceFrom}/{priceTo}/{expFrom}/{expTo}/{time}")
+    public List<Doctor> getAllFilter(@PathVariable("distanceFrom") int distancefrom,
+                                     @PathVariable("distanceTo") int distanceTo,
+                                     @PathVariable("ratingFrom") int ratingFrom,
+                                     @PathVariable("ratingTo") int ratingTo,
+                                     @PathVariable("priceFrom") int priceFrom,
+                                     @PathVariable("priceTo") int priceTo,
+                                     @PathVariable("expFrom") int expFrom,
+                                     @PathVariable("expTo") int expTo,
+                                     @PathVariable("time") String time){
+        return iDoctorService.getAllFilter(distancefrom, distanceTo, ratingFrom, ratingTo, priceFrom, priceTo, expFrom,
+                expTo, time);
+    }
 //    @GetMapping("/search-doctor-specialty/{specialtyName}")
 //    public ResponseEntity<?> searchDoctorBySpecialty(@PathVariable("specialtyName") String specialtyName) {
 //        return ResponseEntity.ok(iDoctorService.searchDoctorsBySpecialty(specialtyName));
