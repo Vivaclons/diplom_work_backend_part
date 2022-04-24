@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/analysisService/AnalysisService.iml" filepath="$PROJECT_DIR$/analysisService/AnalysisService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/appointmentService/appointmentService.iml" filepath="$PROJECT_DIR$/appointmentService/appointmentService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/authentication/authentication.iml" filepath="$PROJECT_DIR$/authentication/authentication.iml" />
+      <module fileurl="file://$PROJECT_DIR$/clientService/clientService.iml" filepath="$PROJECT_DIR$/clientService/clientService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eureka/eureka.iml" filepath="$PROJECT_DIR$/eureka/eureka.iml" />
+      <module fileurl="file://$PROJECT_DIR$/reviewService/src/main/main.iml" filepath="$PROJECT_DIR$/reviewService/src/main/main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/medService/medService.iml" filepath="$PROJECT_DIR$/medService/medService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/reviewService/reviewService.iml" filepath="$PROJECT_DIR$/reviewService/reviewService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zuul-server/zuul-server.iml" filepath="$PROJECT_DIR$/zuul-server/zuul-server.iml" />
+    </modules>
+  </component>
+</project>

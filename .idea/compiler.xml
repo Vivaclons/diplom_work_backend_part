@@ -12,6 +12,7 @@
         <module name="eureka" />
         <module name="clientService" />
         <module name="AnalysisService" />
+        <module name="reviewService" />
         <module name="medService" />
         <module name="authentication" />
       </profile>
@@ -24,6 +25,7 @@
       <module name="clientService" target="11" />
       <module name="eureka" target="11" />
       <module name="medService" target="11" />
+      <module name="reviewService" target="11" />
       <module name="zuul-server" target="11" />
     </bytecodeTargetLevel>
   </component>
@@ -36,6 +38,7 @@
       <module name="clientService" options="-parameters" />
       <module name="eureka" options="-parameters" />
       <module name="medService" options="-parameters" />
+      <module name="reviewService" options="-parameters" />
       <module name="zuul-server" options="-parameters" />
     </option>
   </component>

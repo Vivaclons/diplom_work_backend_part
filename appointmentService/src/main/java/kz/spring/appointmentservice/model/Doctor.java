@@ -34,5 +34,9 @@ public class Doctor implements Serializable {
     private Double distance;
     private Double rating;
     private Integer peopleCount;
+    private String about;
+    private String qualifications;
+    private Integer experience;
+    private Integer fees;
 
 }

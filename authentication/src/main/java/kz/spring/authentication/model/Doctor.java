@@ -37,6 +37,10 @@ public class Doctor implements UserDetails {
     private Double distance;
     private Double rating;
     private Integer peopleCount;
+    private String about;
+    private String qualifications;
+    private Integer experience;
+    private Integer fees;
 
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
