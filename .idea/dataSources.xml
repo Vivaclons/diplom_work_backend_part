@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:postgresql://localhost:5432/KazMedBack</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="d84kodmtft9881@ec2-63-32-248-14.eu-west-1.compute.amazonaws.com" uuid="8be8bcad-b46e-4365-94df-c7c059e84064">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://ec2-63-32-248-14.eu-west-1.compute.amazonaws.com/d84kodmtft9881</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

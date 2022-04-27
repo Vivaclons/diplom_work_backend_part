@@ -28,6 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/auth-service/auth/**").permitAll()
                 .antMatchers("/auth-service/registration/**").permitAll()
                 .antMatchers("/auth-service/admin/**").hasAnyAuthority("ADMIN")
+                .antMatchers("/auth-service/translate/**").hasAnyAuthority("ADMIN", "USER", "DOCTOR", "MEDCENTER")
 
                 //Customer
                 .antMatchers("/client-service/customer/public/**").permitAll()
