@@ -1,0 +1,245 @@
+{
+  "users": [
+    {
+      "customerId": 5,
+      "customerName": "Brad",
+      "customerSurname": "WQE",
+      "customerTelNumber": "234536546753421",
+      "email": null,
+      "activationCode": null,
+      "username": null,
+      "password": "123QWE",
+      "address": "st.ewr",
+      "status": false,
+      "rating": 5,
+      "peopleCount": 50,
+      "doctors": []
+    },
+    {
+      "customerId": 6,
+      "customerName": "USER1",
+      "customerSurname": "USER1",
+      "customerTelNumber": "77077559604",
+      "email": "ayanpost87@gmail.com",
+      "activationCode": "369c881b-1925-4245-bf92-cbc86d474492",
+      "username": "USER1",
+      "password": "$2a$10$0kzOOlY7EMB4xNp0ZdCBr.npopT9DIMVgp1K0jzQYkego6Cj9OU/m",
+      "address": "st. address",
+      "status": true,
+      "rating": 5,
+      "peopleCount": 50,
+      "doctors": []
+    },
+    {
+      "customerId": 7,
+      "customerName": "Ayan",
+      "customerSurname": "R",
+      "customerTelNumber": "77077559604",
+      "email": "ayanpost87@gmail.com",
+      "activationCode": "dadb6e33-3b17-4d87-b29a-cd136e48acbd",
+      "username": "Ayan",
+      "password": "$2a$10$63Vu9GncDX/DVpS54o20zeTAP7Dh/Cynqid1SkYe.o9COB0gbUYny",
+      "address": "st. address",
+      "status": true,
+      "rating": 5,
+      "peopleCount": 50,
+      "doctors": []
+    },
+    {
+      "customerId": 8,
+      "customerName": "Аноним",
+      "customerSurname": "Аноним1",
+      "customerTelNumber": "777777777",
+      "email": "123456@gmail.com",
+      "activationCode": "fcaf76ad-befe-4fb6-ad9f-62a24fdbca2d",
+      "username": "Аноним",
+      "password": "$2a$10$f/ld15lYth09JRjTBHPQyu/lsa/OffoFYIuRk1BzeLot5IhEadEwK",
+      "address": "st. address",
+      "status": true,
+      "rating": 5,
+      "peopleCount": 50,
+      "doctors": []
+    },
+    {
+      "customerId": 9,
+      "customerName": "Test",
+      "customerSurname": "user customerSurname",
+      "customerTelNumber": "999999999",
+      "email": "s@gmail.com",
+      "activationCode": "f30d1c99-78b0-4a12-80b8-3514c3ed6be4",
+      "username": "ADMIN1",
+      "password": "$2a$10$A1GCIY6YAwmNrUGi6NqRWOAw6XMFGBkcVmEYJBhtI0CBHOKsqQp7u",
+      "address": "st. 12",
+      "status": true,
+      "rating": 5,
+      "peopleCount": 50,
+      "doctors": []
+    },
+    {
+      "customerId": 10,
+      "customerName": "TEST USER",
+      "customerSurname": "USER USER",
+      "customerTelNumber": "999999999",
+      "email": "s@gmail.com",
+      "activationCode": "f5637650-2bbc-40d1-82c8-30e250243ce1",
+      "username": "USERNAMEUSER",
+      "password": "$2a$10$D5p.r7dEQ3j0I8YNRCKbqOLRObQschg7z4cgcZJLenHRxrPG3j.G2",
+      "address": "st. 12",
+      "status": true,
+      "rating": 5,
+      "peopleCount": 50,
+      "doctors": []
+    },
+    {
+      "customerId": 11,
+      "customerName": "WQE",
+      "customerSurname": "ASDAS",
+      "customerTelNumber": "999999999",
+      "email": "s@gmail.com",
+      "activationCode": "74aab393-afe5-4182-8913-7a2b3e073833",
+      "username": "REGITR",
+      "password": "$2a$10$18.o6LxZKZxECpeYs9OFzeFV7y2dGIk0R1uwYnWBhvvdBwdGw1MpK",
+      "address": "st. 12",
+      "status": true,
+      "rating": 5,
+      "peopleCount": 50,
+      "doctors": []
+    },
+    {
+      "customerId": 12,
+      "customerName": "USER9",
+      "customerSurname": "USER9",
+      "customerTelNumber": "77078185882",
+      "email": "ayanpost87@gmail.com",
+      "activationCode": "a07ed663-f21d-400f-ab07-b9e14e279eab",
+      "username": "USER9",
+      "password": "$2a$10$CRGkcqUND6Ywq/74M0Bp0uoJWBF3fV5HmruXPb9qbT10eHwwXab16",
+      "address": "st. address",
+      "status": true,
+      "rating": 5,
+      "peopleCount": 50,
+      "doctors": []
+    },
+    {
+      "customerId": 14,
+      "customerName": "Name test",
+      "customerSurname": "test name",
+      "customerTelNumber": "999999999",
+      "email": "sqwe@gmail.com",
+      "activationCode": "bb149c0f-54b6-4a16-b8bc-4a474ed56039",
+      "username": "wqewqeqweq",
+      "password": "$2a$10$zuI/Ita.564cJcQB4mlcFOKVhae3FZzPMMkj6fIDIFOIc9ug0wGMm",
+      "address": "st. 12",
+      "status": true,
+      "rating": 5,
+      "peopleCount": 50,
+      "doctors": []
+    },
+    {
+      "customerId": 15,
+      "customerName": "",
+      "customerSurname": "",
+      "customerTelNumber": "",
+      "email": "",
+      "activationCode": "f08f2009-84f2-495c-969a-e26ad595f34b",
+      "username": "ADMIN",
+      "password": "$2a$10$Adar.43OmD23Vt7CaxNWvO99lNEjF6bQ41dIEskmAmtMSvICnwCXO",
+      "address": "st. arre",
+      "status": true,
+      "rating": 5,
+      "peopleCount": 50,
+      "doctors": []
+    },
+    {
+      "customerId": 16,
+      "customerName": "Arlan",
+      "customerSurname": "Arlan",
+      "customerTelNumber": "77078185882",
+      "email": "s.erkyn00@gmail.com",
+      "activationCode": "ab6936ae-e234-4841-a4b3-50b29e24fcd0",
+      "username": "Arlan",
+      "password": "$2a$10$d7MRHHb1AMwqINu0fF9zWeklpYMsDIaJIdJTQ91tRXtHoPDXnEWBW",
+      "address": "st. arre",
+      "status": true,
+      "rating": 5,
+      "peopleCount": 50,
+      "doctors": []
+    },
+    {
+      "customerId": 17,
+      "customerName": "Name test",
+      "customerSurname": "test name",
+      "customerTelNumber": "999999999",
+      "email": "sqwe@gmail.com",
+      "activationCode": "2cfde530-7ac2-4712-be94-904950904839",
+      "username": "юб/ьь/ь/бьбьт",
+      "password": "$2a$10$gDGcgsb8a12Lpb5Wmskvr.tpDosxtjJCvyh5j6mo55GYLT5ypG1pa",
+      "address": "st. 12",
+      "status": true,
+      "rating": 5,
+      "peopleCount": 50,
+      "doctors": []
+    },
+    {
+      "customerId": 18,
+      "customerName": "ALAN",
+      "customerSurname": "ALAN",
+      "customerTelNumber": "77078185882",
+      "email": "a.nurinvest@gmail.com",
+      "activationCode": "b6203c2f-acf7-4913-a700-d1bc27b08038",
+      "username": "ALAN",
+      "password": "$2a$10$/JFoU/4DaaXpVt7ETgPDveoKzffThQpli25QetxMm306nsLGTeG9K",
+      "address": "st. address",
+      "status": true,
+      "rating": 5,
+      "peopleCount": 50,
+      "doctors": []
+    },
+    {
+      "id": 1,
+      "customerId": 88,
+      "customerName": "ALA1N",
+      "customerSurname": "AL1AN",
+      "customerTelNumber": "",
+      "email": "",
+      "activationCode": "",
+      "username": "ALAN11",
+      "password": "12345678",
+      "address": "",
+      "status": "",
+      "rating": "",
+      "peopleCount": 150,
+      "doctors": []
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "cities": [
+    {
+      "id": 1,
+      "name": "Alamty",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
+
