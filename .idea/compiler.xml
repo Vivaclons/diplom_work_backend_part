@@ -7,13 +7,6 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="zuul-server" />
-        <module name="appointmentService" />
-        <module name="eureka" />
-        <module name="clientService" />
-        <module name="AnalysisService" />
-        <module name="medService" />
-        <module name="authentication" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="14">
