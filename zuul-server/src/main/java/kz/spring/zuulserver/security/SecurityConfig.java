@@ -44,6 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/med-service/doctor/private/**").hasAnyAuthority("DOCTOR", "ADMIN")
 
                 //Specialty
+                .antMatchers("/med-service/specialty/all").permitAll()
                 .antMatchers("/med-service/specialty/**").hasAnyAuthority("ADMIN", "DOCTOR", "MEDCENTER")
 
                 //Analysis
@@ -60,6 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //Review
                 .antMatchers("/review-service/review/doctor/private/**").hasAnyAuthority("USER", "ADMIN", "DOCTOR", "MEDCENTER")
                 .antMatchers("/review-service/review/medCenter/private/**").hasAnyAuthority("USER", "ADMIN", "DOCTOR", "MEDCENTER")
+                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
                 .anyRequest().authenticated()
                 .and()

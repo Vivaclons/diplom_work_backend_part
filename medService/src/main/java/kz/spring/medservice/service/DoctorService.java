@@ -86,12 +86,50 @@ public class DoctorService implements IDoctorService {
     }
 
     @Override
-    public List<Doctor> getAllFilter(int distancefrom, int distanceTo, int ratingFrom, int ratingTo,
+    public List<Doctor> getAllFilter(String lat, String lon, int distancefrom, int distanceTo, int ratingFrom, int ratingTo,
                                      int priceFrom, int priceTo, int expFrom,
                                      int expTo, String time) {
         List<Doctor> doctors = doctorRepository.findAll();
 
         List<Doctor> doctorList = new ArrayList<>();
+
+        double latd = Double.parseDouble(lat);
+        double lond = Double.parseDouble(lon);
+        double raduis = 6371.01;
+
+        boolean sort = true;
+
+        for(int i = 0; i < doctors.size(); i++){
+            double latd2 = Double.parseDouble(doctors.get(i).getLatitude());
+            double lond2 = Double.parseDouble(doctors.get(i).getLongitude());
+
+            double latDistance = Math.toRadians(latd - latd2);
+            double lonDistance = Math.toRadians(lond - lond2);
+
+            double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+                    + Math.cos(Math.toRadians(latd)) * Math.cos(Math.toRadians(latd2))
+                    * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
+
+            double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+            //exchange to meter
+            double distance = raduis * c * 1000;
+
+            distance = Math.pow(distance, 2);
+
+            doctors.get(i).setDistance(Math.sqrt(distance));
+            doctorRepository.saveAndFlush(doctors.get(i));
+        }
+
+        while(sort){
+            sort = false;
+            for(int i = 1; i < doctors.size(); i++){
+                if(doctors.get(i).getDistance() < doctors.get(i-1).getDistance()){
+                    swap(doctors, i, i-1);
+                    sort = true;
+                }
+            }
+        }
 
         int timeF = Integer.parseInt(time.replace(':', '0'));
         int tFrom = 0;
@@ -114,6 +152,52 @@ public class DoctorService implements IDoctorService {
         }
         return doctorList;
     }
+
+    @Override
+    public List<Doctor> nearDoctor(String lat, String lon){
+        double latd = Double.parseDouble(lat);
+        double lond = Double.parseDouble(lon);
+        double raduis = 6371.01;
+
+        List<Doctor> doctor = doctorRepository.findAll();
+
+        boolean sort = true;
+
+        for(int i = 0; i < doctor.size(); i++){
+            double latd2 = Double.parseDouble(doctor.get(i).getLatitude());
+            double lond2 = Double.parseDouble(doctor.get(i).getLongitude());
+
+            double latDistance = Math.toRadians(latd - latd2);
+            double lonDistance = Math.toRadians(lond - lond2);
+
+            double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+                    + Math.cos(Math.toRadians(latd)) * Math.cos(Math.toRadians(latd2))
+                    * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
+
+            double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+            //exchange to meter
+            double distance = raduis * c * 1000;
+
+            distance = Math.pow(distance, 2);
+
+            doctor.get(i).setDistance(Math.sqrt(distance));
+            doctorRepository.saveAndFlush(doctor.get(i));
+        }
+
+        while(sort){
+            sort = false;
+            for(int i = 1; i < doctor.size(); i++){
+                if(doctor.get(i).getDistance() < doctor.get(i-1).getDistance()){
+                    swap(doctor, i, i-1);
+                    sort = true;
+                }
+            }
+        }
+
+        return doctor;
+    }
+
 
     @Override
     public Doctor updateSpecialty(Long doctorId, Long specialtyId) {
@@ -207,51 +291,6 @@ public class DoctorService implements IDoctorService {
 
         }
         return doctorTime;
-    }
-
-    @Override
-    public List<Doctor> nearDoctor(String lat, String lon){
-        double latd = Double.parseDouble(lat);
-        double lond = Double.parseDouble(lon);
-        double raduis = 6371.01;
-
-        List<Doctor> doctor = doctorRepository.findAll();
-
-        boolean sort = true;
-
-        for(int i = 0; i < doctor.size(); i++){
-            double latd2 = Double.parseDouble(doctor.get(i).getLatitude());
-            double lond2 = Double.parseDouble(doctor.get(i).getLongitude());
-
-            double latDistance = Math.toRadians(latd - latd2);
-            double lonDistance = Math.toRadians(lond - lond2);
-
-            double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
-                    + Math.cos(Math.toRadians(latd)) * Math.cos(Math.toRadians(latd2))
-                    * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
-
-            double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-
-            //exchange to meter
-            double distance = raduis * c * 1000;
-
-            distance = Math.pow(distance, 2);
-
-            doctor.get(i).setDistance(Math.sqrt(distance));
-            doctorRepository.saveAndFlush(doctor.get(i));
-        }
-
-        while(sort){
-            sort = false;
-            for(int i = 1; i < doctor.size(); i++){
-                if(doctor.get(i).getDistance() < doctor.get(i-1).getDistance()){
-                    swap(doctor, i, i-1);
-                    sort = true;
-                }
-            }
-        }
-
-        return doctor;
     }
 
     @Override

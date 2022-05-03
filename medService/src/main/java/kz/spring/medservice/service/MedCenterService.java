@@ -84,10 +84,49 @@ public class MedCenterService implements IMedCenterService {
     }
 
     @Override
-    public List<MedCenter> getAllFilter(int distancefrom, int distanceTo, int ratingFrom, int ratingTo, int priceFrom, int priceTo, String time) {
+    public List<MedCenter> getAllFilter(String lat, String lon, int distancefrom, int distanceTo, int ratingFrom, int ratingTo, int priceFrom, int priceTo, String time) {
         List<MedCenter> medCenters = medCenterRepository.findAll();
 
         List<MedCenter> medCenterList = new ArrayList<>();
+
+        double latd = Double.parseDouble(lat);
+        double lond = Double.parseDouble(lon);
+        double raduis = 6371.01;
+
+        boolean sort = true;
+
+        for(int i = 0; i < medCenters.size(); i++){
+            double latd2 = Double.parseDouble(medCenters.get(i).getLatitude());
+            double lond2 = Double.parseDouble(medCenters.get(i).getLongitude());
+
+            double latDistance = Math.toRadians(latd - latd2);
+            double lonDistance = Math.toRadians(lond - lond2);
+
+            double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+                    + Math.cos(Math.toRadians(latd)) * Math.cos(Math.toRadians(latd2))
+                    * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
+
+            double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+            //exchange to meter
+            double distance = raduis * c * 1000;
+
+            distance = Math.pow(distance, 2);
+
+            medCenters.get(i).setDistance(Math.sqrt(distance));
+            medCenterRepository.saveAndFlush(medCenters.get(i));
+        }
+
+        while(sort){
+            sort = false;
+            for(int i = 1; i < medCenters.size(); i++){
+                if(medCenters.get(i).getDistance() < medCenters.get(i-1).getDistance()){
+                    swap(medCenters, i, i-1);
+                    sort = true;
+                }
+            }
+        }
+
 
         int timeF = Integer.parseInt(time.replace(':', '0'));
         int tFrom = 0;

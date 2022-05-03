@@ -34,6 +34,6 @@ public interface IDoctorService {
 
     boolean checkSpecialty(Doctor doctor, Long specialtyId);
 
-    List<Doctor> getAllFilter(int distancefrom, int distanceTo, int ratingFrom, int ratingTo, int priceFrom,
+    List<Doctor> getAllFilter(String lat, String lon, int distancefrom, int distanceTo, int ratingFrom, int ratingTo, int priceFrom,
                               int priceTo, int expFrom, int expTo, String time);
 }

@@ -3,26 +3,36 @@ package kz.spring.medservice.controller;
 import kz.spring.medservice.model.Doctor;
 import kz.spring.medservice.service.impl.IDoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.print.Doc;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/doctor")
+@CrossOrigin(origins = "*")
 public class DoctorController {
 
     @Autowired
     private IDoctorService iDoctorService;
+
+    @Value("${upload.path}")
+    private String uploadPath;
 
     @GetMapping("/public/search/{doctorName}")
     public ResponseEntity<?> searchDoctorByName(@PathVariable("doctorName") String doctorName) {
         return ResponseEntity.ok(iDoctorService.searchDoctorByDoctorName(doctorName));
     }
 
-    @GetMapping("/public/filter/{distanceFrom}/{distanceTo}/{ratingFrom}/{ratingTo}/{priceFrom}/{priceTo}/{expFrom}/{expTo}/{time}")
-    public List<Doctor> getAllFilter(@PathVariable("distanceFrom") int distancefrom,
+    @GetMapping("/public/filter/{lat}/{lon}/{distanceFrom}/{distanceTo}/{ratingFrom}/{ratingTo}/{priceFrom}/{priceTo}/{expFrom}/{expTo}/{time}")
+    public List<Doctor> getAllFilter(@PathVariable("lat") String lat, @PathVariable("lon") String lon,
+                                     @PathVariable("distanceFrom") int distancefrom,
                                      @PathVariable("distanceTo") int distanceTo,
                                      @PathVariable("ratingFrom") int ratingFrom,
                                      @PathVariable("ratingTo") int ratingTo,
@@ -31,7 +41,7 @@ public class DoctorController {
                                      @PathVariable("expFrom") int expFrom,
                                      @PathVariable("expTo") int expTo,
                                      @PathVariable("time") String time){
-        return iDoctorService.getAllFilter(distancefrom, distanceTo, ratingFrom, ratingTo, priceFrom, priceTo, expFrom,
+        return iDoctorService.getAllFilter(lat, lon, distancefrom, distanceTo, ratingFrom, ratingTo, priceFrom, priceTo, expFrom,
                 expTo, time);
     }
 //    @GetMapping("/search-doctor-specialty/{specialtyName}")
@@ -95,7 +105,21 @@ public class DoctorController {
     }
 
     @PutMapping(value = "/private/update", consumes = {"application/xml","application/json"})
-    public void updateDoctor(@RequestBody Doctor doctor){
+    public void updateDoctor(@RequestBody Doctor doctor, @RequestParam("file") MultipartFile file) throws IOException {
+        if(file != null && !file.getOriginalFilename().isEmpty()){
+            File uploadDir = new File(uploadPath);
+
+            if(!uploadDir.exists()){
+                uploadDir.mkdir();
+            }
+
+            String uuidFile = UUID.randomUUID().toString();
+            String fileName = uuidFile + "." + file.getOriginalFilename();
+
+            file.transferTo(new File(uploadPath + "/" + fileName));
+
+            doctor.setAvatar(fileName);
+        }
         iDoctorService.update(doctor);
     }
 

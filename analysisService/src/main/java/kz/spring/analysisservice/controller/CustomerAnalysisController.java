@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/customerAnalysis")
+@CrossOrigin(origins = "*")
 public class CustomerAnalysisController {
     @Autowired
     private ICustomerAnalysisService iCustomerAnalysisService;

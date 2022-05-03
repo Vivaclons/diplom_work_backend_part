@@ -28,6 +28,7 @@ public class Customer {
     private boolean status;
     private Double rating;
     private Integer peopleCount;
+    private String avatar;
 
     @ManyToMany
     List<Doctor> doctors;

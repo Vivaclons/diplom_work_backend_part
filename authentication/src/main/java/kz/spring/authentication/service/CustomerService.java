@@ -22,46 +22,27 @@ public class CustomerService implements ICustomerService, UserDetailsService {
     private CustomerRepository customerRepository;
 
     @Autowired
-    private CustomerKzRepository customerKzRepository;
-
-    @Autowired
-    private CustomerRuRepository customerRuRepository;
-
-    @Autowired
     private MailDelivery mailDelivery;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+
+    @Autowired
+    public void setCustomerRepository(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
 
     @Override
     public Customer getByCustomerName(String customerName) {
         return customerRepository.getByCustomerName(customerName);
     }
 
-    @Override
-    public CustomerKz getByCustomerKzName(String customerName) {
-        return customerKzRepository.getByCustomerName(customerName);
-    }
-
-    @Override
-    public CustomerRu getByCustomerRuName(String customerName) {
-        return customerRuRepository.getByCustomerName(customerName);
-    }
 
     @Override
     public Customer getCustomerById(Long customerId) {
         return customerRepository.getById(customerId);
     }
 
-    @Override
-    public CustomerKz getCustomerKzById(String  username){
-        return customerKzRepository.findByUsername(username);
-    }
-
-    @Override
-    public CustomerRu getCustomerRuById(String username){
-        return customerRuRepository.findByUsername(username);
-    }
 
     @Override
     public void updateCus(Customer customer) {
@@ -69,17 +50,6 @@ public class CustomerService implements ICustomerService, UserDetailsService {
         customerRepository.saveAndFlush(customer);
     }
 
-    @Override
-    public void updateCusKz(CustomerKz customerKz){
-        customerKz.setPassword(passwordEncoder.encode(customerKz.getPassword()));
-        customerKzRepository.saveAndFlush(customerKz);
-    }
-
-    @Override
-    public void updateCusRu(CustomerRu customerRu){
-        customerRu.setPassword(passwordEncoder.encode(customerRu.getPassword()));
-        customerRuRepository.saveAndFlush(customerRu);
-    }
 
     @Override
     public List<Customer> getAllCustomersBy() {
@@ -89,8 +59,6 @@ public class CustomerService implements ICustomerService, UserDetailsService {
     @Override
     public void DeleteByID(Long customerId) {
         customerRepository.deleteById(customerId);
-        customerRuRepository.deleteById(customerId);
-        customerKzRepository.deleteById(customerId);
     }
 
     //Customer
@@ -113,45 +81,26 @@ public class CustomerService implements ICustomerService, UserDetailsService {
 
     @Override
     public boolean addUser(Customer customer){
-        CustomerKz customerKz1 = new CustomerKz();
-        CustomerRu customerRu1 = new CustomerRu();
 
         Customer customer1 = customerRepository.findByUsername(customer.getUsername());
-        CustomerRu customerRu = customerRuRepository.findByUsername(customer.getUsername());
-        CustomerKz customerKz = customerKzRepository.findByUsername(customer.getUsername());
 
-        if(customer1 != null && customerKz != null && customerRu != null){
+        if(customer1 != null){
             System.out.println("ERROR");
             return false;
         }
 
-        customerKz1.setUsername(customer.getUsername());
-        customerRu1.setUsername(customer.getUsername());
 
         customer.setStatus(true);
-        customerKz1.setStatus(true);
-        customerRu1.setStatus(true);
 
         System.out.println(customer.getRoles());
 
         customer.setPassword(passwordEncoder.encode(customer.getPassword()));
-        customerKz1.setPassword(passwordEncoder.encode(customer.getPassword()));
-        customerRu1.setPassword(passwordEncoder.encode(customer.getPassword()));
 
         customer.setActivationCode(UUID.randomUUID().toString());
-        customerKz1.setActivationCode(UUID.randomUUID().toString());
-        customerRu1.setActivationCode(UUID.randomUUID().toString());
 
         customer.setPeopleCount(50);
-        customerRu1.setPeopleCount(50);
-        customerKz1.setPeopleCount(50);
-
         customer.setRating(5.0);
-        customerKz1.setRating(5.0);
-        customerRu1.setRating(5.0);
 
-        customerKz1.setEmail(customer.getEmail());
-        customerRu1.setEmail(customer.getEmail());
         if(!StringUtils.isEmpty(customer.getEmail())){
             String message = String.format(
                     "Hello, %s! \n" + "Welcome to QazMed. Please visit next link: http://localhost:8762/auth-service/registration/activate/%s",
@@ -162,8 +111,6 @@ public class CustomerService implements ICustomerService, UserDetailsService {
         }
 
         customerRepository.saveAndFlush(customer);
-        customerRuRepository.saveAndFlush(customerRu1);
-        customerKzRepository.saveAndFlush(customerKz1);
 
         return true;
     }
@@ -172,19 +119,13 @@ public class CustomerService implements ICustomerService, UserDetailsService {
     public boolean activateCustomer(String code){
 
         Customer customer = customerRepository.findByActivationCode(code);
-        CustomerRu customerRu = customerRuRepository.findByActivationCode(code);
-        CustomerKz customerKz = customerKzRepository.findByActivationCode(code);
 
-        if(customer == null && customer != null && customerKz != null && customerRu != null){
+        if(customer == null && customer != null){
             return false;
         }
 
         customer.setActivationCode(null);
-        customerKz.setActivationCode(null);
-        customerRu.setActivationCode(null);
         customerRepository.saveAndFlush(customer);
-        customerRuRepository.saveAndFlush(customerRu);
-        customerKzRepository.saveAndFlush(customerKz);
 
         return true;
     }
@@ -195,8 +136,6 @@ public class CustomerService implements ICustomerService, UserDetailsService {
         String message = "";
 
         Customer customer = customerRepository.findByEmail(email);
-        CustomerRu customerRu = customerRuRepository.findByEmail(email);
-        CustomerKz customerKz = customerKzRepository.findByEmail(email);
 
         if(customer != null){
             System.out.println("ERROR");
@@ -204,8 +143,6 @@ public class CustomerService implements ICustomerService, UserDetailsService {
         }
 
         customer.setActivationCode("forget password");
-        customerKz.setActivationCode("forget password");
-        customerRu.setActivationCode("forget password");
 
         if(!StringUtils.isEmpty(customer.getEmail())){
             message = String.format(
@@ -217,8 +154,6 @@ public class CustomerService implements ICustomerService, UserDetailsService {
         }
 
         customerRepository.saveAndFlush(customer);
-        customerRuRepository.saveAndFlush(customerRu);
-        customerKzRepository.saveAndFlush(customerKz);
 
         return message;
 
@@ -228,18 +163,12 @@ public class CustomerService implements ICustomerService, UserDetailsService {
     public void updatePassword(String email, String password){
 
         Customer customer = customerRepository.findByEmail(email);
-        CustomerRu customerRu = customerRuRepository.findByEmail(email);
-        CustomerKz customerKz = customerKzRepository.findByEmail(email);
-        if(customer != null && customerKz != null && customerRu != null){
+        if(customer != null){
             System.out.println("ERROR");
         }
 
         customer.setPassword(passwordEncoder.encode(password));
-        customerKz.setPassword(passwordEncoder.encode(password));
-        customerRu.setPassword(passwordEncoder.encode(password));
 
         customerRepository.saveAndFlush(customer);
-        customerKzRepository.saveAndFlush(customerKz);
-        customerRuRepository.saveAndFlush(customerRu);
     }
 }

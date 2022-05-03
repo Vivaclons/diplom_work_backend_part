@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import kz.spring.authentication.model.Customer;
+import kz.spring.authentication.service.CustomerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -79,7 +81,8 @@ public class JwtTokenGeneratorFilter extends UsernamePasswordAuthenticationFilte
                 .compact();
 
         // Add token to header
-        response.addHeader("Authorization", "Bearer " + token);
+        response.addHeader("Authorization", "Bearer: " + token);
+        response.addHeader("Authorization", "userName: " + auth.getName());
         System.out.println("Bearer: " + token);
     }
 

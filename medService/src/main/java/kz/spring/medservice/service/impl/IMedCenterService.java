@@ -21,7 +21,7 @@ public interface IMedCenterService {
     void rating(Long medCenterId, double rating);
     boolean checkDoctor(MedCenter medCenter, Long doctorId);
 
-    List<MedCenter> getAllFilter(int distancefrom, int distanceTo, int ratingFrom, int ratingTo, int priceFrom, int priceTo, String time);
+    List<MedCenter> getAllFilter(String lat, String lon, int distancefrom, int distanceTo, int ratingFrom, int ratingTo, int priceFrom, int priceTo, String time);
 
     List<MedCenter> getNearMedCenter(String lat, String lon);
 }

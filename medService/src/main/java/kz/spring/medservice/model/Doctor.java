@@ -39,6 +39,7 @@ public class Doctor {
     private String qualifications;
     private Integer experience;
     private Integer fees;
+    private String avatar;
     @ManyToMany
     List<Specialty> specialties;
 }
