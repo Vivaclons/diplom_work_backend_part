@@ -29,6 +29,11 @@ public class CustomerController {
         return ResponseEntity.ok(iCustomerService.searchCustomerByCustomerName(customerName));
     }
 
+    @GetMapping("/private/find/{username}")
+    public ResponseEntity<?> findUsername(@PathVariable("username") String username){
+            return ResponseEntity.ok(iCustomerService.findCustomerUsername(username));
+    }
+
     @PatchMapping("/private/add-doctor/{customer_id}/{doctor_id}")
     public ResponseEntity<?> addDoctor(@PathVariable("customer_id") Long customer_id, @PathVariable("doctor_id") Long doctor_id) {
         return ResponseEntity.ok(iCustomerService.addDoctor(customer_id, doctor_id));

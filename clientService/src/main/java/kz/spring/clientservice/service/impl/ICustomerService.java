@@ -16,4 +16,5 @@ public interface ICustomerService {
     void DeleteById(Long id);
     void rating(Long customerId, double rating);
     boolean checkDoctor(Customer customer, Long doctorId);
+    Customer findCustomerUsername(String username);
 }

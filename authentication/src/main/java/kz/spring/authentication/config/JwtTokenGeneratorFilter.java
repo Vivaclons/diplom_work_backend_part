@@ -48,7 +48,7 @@ public class JwtTokenGeneratorFilter extends UsernamePasswordAuthenticationFilte
             // 2. Create auth object (contains credentials) which will be used by auth manager
             UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                     creds.getUsername(), creds.getPassword(), Collections.emptyList());
-
+            System.out.println("creds.getUsername() " + creds.getUsername());
 //            if(customer.getActivationCode() == null){
 
             return authenticationManager.authenticate(authToken);

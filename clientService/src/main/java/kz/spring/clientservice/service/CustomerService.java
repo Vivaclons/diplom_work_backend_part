@@ -30,6 +30,12 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
+    public Customer findCustomerUsername(String username){
+        Customer customer = customerRepository.findCustomerByUsername(username);
+        return customer;
+    }
+
+    @Override
     public Customer removeDoctor(Long customerId, Long doctorId) {
         Customer customer = customerRepository.getByCustomerId(customerId);
 

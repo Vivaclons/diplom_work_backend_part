@@ -48,13 +48,13 @@ public class AppointmentService implements IAppointmentService {
     }
 
     @Override
-    public void create(Appointment appointment, Long medCenterId, Long doctorId, Long customerId) {
+    public void create(Appointment appointment, Long medCenterId, Long doctorId, String username) {
 
         MedCenter medCenter = medCenterRepository.getMedCenterByMedCenterId(medCenterId);
 
         Doctor doctor = doctorRepository.getDoctorByDoctorId(doctorId);
 
-        Customer customer = customerRepository.getCustomerByCustomerId(customerId);
+        Customer customer = customerRepository.findCustomerByUsername(username);
 
 //        Customer customer = restTemplate.getForObject("http://localhost:8083/customer/" + customerId, Customer.class);
 //

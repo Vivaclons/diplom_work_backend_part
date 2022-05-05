@@ -37,9 +37,9 @@ public class AppointmentController {
         iAppointmentService.DeleteById(id);
     }
 
-    @PostMapping(value = "/public/create-appointment/{medCenterId}/{doctorId}/{custId}", consumes = {"application/xml","application/json"})
-    public void createAppointment(@RequestBody Appointment appointment, @PathVariable("medCenterId") Long medCenterId, @PathVariable("doctorId") Long doctorId, @PathVariable("custId") Long customerId){
-        iAppointmentService.create(appointment, medCenterId, doctorId, customerId);
+    @PostMapping(value = "/public/create-appointment/{medCenterId}/{doctorId}/{username}", consumes = {"application/xml","application/json"})
+    public void createAppointment(@RequestBody Appointment appointment, @PathVariable("medCenterId") Long medCenterId, @PathVariable("doctorId") Long doctorId, @PathVariable("username") String username){
+        iAppointmentService.create(appointment, medCenterId, doctorId, username);
     }
 
     @PutMapping(value = "/private/update-appointment/{medCenterId}/{appointmentId}/{doctorId}/{customerId}", consumes = {"application/xml","application/json"})
