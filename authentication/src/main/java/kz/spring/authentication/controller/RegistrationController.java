@@ -33,6 +33,21 @@ public class RegistrationController {
             return "ERROR with registration customer";
         }
 
+        if(customer.getRoles().equals("DOCTOR")){
+            Doctor doctor = new Doctor();
+            doctor.setDoctorName(customer.getCustomerName());
+            doctor.setDoctorSurname(customer.getCustomerSurname());
+            doctor.setDoctorEmail(customer.getEmail());
+            doctor.setPassword(customer.getPassword());
+            addDoctor(doctor);
+        } else if(customer.getRoles().equals("MED_CENTER")){
+            MedCenter medCenter = new MedCenter();
+            medCenter.setMedCenterName(customer.getCustomerName());
+            medCenter.setMedCenterEmail(customer.getEmail());
+            medCenter.setPassword(customer.getPassword());
+            addMedCenter(medCenter);
+        }
+
         return "OK!";
     }
 

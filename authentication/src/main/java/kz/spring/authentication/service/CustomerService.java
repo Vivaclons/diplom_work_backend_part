@@ -63,12 +63,12 @@ public class CustomerService implements ICustomerService, UserDetailsService {
 
     //Customer
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-        Customer customer = customerRepository.findByUsername(username);
+        Customer customer = customerRepository.findCustomerByEmail(email);
 
         if(customer == null){
-            throw new UsernameNotFoundException("User by this userName: " + username + " not found!");
+            throw new UsernameNotFoundException("User by this userName: " + email + " not found!");
         }
 
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
@@ -76,7 +76,7 @@ public class CustomerService implements ICustomerService, UserDetailsService {
             authorities.add(new SimpleGrantedAuthority(role.toString()));
         });
 
-        return new User(customer.getUsername(), customer.getPassword(), authorities);
+        return new User(customer.getEmail(), customer.getPassword(), authorities);
     }
 
     @Override
@@ -135,7 +135,7 @@ public class CustomerService implements ICustomerService, UserDetailsService {
 
         String message = "";
 
-        Customer customer = customerRepository.findByEmail(email);
+        Customer customer = customerRepository.findCustomerByEmail(email);
 
         if(customer != null){
             System.out.println("ERROR");
@@ -162,7 +162,7 @@ public class CustomerService implements ICustomerService, UserDetailsService {
     @Override
     public void updatePassword(String email, String password){
 
-        Customer customer = customerRepository.findByEmail(email);
+        Customer customer = customerRepository.findCustomerByEmail(email);
         if(customer != null){
             System.out.println("ERROR");
         }
