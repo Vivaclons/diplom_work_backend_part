@@ -82,7 +82,7 @@ public class CustomerService implements ICustomerService, UserDetailsService {
     @Override
     public boolean addUser(Customer customer){
 
-        Customer customer1 = customerRepository.findByUsername(customer.getUsername());
+        Customer customer1 = customerRepository.findCustomerByEmail(customer.getEmail());
 
         if(customer1 != null){
             System.out.println("ERROR");

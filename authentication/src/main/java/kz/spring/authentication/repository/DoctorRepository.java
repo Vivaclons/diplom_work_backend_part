@@ -13,5 +13,5 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long> {
     Doctor findByUsername(String username);
     Doctor findByDoctorTelNumber(String telNumber);
     Doctor findByActivationCode(String code);
-    Doctor findByDoctorEmail(String email);
+    Doctor findDoctorsByDoctorEmail(String email);
 }

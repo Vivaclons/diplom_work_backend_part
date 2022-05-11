@@ -107,7 +107,7 @@ public class DoctorService implements UserDetailsService, IDoctorService{
     public String forgetPasswordDoctor(String email){
         String message = "";
 
-        Doctor doctor = doctorRepository.findByDoctorEmail(email);
+        Doctor doctor = doctorRepository.findDoctorsByDoctorEmail(email);
 
         if(doctor != null){
             System.out.println("ERROR");
@@ -133,7 +133,7 @@ public class DoctorService implements UserDetailsService, IDoctorService{
     @Override
     public void updatePasswordDoctor(String email, String password) {
 
-        Doctor doctor = doctorRepository.findByDoctorEmail(email);
+        Doctor doctor = doctorRepository.findDoctorsByDoctorEmail(email);
 
         if(doctor != null){
             System.out.println("ERROR");

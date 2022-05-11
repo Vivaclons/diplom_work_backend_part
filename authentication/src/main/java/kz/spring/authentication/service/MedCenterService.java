@@ -108,7 +108,7 @@ public class MedCenterService implements UserDetailsService, IMedCenterService {
 
     @Override
     public void updatePasswordMedCenter(String email, String password) {
-        MedCenter medCenter = medCenterRepository.findByMedCenterEmail(email);
+        MedCenter medCenter = medCenterRepository.findMedCenterByMedCenterEmail(email);
 
         if(medCenter != null && medCenter != null && medCenter != null){
             System.out.println("ERROR");
@@ -124,7 +124,7 @@ public class MedCenterService implements UserDetailsService, IMedCenterService {
 
         String message = "";
 
-        MedCenter medCenter = medCenterRepository.findByMedCenterEmail(email);
+        MedCenter medCenter = medCenterRepository.findMedCenterByMedCenterEmail(email);
 
         if(medCenter != null){
             System.out.println("ERROR");
