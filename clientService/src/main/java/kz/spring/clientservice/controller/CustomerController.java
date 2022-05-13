@@ -81,21 +81,22 @@ public class CustomerController {
     }
 
     @PutMapping(value = "/private/update", consumes = {"application/xml","application/json"})
-    public void updateCustomer(@RequestBody Customer customer, @RequestParam("file")MultipartFile file) throws IOException {
-        if(file != null && !file.getOriginalFilename().isEmpty()){
-            File uploadDir = new File(uploadPath);
-
-            if(!uploadDir.exists()){
-                uploadDir.mkdir();
-            }
-
-            String uuidFile = UUID.randomUUID().toString();
-            String fileName = uuidFile + "." + file.getOriginalFilename();
-
-            file.transferTo(new File(uploadPath + "/" + fileName));
-
-            customer.setAvatar(fileName);
-        }
+    public void updateCustomer(@RequestBody Customer customer){
+//            , @RequestParam("file")MultipartFile file) throws IOException {
+//        if(file != null && !file.getOriginalFilename().isEmpty()){
+//            File uploadDir = new File(uploadPath);
+//
+//            if(!uploadDir.exists()){
+//                uploadDir.mkdir();
+//            }
+//
+//            String uuidFile = UUID.randomUUID().toString();
+//            String fileName = uuidFile + "." + file.getOriginalFilename();
+//
+//            file.transferTo(new File(uploadPath + "/" + fileName));
+//
+//            customer.setAvatar(fileName);
+//        }
         iCustomerService.update(customer);
     }
 

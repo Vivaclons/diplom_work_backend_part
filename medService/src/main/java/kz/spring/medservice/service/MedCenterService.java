@@ -223,9 +223,26 @@ public class MedCenterService implements IMedCenterService {
 
     @Override
     public void update(MedCenter medCenter) {
-        medCenter.setPeopleCount(50);
-        medCenter.setRating(5.0);
-        medCenterRepository.saveAndFlush(medCenter);
+
+        MedCenter updateMedCenter = medCenterRepository.findMedCenterByMedCenterEmail(medCenter.getMedCenterEmail());
+
+        if(updateMedCenter != null){
+
+            updateMedCenter.setMedCenterName(medCenter.getMedCenterName());
+            updateMedCenter.setMedCenterAddress(medCenter.getMedCenterAddress());
+            updateMedCenter.setMedCenterEmail(medCenter.getMedCenterEmail());
+            updateMedCenter.setAbout(medCenter.getAbout());
+            updateMedCenter.setFees(medCenter.getFees());
+            updateMedCenter.setMedCenterNumber(medCenter.getMedCenterNumber());
+            updateMedCenter.setMedCenterTelNumber(medCenter.getMedCenterTelNumber());
+            updateMedCenter.setWorkTimeFrom(medCenter.getWorkTimeFrom());
+            updateMedCenter.setWorkTimeTo(medCenter.getWorkTimeTo());
+
+            medCenterRepository.saveAndFlush(medCenter);
+
+        }else{
+            System.out.println("Medical center is empty!");
+        }
     }
 
     @Override

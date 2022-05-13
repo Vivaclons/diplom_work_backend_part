@@ -26,7 +26,14 @@ public class SpecialtyService implements ISpecialtyService {
 
     @Override
     public void update(Specialty specialty) {
-        specialtyRepository.saveAndFlush(specialty);
+        Specialty updateSpecialty = specialtyRepository.getSpecialtyBySpecialtyName(specialty.getSpecialtyName());
+
+        if(updateSpecialty != null){
+            updateSpecialty.setSpecialtyName(specialty.getSpecialtyName());
+            specialtyRepository.saveAndFlush(specialty);
+        }else{
+            System.out.println("Specialty is empty!");
+        }
     }
 
     @Override

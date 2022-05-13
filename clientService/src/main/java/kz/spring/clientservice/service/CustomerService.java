@@ -118,9 +118,22 @@ public class CustomerService implements ICustomerService {
 
     @Override
     public void update(Customer customer) {
-        customer.setPeopleCount(50);
-        customer.setRating(5.0);
-        customerRepository.saveAndFlush(customer);
+
+        Customer updateCustomer = customerRepository.findCustomerByUsername(customer.getUsername());
+
+        if(updateCustomer != null){
+
+            updateCustomer.setCustomerName(customer.getCustomerName());
+            updateCustomer.setCustomerSurname(customer.getCustomerSurname());
+            updateCustomer.setAddress(customer.getAddress());
+            updateCustomer.setCustomerTelNumber(customer.getCustomerTelNumber());
+            updateCustomer.setEmail(customer.getEmail());
+            updateCustomer.setUsername(customer.getUsername());
+
+            customerRepository.saveAndFlush(updateCustomer);
+        }else{
+            System.out.println("Customer is empty!");
+        }
     }
 
     @Override

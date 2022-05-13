@@ -252,7 +252,28 @@ public class DoctorService implements IDoctorService {
 
     @Override
     public void update(Doctor doctor) {
-        doctorRepository.saveAndFlush(doctor);
+        
+        Doctor updateDoctor = doctorRepository.findDoctorByDoctorEmail(doctor.getDoctorEmail());
+
+        if(updateDoctor != null){
+
+            updateDoctor.setDoctorName(doctor.getDoctorName());
+            updateDoctor.setDoctorSurname(doctor.getDoctorSurname());
+            updateDoctor.setDoctorEmail(doctor.getDoctorEmail());
+            updateDoctor.setAddress(doctor.getAddress());
+            updateDoctor.setAbout(doctor.getAbout());
+            updateDoctor.setFees(doctor.getFees());
+            updateDoctor.setExperience(doctor.getExperience());
+            updateDoctor.setQualifications(doctor.getQualifications());
+            updateDoctor.setWorkTimeFrom(doctor.getWorkTimeFrom());
+            updateDoctor.setWorkTimeTo(doctor.getWorkTimeTo());
+
+            doctorRepository.saveAndFlush(updateDoctor);
+
+        }else{
+            System.out.println("Doctor is empty!");
+        }
+
     }
 
     @Override
