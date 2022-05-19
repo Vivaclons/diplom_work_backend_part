@@ -9,7 +9,7 @@ public interface ICustomerAnalysisService {
     void removeCustomerAnalysis(Long customerAnalysisId);
     CustomerAnalysis addCustomerAnalysis(Long customerAnalysisId, Long medCenterId, Long analysisId, Long doctorId, Long customerId);
     CustomerAnalysis updateCustomerAnalysis(Long customerAnalysisId, Long medCenterId, Long analysisId, Long doctorId, Long customerId);
-    List<CustomerAnalysis> getAllCustomerAnalysis();
+    List<CustomerAnalysis> getAllCustomerAnalysis(String email);
     CustomerAnalysis updateCustomer(Long customerAnalysisId, Long customerId);
     CustomerAnalysis updateDoctor(Long customerAnalysisId, Long doctorId);
     CustomerAnalysis updateMedCenter(Long customerAnalysisId, Long medCenterId);

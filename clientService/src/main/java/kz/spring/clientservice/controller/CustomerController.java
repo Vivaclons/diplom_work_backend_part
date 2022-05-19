@@ -77,11 +77,11 @@ public class CustomerController {
 
     @PostMapping(value = "/private/create", consumes = {"application/xml","application/json"})
     public void createCustomer(@RequestBody Customer customer){
-        iCustomerService.update(customer);
+        iCustomerService.create(customer);
     }
 
-    @PutMapping(value = "/private/update", consumes = {"application/xml","application/json"})
-    public void updateCustomer(@RequestBody Customer customer){
+    @PutMapping(value = "/private/update/{email}", consumes = {"application/xml","application/json"})
+    public void updateCustomer(@RequestBody Customer customer, @PathVariable("email") String email){
 //            , @RequestParam("file")MultipartFile file) throws IOException {
 //        if(file != null && !file.getOriginalFilename().isEmpty()){
 //            File uploadDir = new File(uploadPath);
@@ -97,7 +97,7 @@ public class CustomerController {
 //
 //            customer.setAvatar(fileName);
 //        }
-        iCustomerService.update(customer);
+        iCustomerService.update(customer, email);
     }
 
     @PutMapping(value = "/private/rating/{customerId}/{rating}", consumes = {"application/xml","application/json"})

@@ -282,14 +282,14 @@ public class AppointmentService implements IAppointmentService {
     }
 
     @Override
-    public List<Appointment> getAllCustomerAppointment(Long customerId){
+    public List<Appointment> getAllCustomerAppointment(String email){
 
         List<Appointment> appointment = appointmentRepository.findAll();
 
         List<Appointment> appointments = new ArrayList<>();
 
         for(int i = 0; i < appointment.size(); i++){
-            if(appointment.get(i).getCustomer().getCustomerId() == customerId){
+            if(appointment.get(i).getCustomer().getEmail().equals(email)){
                 appointments.add(appointment.get(i));
             }
         }
@@ -298,14 +298,14 @@ public class AppointmentService implements IAppointmentService {
     }
 
     @Override
-    public List<Appointment> getAllDoctorAppointment(Long doctorId){
+    public List<Appointment> getAllDoctorAppointment(String email){
 
         List<Appointment> appointment = appointmentRepository.findAll();
 
         List<Appointment> appointments = new ArrayList<>();
 
         for(int i = 0; i < appointment.size(); i++){
-            if(appointment.get(i).getDoctor().getDoctorId() == doctorId){
+            if(appointment.get(i).getDoctor().getDoctorEmail().equals(email)){
                 appointments.add(appointment.get(i));
             }
         }
@@ -314,14 +314,14 @@ public class AppointmentService implements IAppointmentService {
     }
 
     @Override
-    public List<Appointment> getAllMedCenterAppointment(Long medCenterId){
+    public List<Appointment> getAllMedCenterAppointment(String email){
 
         List<Appointment> appointment = appointmentRepository.findAll();
 
         List<Appointment> appointments = new ArrayList<>();
 
         for(int i = 0; i < appointment.size(); i++){
-            if(appointment.get(i).getMedCenter().getMedCenterId() == medCenterId){
+            if(appointment.get(i).getMedCenter().getMedCenterEmail().equals(email)){
                 appointments.add(appointment.get(i));
             }
         }

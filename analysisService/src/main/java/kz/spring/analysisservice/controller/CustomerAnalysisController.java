@@ -15,9 +15,9 @@ public class CustomerAnalysisController {
     @Autowired
     private ICustomerAnalysisService iCustomerAnalysisService;
 
-    @GetMapping("/all")
-    public List<CustomerAnalysis> getAllCustomerAnalysis(){
-        return iCustomerAnalysisService.getAllCustomerAnalysis();
+    @GetMapping("/private/all/{email}")
+    public List<CustomerAnalysis> getAllCustomerAnalysis(@PathVariable("email") String email){
+        return iCustomerAnalysisService.getAllCustomerAnalysis(email);
     }
 
     @PatchMapping("/add-customer-analysis/{customerAnalysisId}/{medCenterId}/{analysisId}/{doctorId}/{customerId}")

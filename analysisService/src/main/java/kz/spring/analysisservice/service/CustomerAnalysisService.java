@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -187,7 +188,17 @@ public class CustomerAnalysisService implements ICustomerAnalysisService {
     }
 
     @Override
-    public List<CustomerAnalysis> getAllCustomerAnalysis() {
-        return this.customerAnalysisRepository.findAll();
+    public List<CustomerAnalysis> getAllCustomerAnalysis(String email) {
+
+        List<CustomerAnalysis> customerAnalysis = customerAnalysisRepository.findAll();
+
+        List<CustomerAnalysis> customerAnalysisList = new ArrayList<>();
+
+        for(int i = 0; i < customerAnalysis.size(); i++){
+            if (customerAnalysis.get(i).getCustomer().getEmail().equals(email)) {
+                customerAnalysisList.add(customerAnalysis.get(i));
+            }
+        }
+        return customerAnalysisList;
     }
 }

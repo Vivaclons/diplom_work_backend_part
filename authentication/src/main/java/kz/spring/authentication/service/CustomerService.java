@@ -68,7 +68,7 @@ public class CustomerService implements ICustomerService, UserDetailsService {
         Customer customer = customerRepository.findCustomerByEmail(email);
 
         if(customer == null){
-            throw new UsernameNotFoundException("User by this userName: " + email + " not found!");
+            throw new UsernameNotFoundException("User by this email: " + email + " not found!");
         }
 
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();

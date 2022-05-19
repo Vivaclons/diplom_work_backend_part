@@ -117,9 +117,14 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
-    public void update(Customer customer) {
+    public void create(Customer customer){
+        customerRepository.saveAndFlush(customer);
+    }
 
-        Customer updateCustomer = customerRepository.findCustomerByUsername(customer.getUsername());
+    @Override
+    public void update(Customer customer, String email) {
+
+        Customer updateCustomer = customerRepository.findCustomerByEmail(email);
 
         if(updateCustomer != null){
 

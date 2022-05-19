@@ -22,7 +22,7 @@ public class AppointmentController {
         return iAppointmentService.getAllAppointment();
     }
 
-    @GetMapping("/public/id}")
+    @GetMapping("/private/{id}")
     public Appointment getById(@PathVariable("id") Long id){
         return iAppointmentService.getById(id);
     }
@@ -62,24 +62,24 @@ public class AppointmentController {
         return ResponseEntity.ok(iAppointmentService.updateMedCenter(appointmentId, medCenterId));
     }
 
-    @PatchMapping("/public/update-appointment-status/{appointmentId}/{status}")
+    @PatchMapping("/private/update-appointment-status/{appointmentId}/{status}")
     public ResponseEntity<?> updateAppointmentStatus(@PathVariable("appointmentId") Long appointmentId, @PathVariable("status") String status){
         return ResponseEntity.ok(iAppointmentService.updateStatus(appointmentId, status));
     }
 
-    @GetMapping("/public/customer/{customerId}")
-    public List<Appointment> getAllCustomerAppointment(@PathVariable("customerId") Long customerId){
-        return iAppointmentService.getAllCustomerAppointment(customerId);
+    @GetMapping("/private/customer/{email}")
+    public List<Appointment> getAllCustomerAppointment(@PathVariable("email") String email){
+        return iAppointmentService.getAllCustomerAppointment(email);
     }
 
-    @GetMapping("/public/doctor/{doctorId}")
-    public List<Appointment> getAllDoctorAppointment(@PathVariable("doctorId") Long doctorId){
-        return iAppointmentService.getAllDoctorAppointment(doctorId);
+    @GetMapping("/private/doctor/{email}")
+    public List<Appointment> getAllDoctorAppointment(@PathVariable("email") String email){
+        return iAppointmentService.getAllDoctorAppointment(email);
     }
 
-    @GetMapping("/public/medCenter/{medCenterId}")
-    public List<Appointment> getAllMedCenterAppointment(@PathVariable("medCenterId") Long medCenterId){
-        return iAppointmentService.getAllMedCenterAppointment(medCenterId);
+    @GetMapping("/private/medCenter/{email}")
+    public List<Appointment> getAllMedCenterAppointment(@PathVariable("email") String email){
+        return iAppointmentService.getAllMedCenterAppointment(email);
     }
 
     @GetMapping("/public/search/status/{status}")
