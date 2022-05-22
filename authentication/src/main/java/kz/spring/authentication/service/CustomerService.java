@@ -171,4 +171,32 @@ public class CustomerService implements ICustomerService, UserDetailsService {
 
         customerRepository.saveAndFlush(customer);
     }
+
+    @Override
+    public void update(Customer customer, String email) {
+
+        Customer updateCustomer = customerRepository.findCustomerByEmail(email);
+
+        if(updateCustomer != null){
+
+            updateCustomer.setCustomerName(customer.getCustomerName());
+            updateCustomer.setCustomerSurname(customer.getCustomerSurname());
+            updateCustomer.setAddress(customer.getAddress());
+            updateCustomer.setCustomerTelNumber(customer.getCustomerTelNumber());
+            if(customer.getEmail() != null){
+                updateCustomer.setEmail(customer.getEmail());
+            }
+            updateCustomer.setUsername(customer.getUsername());
+
+            customerRepository.saveAndFlush(updateCustomer);
+        }else{
+            System.out.println("Customer is empty!");
+        }
+    }
+
+    @Override
+    public Customer getCustomerByEmail(String email){
+        Customer customer = customerRepository.findCustomerByEmail(email);
+        return customer;
+    }
 }
