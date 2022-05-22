@@ -31,7 +31,10 @@ public class CustomerService implements ICustomerService {
 
     @Override
     public Customer findCustomerUsername(String username){
-        Customer customer = customerRepository.findCustomerByUsername(username);
+        Customer customer = customerRepository.findCustomerByEmail(username);
+        if(customer == null){
+            System.out.println("USER NOT FOUND!");
+        }
         return customer;
     }
 

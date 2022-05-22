@@ -197,6 +197,9 @@ public class CustomerService implements ICustomerService, UserDetailsService {
     @Override
     public Customer getCustomerByEmail(String email){
         Customer customer = customerRepository.findCustomerByEmail(email);
+        if(customer == null){
+            System.out.println("USER NOT FOUND!");
+        }
         return customer;
     }
 }
