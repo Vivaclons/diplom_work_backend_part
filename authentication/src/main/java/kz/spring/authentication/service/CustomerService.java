@@ -22,6 +22,12 @@ public class CustomerService implements ICustomerService, UserDetailsService {
     private CustomerRepository customerRepository;
 
     @Autowired
+    private DoctorRepository doctorRepository;
+
+    @Autowired
+    private MedCenterRepository medCenterRepository;
+
+    @Autowired
     private MailDelivery mailDelivery;
 
     @Autowired
@@ -64,19 +70,47 @@ public class CustomerService implements ICustomerService, UserDetailsService {
     //Customer
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-
         Customer customer = customerRepository.findCustomerByEmail(email);
 
-        if(customer == null){
-            throw new UsernameNotFoundException("User by this email: " + email + " not found!");
+        Doctor doctor = doctorRepository.findDoctorsByDoctorEmail(email);
+
+        MedCenter medCenter = medCenterRepository.findMedCenterByMedCenterEmail(email);
+        if(customer != null){
+
+            if(customer == null){
+                throw new UsernameNotFoundException("User by this email: " + email + " not found!");
+            }
+
+            Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+            customer.getRoles().forEach(role -> {
+                authorities.add(new SimpleGrantedAuthority(role.toString()));
+            });
+
+            return new User(customer.getEmail(), customer.getPassword(), authorities);
+        } else if(doctor != null){
+            if(doctor == null){
+                throw new UsernameNotFoundException("Doctor by this email: " + email + " not found!");
+            }
+
+            Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+            doctor.getRoles().forEach(role -> {
+                authorities.add(new SimpleGrantedAuthority(role.toString()));
+            });
+
+            return new User(doctor.getDoctorEmail(), doctor.getPassword(), authorities);
+        } else{
+            if(medCenter == null){
+                throw new UsernameNotFoundException("medCenter by this email: " + email + " not found!");
+            }
+
+            Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+            medCenter.getRoles().forEach(role -> {
+                authorities.add(new SimpleGrantedAuthority(role.toString()));
+            });
+
+            return new User(medCenter.getMedCenterEmail(), medCenter.getPassword(), authorities);
         }
 
-        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        customer.getRoles().forEach(role -> {
-            authorities.add(new SimpleGrantedAuthority(role.toString()));
-        });
-
-        return new User(customer.getEmail(), customer.getPassword(), authorities);
     }
 
     @Override
