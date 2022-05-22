@@ -31,7 +31,10 @@ public class CustomerService implements ICustomerService {
 
     @Override
     public Customer findCustomerUsername(String username){
-        Customer customer = customerRepository.findCustomerByUsername(username);
+        Customer customer = customerRepository.findCustomerByEmail(username);
+        if(customer == null){
+            System.out.println("USER NOT FOUND!");
+        }
         return customer;
     }
 
@@ -132,7 +135,9 @@ public class CustomerService implements ICustomerService {
             updateCustomer.setCustomerSurname(customer.getCustomerSurname());
             updateCustomer.setAddress(customer.getAddress());
             updateCustomer.setCustomerTelNumber(customer.getCustomerTelNumber());
-            updateCustomer.setEmail(customer.getEmail());
+            if(customer.getEmail() != null){
+                updateCustomer.setEmail(customer.getEmail());
+            }
             updateCustomer.setUsername(customer.getUsername());
 
             customerRepository.saveAndFlush(updateCustomer);
