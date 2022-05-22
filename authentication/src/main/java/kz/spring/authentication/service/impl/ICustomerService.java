@@ -23,4 +23,9 @@ public interface ICustomerService {
     String forgetPassword(String email);
 
     void updatePassword(String email, String password);
+
+    void update(Customer customer, String email);
+
+    Customer getCustomerByEmail(String email);
+
 }
