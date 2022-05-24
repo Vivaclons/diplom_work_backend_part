@@ -7,6 +7,7 @@ import kz.spring.authentication.service.impl.ICustomerService;
 import kz.spring.authentication.service.impl.IDoctorService;
 import kz.spring.authentication.service.impl.IMedCenterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
