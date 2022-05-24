@@ -1,5 +1,6 @@
 package kz.spring.authentication.service;
 
+import kz.spring.authentication.model.Customer;
 import kz.spring.authentication.model.Doctor;
 import kz.spring.authentication.repository.DoctorRepository;
 import kz.spring.authentication.service.impl.IDoctorService;
@@ -160,5 +161,40 @@ public class DoctorService implements UserDetailsService, IDoctorService{
         });
 
         return new User(doctor.getUsername(), doctor.getPassword(), authorities);
+    }
+
+    @Override
+    public Doctor getDoctorByEmail(String email){
+        Doctor doctor = doctorRepository.findDoctorByDoctorEmail(email);
+        if(doctor == null){
+            System.out.println("DOCTOR NOT FOUND!");
+        }
+        return doctor;
+    }
+
+    @Override
+    public void update(Doctor doctor, String email) {
+
+        Doctor updateDoctor = doctorRepository.findDoctorByDoctorEmail(email);
+
+        if(updateDoctor != null){
+
+            updateDoctor.setDoctorName(doctor.getDoctorName());
+            updateDoctor.setDoctorSurname(doctor.getDoctorSurname());
+            updateDoctor.setDoctorEmail(doctor.getDoctorEmail());
+            updateDoctor.setAddress(doctor.getAddress());
+            updateDoctor.setAbout(doctor.getAbout());
+            updateDoctor.setFees(doctor.getFees());
+            updateDoctor.setExperience(doctor.getExperience());
+            updateDoctor.setQualifications(doctor.getQualifications());
+            updateDoctor.setWorkTimeFrom(doctor.getWorkTimeFrom());
+            updateDoctor.setWorkTimeTo(doctor.getWorkTimeTo());
+
+            doctorRepository.saveAndFlush(updateDoctor);
+
+        }else{
+            System.out.println("Doctor is empty!");
+        }
+
     }
 }

@@ -23,4 +23,7 @@ public interface IDoctorService {
 
     void updatePasswordDoctor(String email, String password);
 
+    Doctor getDoctorByEmail(String email);
+
+    void update(Doctor doctor, String email);
 }
