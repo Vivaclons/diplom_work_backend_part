@@ -123,7 +123,6 @@ public class CustomerService implements ICustomerService, UserDetailsService {
             return false;
         }
 
-
         customer.setStatus(true);
 
         System.out.println(customer.getRoles());
@@ -221,6 +220,7 @@ public class CustomerService implements ICustomerService, UserDetailsService {
                 updateCustomer.setEmail(customer.getEmail());
             }
             updateCustomer.setUsername(customer.getUsername());
+            updateCustomer.setStatus(true);
 
             customerRepository.saveAndFlush(updateCustomer);
         }else{
