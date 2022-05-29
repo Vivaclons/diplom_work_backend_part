@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Setter
@@ -39,4 +40,6 @@ public class Doctor implements Serializable {
     private Integer experience;
     private Integer fees;
 
+    @ManyToMany
+    List<MedCenter> medCenters;
 }

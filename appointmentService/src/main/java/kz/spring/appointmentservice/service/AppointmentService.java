@@ -48,13 +48,11 @@ public class AppointmentService implements IAppointmentService {
     }
 
     @Override
-    public void create(Appointment appointment, Long medCenterId, Long doctorId, String username) {
-
-        MedCenter medCenter = medCenterRepository.getMedCenterByMedCenterId(medCenterId);
+    public void create(Appointment appointment, Long doctorId, String username) {
 
         Doctor doctor = doctorRepository.getDoctorByDoctorId(doctorId);
 
-        Customer customer = customerRepository.findCustomerByUsername(username);
+        Customer customer = customerRepository.findCustomerByEmail(username);
 
 //        Customer customer = restTemplate.getForObject("http://localhost:8083/customer/" + customerId, Customer.class);
 //
@@ -64,10 +62,10 @@ public class AppointmentService implements IAppointmentService {
 
         boolean apCheck = false;
 
-        if(doctor != null && medCenter != null && customer != null){
+        if(doctor != null && customer != null){
             appointment.setCustomer(customer);
             appointment.setDoctor(doctor);
-            appointment.setMedCenter(medCenter);
+            appointment.setMedCenter(doctor.getMedCenters().get(0));
             appointment.setStatus(String.valueOf(AppointmentStatus.WAITING_TO_ARRIVAL));
             apCheck = checkAppointment(appointment);
             if(apCheck){
