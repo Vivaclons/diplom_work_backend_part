@@ -65,7 +65,9 @@ public class AppointmentService implements IAppointmentService {
         if(doctor != null && customer != null){
             appointment.setCustomer(customer);
             appointment.setDoctor(doctor);
-            appointment.setMedCenter(doctor.getMedCenters().get(0));
+            if(doctor.getMedCenters().get(0) != null){
+                appointment.setMedCenter(doctor.getMedCenters().get(0));
+            }
             appointment.setStatus(String.valueOf(AppointmentStatus.WAITING_TO_ARRIVAL));
             apCheck = checkAppointment(appointment);
             if(apCheck){
