@@ -181,7 +181,9 @@ public class DoctorService implements UserDetailsService, IDoctorService{
 
             updateDoctor.setDoctorName(doctor.getDoctorName());
             updateDoctor.setDoctorSurname(doctor.getDoctorSurname());
-            updateDoctor.setDoctorEmail(doctor.getDoctorEmail());
+            if(doctor.getDoctorEmail() != null){
+                updateDoctor.setDoctorEmail(doctor.getDoctorEmail());
+            }
             updateDoctor.setAddress(doctor.getAddress());
             updateDoctor.setAbout(doctor.getAbout());
             updateDoctor.setFees(doctor.getFees());
