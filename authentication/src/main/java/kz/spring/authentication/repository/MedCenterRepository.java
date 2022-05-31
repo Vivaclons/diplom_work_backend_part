@@ -13,5 +13,4 @@ public interface MedCenterRepository extends JpaRepository<MedCenter, Long> {
     MedCenter findByMedCenterTelNumber(String telNumber);
     MedCenter findByActivationCode(String code);
     MedCenter findMedCenterByMedCenterEmail(String email);
-
 }

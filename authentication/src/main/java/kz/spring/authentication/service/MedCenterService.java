@@ -148,6 +148,41 @@ public class MedCenterService implements UserDetailsService, IMedCenterService {
     }
 
     @Override
+    public void updateMedCenter(MedCenter medCenter, String email) {
+        MedCenter updateMedCenter = medCenterRepository.findMedCenterByMedCenterEmail(email);
+
+        if(updateMedCenter != null){
+
+            updateMedCenter.setMedCenterName(medCenter.getMedCenterName());
+            updateMedCenter.setMedCenterAddress(medCenter.getMedCenterAddress());
+            if(medCenter.getMedCenterEmail() != null){
+                updateMedCenter.setMedCenterEmail(medCenter.getMedCenterEmail());
+            }
+            updateMedCenter.setMedCenterNumber(medCenter.getMedCenterNumber());
+            updateMedCenter.setMedCenterTelNumber(medCenter.getMedCenterTelNumber());
+            updateMedCenter.setWorkTimeFrom(medCenter.getWorkTimeFrom());
+            updateMedCenter.setWorkTimeTo(medCenter.getWorkTimeTo());
+            updateMedCenter.setAbout(medCenter.getAbout());
+            updateMedCenter.setFees(medCenter.getFees());
+            updateMedCenter.setUsername(medCenter.getUsername());
+
+            medCenterRepository.saveAndFlush(updateMedCenter);
+
+        }else{
+            System.out.println("Medical center is empty!");
+        }
+    }
+
+    @Override
+    public MedCenter getMedCenterByEmail(String email) {
+        MedCenter medCenter = medCenterRepository.findMedCenterByMedCenterEmail(email);
+        if(medCenter == null){
+            System.out.println("Medical center not found!!!");
+        }
+        return medCenter;
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         MedCenter medCenter = medCenterRepository.findByUsername(username);

@@ -23,4 +23,7 @@ public interface IMedCenterService {
 
     String forgetPasswordMedCenter(String email);
 
+    void updateMedCenter(MedCenter medCenter, String email);
+
+    MedCenter getMedCenterByEmail(String email);
 }

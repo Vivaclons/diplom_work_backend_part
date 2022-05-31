@@ -39,6 +39,12 @@ public class MedCenter implements UserDetails {
     private Double distance;
     private Double rating;
     private Integer peopleCount;
+    private String about;
+    private Integer fees;
+    private String avatar;
+
+    @ManyToMany
+    List<Doctor> doctors;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "medCenter_role", joinColumns = @JoinColumn(name = "medCenter_id"))

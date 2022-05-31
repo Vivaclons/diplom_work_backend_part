@@ -1,27 +1,27 @@
 package kz.spring.authentication.controller;
 
-import kz.spring.authentication.model.Customer;
 import kz.spring.authentication.model.Doctor;
-import kz.spring.authentication.service.impl.IDoctorService;
+import kz.spring.authentication.model.MedCenter;
+import kz.spring.authentication.service.impl.IMedCenterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("doctor")
+@RequestMapping("medCenter")
 @CrossOrigin(origins = "*")
-public class DoctorController {
+public class MedCenterController {
 
     @Autowired
-    private IDoctorService iDoctorService;
+    private IMedCenterService iMedCenterService;
 
     @GetMapping("/private/find/{email}")
-    public ResponseEntity<?> findDoctorEmail(@PathVariable("email") String email){
-        return ResponseEntity.ok(iDoctorService.getDoctorByEmail(email));
+    public ResponseEntity<?> findMedCenterEmail(@PathVariable("email") String email){
+        return ResponseEntity.ok(iMedCenterService.getMedCenterByEmail(email));
     }
 
     @PutMapping(value = "/private/update/{email}", consumes = {"application/xml","application/json"})
-    public void updateDoctor(@RequestBody Doctor doctor, @PathVariable("email") String email){
+    public void updateMedCenter(@RequestBody MedCenter medCenter, @PathVariable("email") String email){
 //            , @RequestParam("file")MultipartFile file) throws IOException {
 //        if(file != null && !file.getOriginalFilename().isEmpty()){
 //            File uploadDir = new File(uploadPath);
@@ -37,6 +37,6 @@ public class DoctorController {
 //
 //            customer.setAvatar(fileName);
 //        }
-        iDoctorService.update(doctor, email);
+        iMedCenterService.updateMedCenter(medCenter, email);
     }
 }
