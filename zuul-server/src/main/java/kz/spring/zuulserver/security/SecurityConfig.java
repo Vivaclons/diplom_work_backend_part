@@ -64,6 +64,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/review-service/review/medCenter/private/**").hasAnyAuthority("USER", "ADMIN", "DOCTOR", "MEDCENTER")
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
+                //Payment
+                .antMatchers("payment-service/pay/**").permitAll()
+
                 .anyRequest().authenticated()
                 .and()
                 .addFilterAfter(new AuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);

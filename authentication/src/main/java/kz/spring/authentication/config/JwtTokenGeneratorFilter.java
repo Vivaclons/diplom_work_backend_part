@@ -61,7 +61,7 @@ public class JwtTokenGeneratorFilter extends UsernamePasswordAuthenticationFilte
 //            }
             // 3. Authentication manager authenticate the user, and use UserDetialsServiceImpl::loadUserByUsername() method to load the user.
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e + " or activation code is null");
         }
     }
 

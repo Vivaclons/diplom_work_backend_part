@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.logging.Logger;
+
 @Controller
 public class PaypalController {
 
@@ -21,7 +23,7 @@ public class PaypalController {
     @PostMapping("/pay/{price}")
     public String payment(@PathVariable("price") double price){
         try {
-            Payment payment = iPaypalService.create(price, "USD",
+            Payment payment = iPaypalService.create(price, "KZT",
                     "PayPal", "sale", "payment desc",
                     "http://localhost:9090/" + CANCEL, "http://localhost:9090/" + SUCCESS);
 

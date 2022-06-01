@@ -81,6 +81,10 @@ public class CustomerService implements ICustomerService, UserDetailsService {
                 throw new UsernameNotFoundException("User by this email: " + email + " not found!");
             }
 
+//            if(customer.getActivationCode() != null){
+//                throw new UsernameNotFoundException("User by this email: " + email + " not activated!");
+//            }
+
             Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
             customer.getRoles().forEach(role -> {
                 authorities.add(new SimpleGrantedAuthority(role.toString()));
@@ -92,6 +96,10 @@ public class CustomerService implements ICustomerService, UserDetailsService {
                 throw new UsernameNotFoundException("Doctor by this email: " + email + " not found!");
             }
 
+//            if(doctor.getActivationCode() != null){
+//                throw new UsernameNotFoundException("Doctor by this email: " + email + " not activated!");
+//            }
+
             Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
             doctor.getRoles().forEach(role -> {
                 authorities.add(new SimpleGrantedAuthority(role.toString()));
@@ -102,6 +110,10 @@ public class CustomerService implements ICustomerService, UserDetailsService {
             if(medCenter == null){
                 throw new UsernameNotFoundException("medCenter by this email: " + email + " not found!");
             }
+
+//            if(medCenter.getActivationCode() != null){
+//                throw new UsernameNotFoundException("medCenter by this email: " + email + " not activated!");
+//            }
 
             Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
             medCenter.getRoles().forEach(role -> {
