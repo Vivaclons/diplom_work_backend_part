@@ -117,6 +117,7 @@ public class RegistrationController {
     public String addMedCenter(@RequestBody MedCenter medCenter){
 
         if(!iMedCenterService.addMedCenter(medCenter)){
+            System.out.println("ASASASASAS");
             return "ERROR with registration medical center";
         }
 

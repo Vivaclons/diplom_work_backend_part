@@ -59,7 +59,7 @@ public class DoctorService implements UserDetailsService, IDoctorService{
 
     @Override
     public boolean addDoctor(Doctor doctor) {
-        Doctor doctor1 = doctorRepository.findByUsername(doctor.getUsername());
+        Doctor doctor1 = doctorRepository.findDoctorByDoctorEmail(doctor.getDoctorEmail());
 
         if(doctor1 != null){
             System.out.println("ERROR");

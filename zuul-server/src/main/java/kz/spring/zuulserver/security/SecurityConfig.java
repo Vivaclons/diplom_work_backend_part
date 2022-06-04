@@ -28,9 +28,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/auth-service/auth/**").permitAll()
                 .antMatchers("/auth-service/registration/**").permitAll()
                 .antMatchers("/auth-service/admin/**").hasAnyAuthority("ADMIN")
-                .antMatchers("/auth-service/doctor/**").hasAnyAuthority("DOCTOR")
-                .antMatchers("/auth-service/customer/**").hasAnyAuthority("USER")
-                .antMatchers("/auth-service/medCenter/**").hasAnyAuthority("MEDCENTER")
+                .antMatchers("/auth-service/doctor/**").hasAnyAuthority("DOCTOR", "ADMIN")
+                .antMatchers("/auth-service/customer/**").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers("/auth-service/medCenter/**").hasAnyAuthority("MEDCENTER", "ADMIN")
                 //Customer
                 .antMatchers("/client-service/customer/public/**").permitAll()
 //                .antMatchers("/client-service/customer/public/**").hasAnyAuthority("USER", "DOCTOR", "ADMIN")

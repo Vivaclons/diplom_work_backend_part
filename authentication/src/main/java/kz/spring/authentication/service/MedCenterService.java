@@ -58,9 +58,10 @@ public class MedCenterService implements UserDetailsService, IMedCenterService {
 
     @Override
     public boolean addMedCenter(MedCenter medCenter) {
-        MedCenter medCenter1 = medCenterRepository.findByUsername(medCenter.getUsername());
+        MedCenter medCenter1 = medCenterRepository.findMedCenterByMedCenterEmail(medCenter.getMedCenterEmail());
 
         if(medCenter1 != null){
+            System.out.println("Crearearae");
             System.out.println("ERROR");
             return false;
         }
