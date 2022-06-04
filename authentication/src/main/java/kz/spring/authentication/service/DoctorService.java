@@ -179,18 +179,36 @@ public class DoctorService implements UserDetailsService, IDoctorService{
 
         if(updateDoctor != null){
 
-            updateDoctor.setDoctorName(doctor.getDoctorName());
-            updateDoctor.setDoctorSurname(doctor.getDoctorSurname());
+            if(doctor.getDoctorName() != null){
+                updateDoctor.setDoctorName(doctor.getDoctorName());
+            }
+            if(doctor.getDoctorSurname() != null){
+                updateDoctor.setDoctorSurname(doctor.getDoctorSurname());
+            }
             if(doctor.getDoctorEmail() != null){
                 updateDoctor.setDoctorEmail(doctor.getDoctorEmail());
             }
-            updateDoctor.setAddress(doctor.getAddress());
-            updateDoctor.setAbout(doctor.getAbout());
-            updateDoctor.setFees(doctor.getFees());
-            updateDoctor.setExperience(doctor.getExperience());
-            updateDoctor.setQualifications(doctor.getQualifications());
-            updateDoctor.setWorkTimeFrom(doctor.getWorkTimeFrom());
-            updateDoctor.setWorkTimeTo(doctor.getWorkTimeTo());
+            if(doctor.getAddress() != null){
+                updateDoctor.setAddress(doctor.getAddress());
+            }
+            if(doctor.getAbout() != null){
+                updateDoctor.setAbout(doctor.getAbout());
+            }
+            if(doctor.getFees() != null){
+                updateDoctor.setFees(doctor.getFees());
+            }
+            if(doctor.getExperience() != null){
+                updateDoctor.setExperience(doctor.getExperience());
+            }
+            if(doctor.getQualifications() != null){
+                updateDoctor.setQualifications(doctor.getQualifications());
+            }
+            if(doctor.getWorkTimeFrom() != null){
+                updateDoctor.setWorkTimeFrom(doctor.getWorkTimeFrom());
+            }
+            if(doctor.getWorkTimeTo() != null){
+                updateDoctor.setWorkTimeTo(doctor.getWorkTimeTo());
+            }
 
             doctorRepository.saveAndFlush(updateDoctor);
 

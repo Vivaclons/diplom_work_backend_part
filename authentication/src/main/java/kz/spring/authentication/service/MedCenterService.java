@@ -154,18 +154,37 @@ public class MedCenterService implements UserDetailsService, IMedCenterService {
 
         if(updateMedCenter != null){
 
-            updateMedCenter.setMedCenterName(medCenter.getMedCenterName());
-            updateMedCenter.setMedCenterAddress(medCenter.getMedCenterAddress());
+            if(medCenter.getMedCenterName() != null){
+                updateMedCenter.setMedCenterName(medCenter.getMedCenterName());
+            }
+            if(medCenter.getMedCenterAddress() != null){
+                updateMedCenter.setMedCenterAddress(medCenter.getMedCenterAddress());
+            }
             if(medCenter.getMedCenterEmail() != null){
                 updateMedCenter.setMedCenterEmail(medCenter.getMedCenterEmail());
             }
-            updateMedCenter.setMedCenterNumber(medCenter.getMedCenterNumber());
-            updateMedCenter.setMedCenterTelNumber(medCenter.getMedCenterTelNumber());
-            updateMedCenter.setWorkTimeFrom(medCenter.getWorkTimeFrom());
-            updateMedCenter.setWorkTimeTo(medCenter.getWorkTimeTo());
-            updateMedCenter.setAbout(medCenter.getAbout());
-            updateMedCenter.setFees(medCenter.getFees());
-            updateMedCenter.setUsername(medCenter.getUsername());
+            if(medCenter.getMedCenterNumber() != null){
+                updateMedCenter.setMedCenterNumber(medCenter.getMedCenterNumber());
+            }
+            if(medCenter.getMedCenterTelNumber() != null){
+                updateMedCenter.setMedCenterTelNumber(medCenter.getMedCenterTelNumber());
+            }
+            if(medCenter.getWorkTimeFrom() != null){
+                updateMedCenter.setWorkTimeFrom(medCenter.getWorkTimeFrom());
+            }
+            if(medCenter.getWorkTimeTo() != null){
+                updateMedCenter.setWorkTimeTo(medCenter.getWorkTimeTo());
+
+            }
+            if(medCenter.getAbout() != null){
+                updateMedCenter.setAbout(medCenter.getAbout());
+            }
+            if(medCenter.getFees() != null){
+                updateMedCenter.setFees(medCenter.getFees());
+            }
+            if(medCenter.getUsername() != null){
+                updateMedCenter.setUsername(medCenter.getUsername());
+            }
 
             medCenterRepository.saveAndFlush(updateMedCenter);
 

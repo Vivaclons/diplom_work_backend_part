@@ -224,16 +224,24 @@ public class CustomerService implements ICustomerService, UserDetailsService {
 
         if(updateCustomer != null){
 
-            updateCustomer.setCustomerName(customer.getCustomerName());
-            updateCustomer.setCustomerSurname(customer.getCustomerSurname());
-            updateCustomer.setAddress(customer.getAddress());
-            updateCustomer.setCustomerTelNumber(customer.getCustomerTelNumber());
+            if(customer.getCustomerName() != null){
+                updateCustomer.setCustomerName(customer.getCustomerName());
+            }
+            if(customer.getCustomerSurname() != null){
+                updateCustomer.setCustomerSurname(customer.getCustomerSurname());
+            }
+            if(customer.getAddress() != null){
+                updateCustomer.setAddress(customer.getAddress());
+            }
+            if(customer.getCustomerTelNumber() != null){
+                updateCustomer.setCustomerTelNumber(customer.getCustomerTelNumber());
+            }
             if(customer.getEmail() != null){
                 updateCustomer.setEmail(customer.getEmail());
             }
-            updateCustomer.setUsername(customer.getUsername());
-            updateCustomer.setStatus(true);
-
+            if(customer.getUsername() != null){
+                updateCustomer.setUsername(customer.getUsername());
+            }
             customerRepository.saveAndFlush(updateCustomer);
         }else{
             System.out.println("Customer is empty!");
