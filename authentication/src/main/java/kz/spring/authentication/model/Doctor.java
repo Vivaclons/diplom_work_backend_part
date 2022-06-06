@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -42,6 +43,9 @@ public class Doctor implements UserDetails {
     private Integer experience;
     private Integer fees;
 
+
+    @ManyToMany
+    List<Specialty> specialties;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "doctor_role", joinColumns = @JoinColumn(name = "doctor_id"))

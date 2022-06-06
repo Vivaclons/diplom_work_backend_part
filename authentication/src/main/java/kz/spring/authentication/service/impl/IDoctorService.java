@@ -26,4 +26,12 @@ public interface IDoctorService {
     Doctor getDoctorByEmail(String email);
 
     void update(Doctor doctor, String email);
+
+    Doctor addSpecialty(String email, Long specialtyId);
+
+    boolean checkSpecialty(Doctor doctor, Long specialtyId);
+
+    Doctor updateSpecialty(String email, Long specialtyId);
+
+    Doctor removeSpecialty(String email, Long specialtyId);
 }

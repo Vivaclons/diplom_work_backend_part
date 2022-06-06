@@ -1,8 +1,9 @@
 package kz.spring.authentication.service;
 
-import kz.spring.authentication.model.Customer;
 import kz.spring.authentication.model.Doctor;
+import kz.spring.authentication.model.Specialty;
 import kz.spring.authentication.repository.DoctorRepository;
+import kz.spring.authentication.repository.SpecialtyRepository;
 import kz.spring.authentication.service.impl.IDoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -27,6 +28,9 @@ public class DoctorService implements UserDetailsService, IDoctorService{
 
     @Autowired
     private MailDelivery mailDelivery;
+
+    @Autowired
+    private SpecialtyRepository specialtyRepository;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
@@ -217,4 +221,73 @@ public class DoctorService implements UserDetailsService, IDoctorService{
         }
 
     }
+
+    @Override
+    public Doctor addSpecialty(String email, Long specialtyId) {
+
+        Doctor doctor = doctorRepository.findDoctorByDoctorEmail(email);
+
+        Specialty specialty = specialtyRepository.getSpecialtyBySpecialtyId(specialtyId);
+
+        boolean check = false;
+
+        if(doctor != null && specialty != null && checkSpecialty(doctor, specialtyId)){
+            doctor.getSpecialties().add(specialty);
+            if(!check){
+                return doctorRepository.saveAndFlush(doctor);
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Doctor updateSpecialty(String email, Long specialtyId) {
+
+        Doctor doctor = doctorRepository.findDoctorByDoctorEmail(email);
+
+        Specialty specialty = specialtyRepository.getSpecialtyBySpecialtyId(specialtyId);
+
+        boolean check = false;
+
+        if(doctor != null && specialty != null){
+            doctor.getSpecialties().add(specialty);
+            if(!check){
+                return doctorRepository.saveAndFlush(doctor);
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Doctor removeSpecialty(String email, Long specialtyId) {
+
+        Doctor doctor = doctorRepository.findDoctorByDoctorEmail(email);
+
+        boolean check = false;
+
+        for(int i = 0; i < doctor.getSpecialties().size(); i++){
+            if(doctor.getSpecialties().get(i).getSpecialtyId().equals(specialtyId)){
+                doctor.getSpecialties().remove(i);
+                check = true;
+                break;
+            }
+        }
+
+        if(check){
+            return doctorRepository.saveAndFlush(doctor);
+        }
+        return null;
+    }
+
+    @Override
+    public boolean checkSpecialty(Doctor doctor, Long specialtyId){
+        for(int i = 0; i < doctor.getSpecialties().size(); i++){
+            if(doctor.getSpecialties().get(i).getSpecialtyId() == specialtyId){
+                System.out.println("doctor has this specialty " + doctor.getSpecialties().get(i).getSpecialtyName());
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

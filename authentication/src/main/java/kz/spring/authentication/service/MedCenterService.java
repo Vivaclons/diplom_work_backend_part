@@ -78,7 +78,7 @@ public class MedCenterService implements UserDetailsService, IMedCenterService {
 
         if(!StringUtils.isEmpty(medCenter.getMedCenterEmail())){
             String message = String.format(
-                    "Hello, %s! \n" + "Welcome to QazMed. Please visit next link: http://localhost:8762/auth-service/registration/doctor/activate/%s",
+                    "Hello, %s! \n" + "Welcome to QazMed. Please visit next link: https://qazmed.eu.ngrok.io/auth-service/registration/doctor/activate/%s",
                     medCenter.getUsername(),
                     medCenter.getActivationCode()
             );
@@ -136,7 +136,7 @@ public class MedCenterService implements UserDetailsService, IMedCenterService {
 
         if(!StringUtils.isEmpty(medCenter.getMedCenterEmail())){
             message = String.format(
-                    "Hello, %s! \n" + "Welcome to QazMed. Please visit next link: http://localhost:8762/auth-service/registration/medCenter/activate/%s",
+                    "Hello, %s! \n" + "Welcome to QazMed. Please visit next link: https://qazmed.eu.ngrok.io/auth-service/registration/medCenter/activate/%s",
                     medCenter.getUsername(),
                     medCenter.getActivationCode()
             );

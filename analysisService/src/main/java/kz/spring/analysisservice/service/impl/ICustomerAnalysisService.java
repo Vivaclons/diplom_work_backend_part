@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ICustomerAnalysisService {
     void removeCustomerAnalysis(Long customerAnalysisId);
-    CustomerAnalysis addCustomerAnalysis(Long customerAnalysisId, Long medCenterId, Long analysisId, Long doctorId, Long customerId);
+    CustomerAnalysis addCustomerAnalysis(Long customerAnalysisId, Long analysisId, Long doctorId, Long customerId);
     CustomerAnalysis updateCustomerAnalysis(Long customerAnalysisId, Long medCenterId, Long analysisId, Long doctorId, Long customerId);
     List<CustomerAnalysis> getAllCustomerAnalysis(String email);
     CustomerAnalysis updateCustomer(Long customerAnalysisId, Long customerId);

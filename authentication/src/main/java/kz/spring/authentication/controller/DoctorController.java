@@ -39,4 +39,19 @@ public class DoctorController {
 //        }
         iDoctorService.update(doctor, email);
     }
+
+    @PatchMapping("/private/add-specialty/{email}/{specialty_id}")
+    public ResponseEntity<?> addSpecialty(@PathVariable("email") String email, @PathVariable("specialty_id") Long specialty_id) {
+        return ResponseEntity.ok(iDoctorService.addSpecialty(email, specialty_id));
+    }
+
+    @PatchMapping("/private/change-specialty/{email}/{specialty_id}")
+    public ResponseEntity<?> updateDoctorSpecialtyById(@PathVariable("email") String email, @PathVariable("specialty_id") Long specialty_id) {
+        return ResponseEntity.ok(iDoctorService.updateSpecialty(email, specialty_id));
+    }
+
+    @PatchMapping("/private/remove-specialty/{email}/{specialty_id}")
+    public ResponseEntity<?> removeSpecialty(@PathVariable("email") String email, @PathVariable("specialty_id") Long specialty_id) {
+        return ResponseEntity.ok(iDoctorService.removeSpecialty(email, specialty_id));
+    }
 }

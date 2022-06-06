@@ -37,11 +37,9 @@ public class CustomerAnalysisService implements ICustomerAnalysisService {
     }
 
     @Override
-    public CustomerAnalysis addCustomerAnalysis(Long customerAnalysisId, Long medCenterId, Long analysisId, Long doctorId, Long customerId) {
+    public CustomerAnalysis addCustomerAnalysis(Long customerAnalysisId, Long analysisId, Long doctorId, Long customerId) {
 
         CustomerAnalysis customerAnalysis = new CustomerAnalysis();
-
-        MedCenter medCenter = medCenterRepository.getMedCenterByMedCenterId(medCenterId);
 
         Doctor doctor = doctorRepository.getDoctorByDoctorId(doctorId);
 
@@ -55,7 +53,7 @@ public class CustomerAnalysisService implements ICustomerAnalysisService {
 
         Analysis analysis = analysisRepository.getAnalysisByAnalysisId(analysisId);
 
-        if(doctor != null && medCenter != null && customer != null && analysis != null){
+        if(doctor != null && customer != null && analysis != null){
 //            customerAnalysis.getAnalysis().setAnalysisId(analysisId);
 //            customerAnalysis.getCustomer().setCustomerId(customerId);
 //            customerAnalysis.getDoctor().setDoctorId(doctorId);
@@ -63,7 +61,6 @@ public class CustomerAnalysisService implements ICustomerAnalysisService {
             customerAnalysis.setAnalysis(analysis);
             customerAnalysis.setCustomer(customer);
             customerAnalysis.setDoctor(doctor);
-            customerAnalysis.setMedCenter(medCenter);
             return customerAnalysisRepository.saveAndFlush(customerAnalysis);
         }
         return null;
