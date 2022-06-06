@@ -21,9 +21,9 @@ public class ReviewMedCenterController {
         return iReviewMedCenterService.getAllMedCenterReview(medCenter_id);
     }
 
-    @PostMapping("/private/create-review/{medCenter_id}/{customerId}")
-    public void createReviewMedCenter(@RequestBody ReviewMedCenter reviewMedCenter, @PathVariable("medCenter_id") Long medCenter_id, @PathVariable("customerId") Long customerId){
-        iReviewMedCenterService.createReviewMedCenter(reviewMedCenter, medCenter_id, customerId);
+    @PostMapping("/private/create-review/{medCenter_id}/{email}")
+    public void createReviewMedCenter(@RequestBody ReviewMedCenter reviewMedCenter, @PathVariable("medCenter_id") Long medCenter_id, @PathVariable("email") String email){
+        iReviewMedCenterService.createReviewMedCenter(reviewMedCenter, medCenter_id, email);
     }
 
 

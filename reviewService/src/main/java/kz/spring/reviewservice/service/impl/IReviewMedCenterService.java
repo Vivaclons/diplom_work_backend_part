@@ -6,7 +6,7 @@ import kz.spring.reviewservice.model.ReviewMedCenter;
 import java.util.List;
 
 public interface IReviewMedCenterService {
-    void createReviewMedCenter(ReviewMedCenter reviewMedCenter, Long medCenter_id, Long customerId);
+    void createReviewMedCenter(ReviewMedCenter reviewMedCenter, Long medCenter_id, String email);
 
     void updateReviewMedCenter(ReviewMedCenter reviewMedCenter);
 

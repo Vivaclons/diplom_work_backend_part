@@ -21,9 +21,9 @@ public class ReviewDoctorController {
         return iReviewDoctorService.getAllDoctorReview(doctorId);
     }
 
-    @PostMapping("/private/create-review/{doctorId}/{customerId}")
-    public void createReviewDoctor(@RequestBody ReviewDoctor reviewDoctor, @PathVariable("doctorId") Long doctorId, @PathVariable("customerId") Long customerId){
-        iReviewDoctorService.addReviewDoctor(reviewDoctor, doctorId, customerId);
+    @PostMapping("/private/create-review/{doctorId}/{email}")
+    public void createReviewDoctor(@RequestBody ReviewDoctor reviewDoctor, @PathVariable("doctorId") Long doctorId, @PathVariable("email") String email){
+        iReviewDoctorService.addReviewDoctor(reviewDoctor, doctorId, email);
     }
 
 

@@ -7,7 +7,7 @@ import java.util.List;
 public interface IReviewDoctorService {
     List<ReviewDoctor> getAllDoctorReview(Long doctorId);
 
-    void addReviewDoctor(ReviewDoctor reviewDoctor, Long doctor_id, Long customer_id);
+    void addReviewDoctor(ReviewDoctor reviewDoctor, Long doctor_id, String email);
 
     void updateReviewDoctor(ReviewDoctor reviewDoctor);
 
