@@ -35,14 +35,14 @@ public class MedCenterService implements IMedCenterService {
     }
 
     @Override
-    public MedCenter removeDoctor(Long medCenterId, Long doctorId) {
+    public MedCenter removeDoctor(String medCenterEmail, String doctorEmail) {
 
-        MedCenter medCenter = medCenterRepository.getByMedCenterId(medCenterId);
+        MedCenter medCenter = medCenterRepository.findMedCenterByMedCenterEmail(medCenterEmail);
 
         boolean check = false;
 
         for(int i = 0; i < medCenter.getDoctors().size(); i++){
-            if(medCenter.getDoctors().get(i).getDoctorId().equals(doctorId)){
+            if(medCenter.getDoctors().get(i).getDoctorEmail().equals(doctorEmail)){
                 medCenter.getDoctors().remove(i);
                 check = true;
                 break;
@@ -56,14 +56,14 @@ public class MedCenterService implements IMedCenterService {
     }
 
     @Override
-    public MedCenter addDoctor(Long medCenterId, Long doctorId) {
-        MedCenter medCenter = medCenterRepository.getByMedCenterId(medCenterId);
+    public MedCenter addDoctor(String medCenterEmail, String doctorEmail) {
+        MedCenter medCenter = medCenterRepository.findMedCenterByMedCenterEmail(medCenterEmail);
 
-        Doctor doctor = doctorRepository.getDoctorByDoctorId(doctorId);
+        Doctor doctor = doctorRepository.findDoctorByDoctorEmail(doctorEmail);
 
         boolean check = false;
 
-        if(doctor != null && medCenter != null && checkDoctor(medCenter, doctorId)){
+        if(doctor != null && medCenter != null && checkDoctor(medCenter, doctorEmail)){
             medCenter.getDoctors().add(doctor);
             if(!check){
                 return medCenterRepository.saveAndFlush(medCenter);
@@ -73,10 +73,10 @@ public class MedCenterService implements IMedCenterService {
     }
 
     @Override
-    public boolean checkDoctor(MedCenter medCenter, Long doctorId){
+    public boolean checkDoctor(MedCenter medCenter, String doctorEmail){
         for(int i = 0; i < medCenter.getDoctors().size(); i++){
-            if(medCenter.getDoctors().get(i).getDoctorId() == doctorId){
-                System.out.println("This medical center has this doctor with id " + doctorId);
+            if(medCenter.getDoctors().get(i).getDoctorEmail() == doctorEmail){
+                System.out.println("This medical center has this doctor with id " + doctorEmail);
                 return false;
             }
         }
@@ -194,12 +194,12 @@ public class MedCenterService implements IMedCenterService {
     }
 
     @Override
-    public MedCenter updateDoctor(Long medCenterId, Long doctorId) {
-        MedCenter medCenter = medCenterRepository.getByMedCenterId(medCenterId);
+    public MedCenter updateDoctor(String medCenterEmail, String doctorEmail) {
+        MedCenter medCenter = medCenterRepository.findMedCenterByMedCenterEmail(medCenterEmail);
 
         if(medCenter != null && medCenter.getMedCenterId() != null && medCenter.getMedCenterId() != 0L) {
             for (int i = 0; i < medCenter.getDoctors().size(); i++) {
-                medCenter.getDoctors().get(i).setDoctorId(doctorId);
+                medCenter.getDoctors().get(i).setDoctorEmail(doctorEmail);
                 return medCenterRepository.saveAndFlush(medCenter);
             }
         }

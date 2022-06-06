@@ -39,19 +39,19 @@ public class MedCenterController {
         return ResponseEntity.ok(iMedCenterService.searchMedCenterByMedCenterAddress(medCenterAddress));
     }
 
-    @PatchMapping("/private/add-doctor/{medCenter_id}/{doctor_id}")
-    public ResponseEntity<?> addDoctor(@PathVariable("medCenter_id") Long medCenter_id, @PathVariable("doctor_id") Long doctor_id) {
-        return ResponseEntity.ok(iMedCenterService.addDoctor(medCenter_id, doctor_id));
+    @PatchMapping("/private/add-doctor/{medCenter_email}/{doctor_email}")
+    public ResponseEntity<?> addDoctor(@PathVariable("medCenter_email") String medCenter_email, @PathVariable("doctor_email") String doctor_email) {
+        return ResponseEntity.ok(iMedCenterService.addDoctor(medCenter_email, doctor_email));
     }
 
-    @PatchMapping("/private/change-doctor/{medCenter_id}/{doctor_id}")
-    public ResponseEntity<?> updateMedCenterDoctorById(@PathVariable("medCenter_id") Long medCenter_id, @PathVariable("doctor_id") Long doctor_id) {
-        return ResponseEntity.ok(iMedCenterService.updateDoctor(medCenter_id, doctor_id));
+    @PatchMapping("/private/change-doctor/{medCenter_email}/{doctor_email}")
+    public ResponseEntity<?> updateMedCenterDoctorById(@PathVariable("medCenter_email") String medCenter_email, @PathVariable("doctor_email") String doctor_email) {
+        return ResponseEntity.ok(iMedCenterService.updateDoctor(medCenter_email, doctor_email));
     }
 
-    @PatchMapping("/private/remove-doctor/{medCenter_id}/{doctor_id}")
-    public ResponseEntity<?> removeDoctor(@PathVariable("medCenter_id") Long medCenter_id, @PathVariable("doctor_id") Long doctor_id) {
-        return ResponseEntity.ok(iMedCenterService.removeDoctor(medCenter_id, doctor_id));
+    @PatchMapping("/private/remove-doctor/{medCenter_email}/{doctor_email}")
+    public ResponseEntity<?> removeDoctor(@PathVariable("medCenter_email") String medCenter_email, @PathVariable("doctor_email") String doctor_email) {
+        return ResponseEntity.ok(iMedCenterService.removeDoctor(medCenter_email, doctor_email));
     }
 
     @GetMapping("/public/{id}")
