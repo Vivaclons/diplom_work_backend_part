@@ -37,6 +37,12 @@ public class SpecialtyService implements ISpecialtyService {
     }
 
     @Override
+    public void create(Specialty specialty) {
+        specialtyRepository.saveAndFlush(specialty);
+    }
+
+
+    @Override
     public List<Specialty> getAllSpecialty() {
         return specialtyRepository.findAll();
     }

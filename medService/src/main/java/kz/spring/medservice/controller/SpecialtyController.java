@@ -32,7 +32,7 @@ public class SpecialtyController {
 
     @PostMapping(value = "/create", consumes = {"application/xml","application/json"})
     public void createSpecialty(@RequestBody Specialty specialty){
-        iSpecialtyService.update(specialty);
+        iSpecialtyService.create(specialty);
     }
 
     @PutMapping(value = "/update", consumes = {"application/xml","application/json"})
