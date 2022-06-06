@@ -37,6 +37,27 @@ public class CustomerAnalysisService implements ICustomerAnalysisService {
     }
 
     @Override
+    public CustomerAnalysis createCusAnalysis(Analysis analysis, String doctorEmail, String customerEmail){
+        CustomerAnalysis customerAnalysis = new CustomerAnalysis();
+
+        Doctor doctor = doctorRepository.findDoctorByDoctorEmail(doctorEmail);
+
+        Customer customer = customerRepository.findCustomerByEmail(customerEmail);
+
+        if(doctor != null && customer != null){
+//            customerAnalysis.getAnalysis().setAnalysisId(analysisId);
+//            customerAnalysis.getCustomer().setCustomerId(customerId);
+//            customerAnalysis.getDoctor().setDoctorId(doctorId);
+//            customerAnalysis.getMedCenter().setMedCenterId(medCenterId);
+            customerAnalysis.setAnalysis(analysis);
+            customerAnalysis.setCustomer(customer);
+            customerAnalysis.setDoctor(doctor);
+            return customerAnalysisRepository.saveAndFlush(customerAnalysis);
+        }
+        return null;
+    }
+
+    @Override
     public CustomerAnalysis addCustomerAnalysis(Long customerAnalysisId, Long analysisId, Long doctorId, Long customerId) {
 
         CustomerAnalysis customerAnalysis = new CustomerAnalysis();

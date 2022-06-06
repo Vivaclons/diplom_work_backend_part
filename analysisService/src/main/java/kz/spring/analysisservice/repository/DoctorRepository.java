@@ -9,4 +9,5 @@ import javax.print.Doc;
 @Repository
 public interface DoctorRepository extends JpaRepository<Doctor, Long> {
     Doctor getDoctorByDoctorId(Long id);
+    Doctor findDoctorByDoctorEmail(String email);
 }

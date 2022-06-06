@@ -1,5 +1,6 @@
 package kz.spring.analysisservice.controller;
 
+import kz.spring.analysisservice.model.Analysis;
 import kz.spring.analysisservice.model.CustomerAnalysis;
 import kz.spring.analysisservice.service.impl.ICustomerAnalysisService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,14 @@ public class CustomerAnalysisController {
         return iCustomerAnalysisService.getAllCustomerAnalysis(email);
     }
 
-    @PatchMapping("/add-customer-analysis/{customerAnalysisId}/{medCenterId}/{analysisId}/{doctorId}/{customerId}")
-    public ResponseEntity<?> addCustomerAnalysis(@PathVariable("customerAnalysisId") Long customerAnalysisId, @PathVariable("medCenterId") Long medCenterId, @PathVariable("analysisId") Long analysisId, @PathVariable("doctorId") Long doctorId, @PathVariable("customerId") Long customerId) {
-        return ResponseEntity.ok(iCustomerAnalysisService.addCustomerAnalysis(customerAnalysisId, medCenterId, analysisId, doctorId, customerId));
+    @PatchMapping("/add-customer-analysis/{doctorEmail}/{customerEmail}")
+    public ResponseEntity<?> addAnalysisCus(@RequestBody Analysis analysis, @PathVariable("doctorEmail") String doctorEmail, @PathVariable("customerEmail") String customerEmail) {
+        return ResponseEntity.ok(iCustomerAnalysisService.createCusAnalysis(analysis, doctorEmail, customerEmail));
+    }
+
+    @PatchMapping("/add-customer-analysis/{customerAnalysisId}/{analysisId}/{doctorId}/{email}")
+    public ResponseEntity<?> addCustomerAnalysis(@PathVariable("customerAnalysisId") Long customerAnalysisId, @PathVariable("analysisId") Long analysisId, @PathVariable("doctorId") Long doctorId, @PathVariable("customerId") Long customerId) {
+        return ResponseEntity.ok(iCustomerAnalysisService.addCustomerAnalysis(customerAnalysisId, analysisId, doctorId, customerId));
     }
 
     @PatchMapping("/update-customer/{customerAnalysisId}/{customerId}")

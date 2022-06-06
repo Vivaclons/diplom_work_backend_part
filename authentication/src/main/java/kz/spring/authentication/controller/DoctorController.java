@@ -1,6 +1,5 @@
 package kz.spring.authentication.controller;
 
-import kz.spring.authentication.model.Customer;
 import kz.spring.authentication.model.Doctor;
 import kz.spring.authentication.service.impl.IDoctorService;
 import org.springframework.beans.factory.annotation.Autowired;

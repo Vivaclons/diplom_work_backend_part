@@ -1,5 +1,6 @@
 package kz.spring.analysisservice.service.impl;
 
+import kz.spring.analysisservice.model.Analysis;
 import kz.spring.analysisservice.model.Customer;
 import kz.spring.analysisservice.model.CustomerAnalysis;
 
@@ -14,4 +15,5 @@ public interface ICustomerAnalysisService {
     CustomerAnalysis updateDoctor(Long customerAnalysisId, Long doctorId);
     CustomerAnalysis updateMedCenter(Long customerAnalysisId, Long medCenterId);
     CustomerAnalysis updateAnalysis(Long customerAnalysisId, Long analysisId);
+    CustomerAnalysis createCusAnalysis(Analysis analysis, String doctorEmail, String customerEmail);
 }
