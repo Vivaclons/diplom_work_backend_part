@@ -65,9 +65,44 @@ public class AppointmentService implements IAppointmentService {
         if(doctor != null && customer != null){
             appointment.setCustomer(customer);
             appointment.setDoctor(doctor);
-            if(doctor.getMedCenters().get(0) != null){
-                appointment.setMedCenter(doctor.getMedCenters().get(0));
+//            if(doctor.getMedCenters().get(0) != null){
+//                appointment.setMedCenter(doctor.getMedCenters().get(0));
+//            }
+            appointment.setStatus(String.valueOf(AppointmentStatus.WAITING_TO_ARRIVAL));
+            apCheck = checkAppointment(appointment);
+            if(apCheck){
+                appointmentNotification(appointment);
+                appointmentRepository.saveAndFlush(appointment);
+            } else {
+                System.out.println("Error with appointment date: you have appointment in this time");
             }
+        } else {
+            System.out.println("entity is empty!");
+        }
+    }
+
+    @Override
+    public void createM(Appointment appointment, Long medCenterId, String username){
+//        Doctor doctor = doctorRepository.getDoctorByDoctorId(doctorId);
+
+        MedCenter medCenter = medCenterRepository.getMedCenterByMedCenterId(medCenterId);
+
+        Customer customer = customerRepository.findCustomerByEmail(username);
+
+//        Customer customer = restTemplate.getForObject("http://localhost:8083/customer/" + customerId, Customer.class);
+//
+//        Doctor doctor = restTemplate.getForObject("http://localhost:8082/doctor/" + doctorId, Doctor.class);
+//
+//        MedCenter medCenter = restTemplate.getForObject("http://localhost:8082/medCenter/" + medCenterId, MedCenter.class);
+
+        boolean apCheck = false;
+
+        if(medCenter != null && customer != null){
+            appointment.setCustomer(customer);
+            appointment.setMedCenter(medCenter);
+//            if(doctor.getMedCenters().get(0) != null){
+//                appointment.setMedCenter(doctor.getMedCenters().get(0));
+//            }
             appointment.setStatus(String.valueOf(AppointmentStatus.WAITING_TO_ARRIVAL));
             apCheck = checkAppointment(appointment);
             if(apCheck){
@@ -125,12 +160,12 @@ public class AppointmentService implements IAppointmentService {
             appointment.setCustomer(customer);
             appointment.setDoctor(doctor);
             appointment.setMedCenter(medCenter);
-            apCheck = checkAppointment(appointment);
-            if(apCheck){
+//            apCheck = checkAppointment(appointment);
+//            if(apCheck){
                 appointmentRepository.saveAndFlush(appointment);
-            } else {
-                System.out.println("Error with appointment date: you have appointment in this time");
-            }
+//            } else {
+//                System.out.println("Error with appointment date: you have appointment in this time");
+//            }
         } else {
             System.out.println("entity is empty!");
         }

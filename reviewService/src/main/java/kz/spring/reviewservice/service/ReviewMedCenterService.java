@@ -27,7 +27,7 @@ public class ReviewMedCenterService implements IReviewMedCenterService {
 
     @Override
     public void createReviewMedCenter(ReviewMedCenter reviewMedCenter, Long medCenter_id, String email) {
-        MedCenter medCenter = medCenterRepository.getById(medCenter_id);
+        MedCenter medCenter = medCenterRepository.findMedCenterByMedCenterId(medCenter_id);
 
         Customer customer = customerRepository.findCustomerByEmail(email);
 

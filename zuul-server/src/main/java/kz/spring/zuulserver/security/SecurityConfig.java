@@ -30,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/auth-service/admin/**").hasAnyAuthority("ADMIN")
                 .antMatchers("/auth-service/doctor/**").hasAnyAuthority("DOCTOR", "ADMIN")
                 .antMatchers("/auth-service/customer/**").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers("/auth-service/medCenter/**").hasAnyAuthority("MEDCENTER", "ADMIN")
+                .antMatchers("/auth-service/medCenter/**").hasAnyAuthority("MED_CENTER", "ADMIN")
                 //Customer
                 .antMatchers("/client-service/customer/public/**").permitAll()
 //                .antMatchers("/client-service/customer/public/**").hasAnyAuthority("USER", "DOCTOR", "ADMIN")
@@ -38,30 +38,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 //MedCenter
                 .antMatchers("/med-service/doctor/public/**").permitAll()
-//                .antMatchers("/med-service/doctor/public/**").hasAnyAuthority("DOCTOR", "MEDCENTER", "ADMIN")
+//                .antMatchers("/med-service/doctor/public/**").hasAnyAuthority("DOCTOR", "MED_CENTER", "ADMIN")
                 .antMatchers("/med-service/medCenter/public/**").permitAll()
-//                .antMatchers("/med-service/medCenter/public/**").hasAnyAuthority("DOCTOR", "MEDCENTER", "ADMIN")
-                .antMatchers("/med-service/medCenter/private/**").hasAnyAuthority("MEDCENTER", "ADMIN")
+//                .antMatchers("/med-service/MED_CENTER/public/**").hasAnyAuthority("DOCTOR", "MEDCENTER", "ADMIN")
+                .antMatchers("/med-service/medCenter/private/**").hasAnyAuthority("MED_CENTER", "ADMIN")
                 .antMatchers("/med-service/doctor/private/**").hasAnyAuthority("DOCTOR", "ADMIN")
 
                 //Specialty
-                .antMatchers("/med-service/specialty/all").permitAll()
-                .antMatchers("/med-service/specialty/**").hasAnyAuthority("ADMIN", "DOCTOR", "MEDCENTER")
+                .antMatchers("/med-service/specialty/**").permitAll()
 
                 //Analysis
-                .antMatchers("/analysis-service/**").hasAnyAuthority("USER", "ADMIN", "DOCTOR", "MEDCENTER")
+                .antMatchers("/analysis-service/**").hasAnyAuthority("USER", "ADMIN", "DOCTOR", "MED_CENTER")
 
                 //Appointment
-                .antMatchers("/appointment-service/**").hasAnyAuthority("USER", "ADMIN", "DOCTOR", "MEDCENTER")
+                .antMatchers("/appointment-service/**").hasAnyAuthority("USER", "ADMIN", "DOCTOR", "MED_CENTER")
 
-                .antMatchers("/appointment-service/private/**").hasAnyAuthority("ADMIN", "USER", "DOCTOR", "MEDCENTER")
+                .antMatchers("/appointment-service/private/**").hasAnyAuthority("ADMIN", "USER", "DOCTOR", "MED_CENTER")
 
                 .antMatchers("/appointment-service/public/**").permitAll()
-//                .antMatchers("/appointment-service/public/**").hasAnyAuthority("ADMIN", "DOCTOR", "MEDCENTER", "USER")
+//                .antMatchers("/appointment-service/public/**").hasAnyAuthority("ADMIN", "DOCTOR", "MED_CENTER", "USER")
 
                 //Review
-                .antMatchers("/review-service/review/doctor/private/**").hasAnyAuthority("USER", "ADMIN", "DOCTOR", "MEDCENTER")
-                .antMatchers("/review-service/review/medCenter/private/**").hasAnyAuthority("USER", "ADMIN", "DOCTOR", "MEDCENTER")
+                .antMatchers("/review-service/review/doctor/private/**").hasAnyAuthority("USER", "ADMIN", "DOCTOR", "MED_CENTER")
+                .antMatchers("/review-service/review/medCenter/private/**").hasAnyAuthority("USER", "ADMIN", "DOCTOR", "MED_CENTER")
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
                 //Payment

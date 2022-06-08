@@ -13,6 +13,8 @@ public interface IAppointmentService {
     Appointment updateCustomer(Long appointmentId, Long customerId);
     Appointment getByDate(Date date);
     void create(Appointment appointment, Long doctorId, String username);
+
+    void createM(Appointment appointment, Long medCenterId, String username);
     void update(Appointment appointment, Long medCenterId, Long appointmentId, Long doctorId, Long customerId);
     List<Appointment> getAllAppointment();
     void DeleteById(Long id);

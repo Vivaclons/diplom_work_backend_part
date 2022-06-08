@@ -123,7 +123,7 @@ public class DoctorService implements UserDetailsService, IDoctorService{
 
         if(!StringUtils.isEmpty(doctor.getDoctorEmail())){
             message = String.format(
-                    "Hello, %s! \n" + "Welcome to QazMed. Please visit next link: http://localhost:8762/auth-service/registration/doctor/activate/%s",
+                    "Hello, %s! \n" + "Welcome to QazMed. Please visit next link: https://qazmed.eu.ngrok.io/auth-service/registration/doctor/activate/%s",
                     doctor.getUsername(),
                     doctor.getActivationCode()
             );
@@ -191,6 +191,9 @@ public class DoctorService implements UserDetailsService, IDoctorService{
             }
             if(doctor.getDoctorEmail() != null){
                 updateDoctor.setDoctorEmail(doctor.getDoctorEmail());
+            }
+            if(doctor.getDoctorTelNumber() != null){
+                updateDoctor.setDoctorTelNumber(doctor.getDoctorTelNumber());
             }
             if(doctor.getAddress() != null){
                 updateDoctor.setAddress(doctor.getAddress());

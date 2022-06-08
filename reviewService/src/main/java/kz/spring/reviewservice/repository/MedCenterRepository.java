@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MedCenterRepository extends JpaRepository<MedCenter, Long> {
+    MedCenter findMedCenterByMedCenterId(Long id);
 }

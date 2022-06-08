@@ -148,7 +148,7 @@ public class CustomerService implements ICustomerService, UserDetailsService {
 
         if(!StringUtils.isEmpty(customer.getEmail())){
             String message = String.format(
-                    "Hello, %s! \n" + "Welcome to QazMed. Please visit next link: http://localhost:8762/auth-service/registration/activate/%s",
+                    "Hello, %s! \n" + "Welcome to QazMed. Please visit next link: http://qazmed.eu.ngrok.io/auth-service/registration/activate/%s",
                     customer.getUsername(),
                     customer.getActivationCode()
             );
@@ -191,7 +191,7 @@ public class CustomerService implements ICustomerService, UserDetailsService {
 
         if(!StringUtils.isEmpty(customer.getEmail())){
             message = String.format(
-                    "Hello, %s! \n" + "Welcome to QazMed. Please visit next link: http://localhost:8762/auth-service/registration/activate/%s",
+                    "Hello, %s! \n" + "Welcome to QazMed. Please visit next link: https://qazmed.eu.ngrok.io/auth-service/registration/activate/%s",
                     customer.getUsername(),
                     customer.getActivationCode()
             );

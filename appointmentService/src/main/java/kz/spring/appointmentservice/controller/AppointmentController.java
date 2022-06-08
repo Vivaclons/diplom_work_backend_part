@@ -42,6 +42,11 @@ public class AppointmentController {
         iAppointmentService.create(appointment, doctorId, username);
     }
 
+    @PostMapping(value = "/public/med/create-appointment/{medCenterId}/{username}", consumes = {"application/xml","application/json"})
+    public void createAppointmentM(@RequestBody Appointment appointment, @PathVariable("medCenterId") Long medCenterId, @PathVariable("username") String username){
+        iAppointmentService.create(appointment, medCenterId, username);
+    }
+
     @PutMapping(value = "/private/update-appointment/{medCenterId}/{appointmentId}/{doctorId}/{customerId}", consumes = {"application/xml","application/json"})
     public void updateAppointment(@RequestBody Appointment appointment, @PathVariable("medCenterId") Long medCenterId, @PathVariable("appointmentId") Long appointmentId, @PathVariable("doctorId") Long doctorId, @PathVariable("customerId") Long customerId){
         iAppointmentService.update(appointment, medCenterId, appointmentId, doctorId, customerId);

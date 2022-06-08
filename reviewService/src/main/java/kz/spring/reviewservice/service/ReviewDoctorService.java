@@ -43,7 +43,7 @@ public class ReviewDoctorService implements IReviewDoctorService {
 
     @Override
     public void addReviewDoctor(ReviewDoctor reviewDoctor, Long doctor_id, String email) {
-        Doctor doctor = doctorRepository.getById(doctor_id);
+        Doctor doctor = doctorRepository.getDoctorByDoctorId(doctor_id);
 
         Customer customer = customerRepository.findCustomerByEmail(email);
 
